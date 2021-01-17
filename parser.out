@@ -4,7 +4,6 @@ Unused terminals:
 
     BREAK
     CASE
-    CHAR
     CONST
     CONTINUE
     DEFAULT
@@ -12,17 +11,10 @@ Unused terminals:
     DOUBLE
     ELSE
     ENUM
-    EQUALS
     EXTERN
-    FLOATTYPE
     FLOAT_CONST
     FOR
     GOTO
-    GREATER
-    ID
-    IF
-    INFERIOR
-    INT
     INT_CONST
     LBRACE
     LONG
@@ -44,66 +36,84 @@ Unused terminals:
 
 Grammar
 
-Rule 0     S' -> print_statement
-Rule 1     print_statement -> PRINT LPAREN expression RPAREN SEMICOL
-Rule 2     print_statement -> PRINT LPAREN STRING RPAREN SEMICOL
-Rule 3     expression -> expression PLUS term
-Rule 4     expression -> expression MINUS term
-Rule 5     expression -> term
-Rule 6     term -> term TIMES factor
-Rule 7     term -> term DIVIDE factor
-Rule 8     term -> term MODULO factor
-Rule 9     term -> factor
-Rule 10    factor -> NUMBER
-Rule 11    factor -> LPAREN expression RPAREN
-Rule 12    empty -> <empty>
+Rule 0     S' -> statement
+Rule 1     statement -> expression
+Rule 2     statement -> comparison
+Rule 3     statement -> if_statement
+Rule 4     statement -> var_statement
+Rule 5     var_statement -> CHAR ID EQUALS STRING SEMICOL
+Rule 6     var_statement -> FLOATTYPE ID EQUALS NUMBER SEMICOL
+Rule 7     var_statement -> INT ID EQUALS NUMBER SEMICOL
+Rule 8     comparison -> expression GTH expression
+Rule 9     comparison -> expression LTH expression
+Rule 10    comparison -> expression GTHOREQUAL expression
+Rule 11    comparison -> expression LTHOREQUAL expression
+Rule 12    comparison -> expression EQUALEQUAL expression
+Rule 13    comparison -> expression NOTEQUAL expression
+Rule 14    if_statement -> IF LPAREN comparison RPAREN
+Rule 15    expression -> expression PLUS term
+Rule 16    expression -> expression MINUS term
+Rule 17    expression -> term
+Rule 18    term -> term TIMES factor
+Rule 19    term -> term DIVIDE factor
+Rule 20    term -> term MODULO factor
+Rule 21    term -> factor
+Rule 22    factor -> NUMBER
+Rule 23    factor -> LPAREN expression RPAREN
+Rule 24    print_statement -> PRINT LPAREN expression RPAREN SEMICOL
+Rule 25    print_statement -> PRINT LPAREN STRING RPAREN SEMICOL
+Rule 26    empty -> <empty>
 
 Terminals, with rules where they appear
 
 BREAK                : 
 CASE                 : 
-CHAR                 : 
+CHAR                 : 5
 CONST                : 
 CONTINUE             : 
 DEFAULT              : 
-DIVIDE               : 7
+DIVIDE               : 19
 DO                   : 
 DOUBLE               : 
 ELSE                 : 
 ENUM                 : 
-EQUALS               : 
+EQUALEQUAL           : 12
+EQUALS               : 5 6 7
 EXTERN               : 
-FLOATTYPE            : 
+FLOATTYPE            : 6
 FLOAT_CONST          : 
 FOR                  : 
 GOTO                 : 
-GREATER              : 
-ID                   : 
-IF                   : 
-INFERIOR             : 
-INT                  : 
+GTH                  : 8
+GTHOREQUAL           : 10
+ID                   : 5 6 7
+IF                   : 14
+INT                  : 7
 INT_CONST            : 
 LBRACE               : 
 LONG                 : 
-LPAREN               : 1 2 11
-MINUS                : 4
-MODULO               : 8
-NUMBER               : 10
-PLUS                 : 3
-PRINT                : 1 2
+LPAREN               : 14 23 24 25
+LTH                  : 9
+LTHOREQUAL           : 11
+MINUS                : 16
+MODULO               : 20
+NOTEQUAL             : 13
+NUMBER               : 6 7 22
+PLUS                 : 15
+PRINT                : 24 25
 RBRACE               : 
 REGISTER             : 
 RETURN               : 
-RPAREN               : 1 2 11
-SEMICOL              : 1 2
+RPAREN               : 14 23 24 25
+SEMICOL              : 5 6 7 24 25
 SHORT                : 
 SIGNED               : 
 SIZEOF               : 
 STATIC               : 
-STRING               : 2
+STRING               : 5 25
 STRUCT               : 
 SWITCH               : 
-TIMES                : 6
+TIMES                : 18
 TYPEDEF              : 
 UNION                : 
 UNSIGNED             : 
@@ -114,315 +124,748 @@ error                :
 
 Nonterminals, with rules where they appear
 
+comparison           : 2 14
 empty                : 
-expression           : 1 3 4 11
-factor               : 6 7 8 9
-print_statement      : 0
-term                 : 3 4 5 6 7 8
+expression           : 1 8 8 9 9 10 10 11 11 12 12 13 13 15 16 23 24
+factor               : 18 19 20 21
+if_statement         : 3
+print_statement      : 
+statement            : 0
+term                 : 15 16 17 18 19 20
+var_statement        : 4
 
 Parsing method: LALR
 
 state 0
 
-    (0) S' -> . print_statement
-    (1) print_statement -> . PRINT LPAREN expression RPAREN SEMICOL
-    (2) print_statement -> . PRINT LPAREN STRING RPAREN SEMICOL
+    (0) S' -> . statement
+    (1) statement -> . expression
+    (2) statement -> . comparison
+    (3) statement -> . if_statement
+    (4) statement -> . var_statement
+    (15) expression -> . expression PLUS term
+    (16) expression -> . expression MINUS term
+    (17) expression -> . term
+    (8) comparison -> . expression GTH expression
+    (9) comparison -> . expression LTH expression
+    (10) comparison -> . expression GTHOREQUAL expression
+    (11) comparison -> . expression LTHOREQUAL expression
+    (12) comparison -> . expression EQUALEQUAL expression
+    (13) comparison -> . expression NOTEQUAL expression
+    (14) if_statement -> . IF LPAREN comparison RPAREN
+    (5) var_statement -> . CHAR ID EQUALS STRING SEMICOL
+    (6) var_statement -> . FLOATTYPE ID EQUALS NUMBER SEMICOL
+    (7) var_statement -> . INT ID EQUALS NUMBER SEMICOL
+    (18) term -> . term TIMES factor
+    (19) term -> . term DIVIDE factor
+    (20) term -> . term MODULO factor
+    (21) term -> . factor
+    (22) factor -> . NUMBER
+    (23) factor -> . LPAREN expression RPAREN
 
-    PRINT           shift and go to state 2
+    IF              shift and go to state 7
+    CHAR            shift and go to state 9
+    FLOATTYPE       shift and go to state 10
+    INT             shift and go to state 12
+    NUMBER          shift and go to state 11
+    LPAREN          shift and go to state 8
 
-    print_statement                shift and go to state 1
+    statement                      shift and go to state 1
+    expression                     shift and go to state 2
+    comparison                     shift and go to state 3
+    if_statement                   shift and go to state 4
+    var_statement                  shift and go to state 5
+    term                           shift and go to state 6
+    factor                         shift and go to state 13
 
 state 1
 
-    (0) S' -> print_statement .
+    (0) S' -> statement .
 
 
 
 state 2
 
-    (1) print_statement -> PRINT . LPAREN expression RPAREN SEMICOL
-    (2) print_statement -> PRINT . LPAREN STRING RPAREN SEMICOL
+    (1) statement -> expression .
+    (15) expression -> expression . PLUS term
+    (16) expression -> expression . MINUS term
+    (8) comparison -> expression . GTH expression
+    (9) comparison -> expression . LTH expression
+    (10) comparison -> expression . GTHOREQUAL expression
+    (11) comparison -> expression . LTHOREQUAL expression
+    (12) comparison -> expression . EQUALEQUAL expression
+    (13) comparison -> expression . NOTEQUAL expression
 
-    LPAREN          shift and go to state 3
+    $end            reduce using rule 1 (statement -> expression .)
+    PLUS            shift and go to state 14
+    MINUS           shift and go to state 15
+    GTH             shift and go to state 16
+    LTH             shift and go to state 17
+    GTHOREQUAL      shift and go to state 18
+    LTHOREQUAL      shift and go to state 19
+    EQUALEQUAL      shift and go to state 20
+    NOTEQUAL        shift and go to state 21
 
 
 state 3
 
-    (1) print_statement -> PRINT LPAREN . expression RPAREN SEMICOL
-    (2) print_statement -> PRINT LPAREN . STRING RPAREN SEMICOL
-    (3) expression -> . expression PLUS term
-    (4) expression -> . expression MINUS term
-    (5) expression -> . term
-    (6) term -> . term TIMES factor
-    (7) term -> . term DIVIDE factor
-    (8) term -> . term MODULO factor
-    (9) term -> . factor
-    (10) factor -> . NUMBER
-    (11) factor -> . LPAREN expression RPAREN
+    (2) statement -> comparison .
 
-    STRING          shift and go to state 6
-    NUMBER          shift and go to state 9
-    LPAREN          shift and go to state 4
+    $end            reduce using rule 2 (statement -> comparison .)
 
-    expression                     shift and go to state 5
-    term                           shift and go to state 7
-    factor                         shift and go to state 8
 
 state 4
 
-    (11) factor -> LPAREN . expression RPAREN
-    (3) expression -> . expression PLUS term
-    (4) expression -> . expression MINUS term
-    (5) expression -> . term
-    (6) term -> . term TIMES factor
-    (7) term -> . term DIVIDE factor
-    (8) term -> . term MODULO factor
-    (9) term -> . factor
-    (10) factor -> . NUMBER
-    (11) factor -> . LPAREN expression RPAREN
+    (3) statement -> if_statement .
 
-    NUMBER          shift and go to state 9
-    LPAREN          shift and go to state 4
+    $end            reduce using rule 3 (statement -> if_statement .)
 
-    expression                     shift and go to state 10
-    term                           shift and go to state 7
-    factor                         shift and go to state 8
 
 state 5
 
-    (1) print_statement -> PRINT LPAREN expression . RPAREN SEMICOL
-    (3) expression -> expression . PLUS term
-    (4) expression -> expression . MINUS term
+    (4) statement -> var_statement .
 
-    RPAREN          shift and go to state 11
-    PLUS            shift and go to state 12
-    MINUS           shift and go to state 13
+    $end            reduce using rule 4 (statement -> var_statement .)
 
 
 state 6
 
-    (2) print_statement -> PRINT LPAREN STRING . RPAREN SEMICOL
+    (17) expression -> term .
+    (18) term -> term . TIMES factor
+    (19) term -> term . DIVIDE factor
+    (20) term -> term . MODULO factor
 
-    RPAREN          shift and go to state 14
+    PLUS            reduce using rule 17 (expression -> term .)
+    MINUS           reduce using rule 17 (expression -> term .)
+    GTH             reduce using rule 17 (expression -> term .)
+    LTH             reduce using rule 17 (expression -> term .)
+    GTHOREQUAL      reduce using rule 17 (expression -> term .)
+    LTHOREQUAL      reduce using rule 17 (expression -> term .)
+    EQUALEQUAL      reduce using rule 17 (expression -> term .)
+    NOTEQUAL        reduce using rule 17 (expression -> term .)
+    $end            reduce using rule 17 (expression -> term .)
+    RPAREN          reduce using rule 17 (expression -> term .)
+    TIMES           shift and go to state 22
+    DIVIDE          shift and go to state 23
+    MODULO          shift and go to state 24
 
 
 state 7
 
-    (5) expression -> term .
-    (6) term -> term . TIMES factor
-    (7) term -> term . DIVIDE factor
-    (8) term -> term . MODULO factor
+    (14) if_statement -> IF . LPAREN comparison RPAREN
 
-    RPAREN          reduce using rule 5 (expression -> term .)
-    PLUS            reduce using rule 5 (expression -> term .)
-    MINUS           reduce using rule 5 (expression -> term .)
-    TIMES           shift and go to state 15
-    DIVIDE          shift and go to state 16
-    MODULO          shift and go to state 17
+    LPAREN          shift and go to state 25
 
 
 state 8
 
-    (9) term -> factor .
+    (23) factor -> LPAREN . expression RPAREN
+    (15) expression -> . expression PLUS term
+    (16) expression -> . expression MINUS term
+    (17) expression -> . term
+    (18) term -> . term TIMES factor
+    (19) term -> . term DIVIDE factor
+    (20) term -> . term MODULO factor
+    (21) term -> . factor
+    (22) factor -> . NUMBER
+    (23) factor -> . LPAREN expression RPAREN
 
-    TIMES           reduce using rule 9 (term -> factor .)
-    DIVIDE          reduce using rule 9 (term -> factor .)
-    MODULO          reduce using rule 9 (term -> factor .)
-    RPAREN          reduce using rule 9 (term -> factor .)
-    PLUS            reduce using rule 9 (term -> factor .)
-    MINUS           reduce using rule 9 (term -> factor .)
+    NUMBER          shift and go to state 11
+    LPAREN          shift and go to state 8
 
+    expression                     shift and go to state 26
+    term                           shift and go to state 6
+    factor                         shift and go to state 13
 
 state 9
 
-    (10) factor -> NUMBER .
+    (5) var_statement -> CHAR . ID EQUALS STRING SEMICOL
 
-    TIMES           reduce using rule 10 (factor -> NUMBER .)
-    DIVIDE          reduce using rule 10 (factor -> NUMBER .)
-    MODULO          reduce using rule 10 (factor -> NUMBER .)
-    RPAREN          reduce using rule 10 (factor -> NUMBER .)
-    PLUS            reduce using rule 10 (factor -> NUMBER .)
-    MINUS           reduce using rule 10 (factor -> NUMBER .)
+    ID              shift and go to state 27
 
 
 state 10
 
-    (11) factor -> LPAREN expression . RPAREN
-    (3) expression -> expression . PLUS term
-    (4) expression -> expression . MINUS term
+    (6) var_statement -> FLOATTYPE . ID EQUALS NUMBER SEMICOL
 
-    RPAREN          shift and go to state 18
-    PLUS            shift and go to state 12
-    MINUS           shift and go to state 13
+    ID              shift and go to state 28
 
 
 state 11
 
-    (1) print_statement -> PRINT LPAREN expression RPAREN . SEMICOL
+    (22) factor -> NUMBER .
 
-    SEMICOL         shift and go to state 19
+    TIMES           reduce using rule 22 (factor -> NUMBER .)
+    DIVIDE          reduce using rule 22 (factor -> NUMBER .)
+    MODULO          reduce using rule 22 (factor -> NUMBER .)
+    PLUS            reduce using rule 22 (factor -> NUMBER .)
+    MINUS           reduce using rule 22 (factor -> NUMBER .)
+    GTH             reduce using rule 22 (factor -> NUMBER .)
+    LTH             reduce using rule 22 (factor -> NUMBER .)
+    GTHOREQUAL      reduce using rule 22 (factor -> NUMBER .)
+    LTHOREQUAL      reduce using rule 22 (factor -> NUMBER .)
+    EQUALEQUAL      reduce using rule 22 (factor -> NUMBER .)
+    NOTEQUAL        reduce using rule 22 (factor -> NUMBER .)
+    $end            reduce using rule 22 (factor -> NUMBER .)
+    RPAREN          reduce using rule 22 (factor -> NUMBER .)
 
 
 state 12
 
-    (3) expression -> expression PLUS . term
-    (6) term -> . term TIMES factor
-    (7) term -> . term DIVIDE factor
-    (8) term -> . term MODULO factor
-    (9) term -> . factor
-    (10) factor -> . NUMBER
-    (11) factor -> . LPAREN expression RPAREN
+    (7) var_statement -> INT . ID EQUALS NUMBER SEMICOL
 
-    NUMBER          shift and go to state 9
-    LPAREN          shift and go to state 4
+    ID              shift and go to state 29
 
-    term                           shift and go to state 20
-    factor                         shift and go to state 8
 
 state 13
 
-    (4) expression -> expression MINUS . term
-    (6) term -> . term TIMES factor
-    (7) term -> . term DIVIDE factor
-    (8) term -> . term MODULO factor
-    (9) term -> . factor
-    (10) factor -> . NUMBER
-    (11) factor -> . LPAREN expression RPAREN
+    (21) term -> factor .
 
-    NUMBER          shift and go to state 9
-    LPAREN          shift and go to state 4
+    TIMES           reduce using rule 21 (term -> factor .)
+    DIVIDE          reduce using rule 21 (term -> factor .)
+    MODULO          reduce using rule 21 (term -> factor .)
+    PLUS            reduce using rule 21 (term -> factor .)
+    MINUS           reduce using rule 21 (term -> factor .)
+    GTH             reduce using rule 21 (term -> factor .)
+    LTH             reduce using rule 21 (term -> factor .)
+    GTHOREQUAL      reduce using rule 21 (term -> factor .)
+    LTHOREQUAL      reduce using rule 21 (term -> factor .)
+    EQUALEQUAL      reduce using rule 21 (term -> factor .)
+    NOTEQUAL        reduce using rule 21 (term -> factor .)
+    $end            reduce using rule 21 (term -> factor .)
+    RPAREN          reduce using rule 21 (term -> factor .)
 
-    term                           shift and go to state 21
-    factor                         shift and go to state 8
 
 state 14
 
-    (2) print_statement -> PRINT LPAREN STRING RPAREN . SEMICOL
+    (15) expression -> expression PLUS . term
+    (18) term -> . term TIMES factor
+    (19) term -> . term DIVIDE factor
+    (20) term -> . term MODULO factor
+    (21) term -> . factor
+    (22) factor -> . NUMBER
+    (23) factor -> . LPAREN expression RPAREN
 
-    SEMICOL         shift and go to state 22
+    NUMBER          shift and go to state 11
+    LPAREN          shift and go to state 8
 
+    term                           shift and go to state 30
+    factor                         shift and go to state 13
 
 state 15
 
-    (6) term -> term TIMES . factor
-    (10) factor -> . NUMBER
-    (11) factor -> . LPAREN expression RPAREN
+    (16) expression -> expression MINUS . term
+    (18) term -> . term TIMES factor
+    (19) term -> . term DIVIDE factor
+    (20) term -> . term MODULO factor
+    (21) term -> . factor
+    (22) factor -> . NUMBER
+    (23) factor -> . LPAREN expression RPAREN
 
-    NUMBER          shift and go to state 9
-    LPAREN          shift and go to state 4
+    NUMBER          shift and go to state 11
+    LPAREN          shift and go to state 8
 
-    factor                         shift and go to state 23
+    term                           shift and go to state 31
+    factor                         shift and go to state 13
 
 state 16
 
-    (7) term -> term DIVIDE . factor
-    (10) factor -> . NUMBER
-    (11) factor -> . LPAREN expression RPAREN
+    (8) comparison -> expression GTH . expression
+    (15) expression -> . expression PLUS term
+    (16) expression -> . expression MINUS term
+    (17) expression -> . term
+    (18) term -> . term TIMES factor
+    (19) term -> . term DIVIDE factor
+    (20) term -> . term MODULO factor
+    (21) term -> . factor
+    (22) factor -> . NUMBER
+    (23) factor -> . LPAREN expression RPAREN
 
-    NUMBER          shift and go to state 9
-    LPAREN          shift and go to state 4
+    NUMBER          shift and go to state 11
+    LPAREN          shift and go to state 8
 
-    factor                         shift and go to state 24
+    expression                     shift and go to state 32
+    term                           shift and go to state 6
+    factor                         shift and go to state 13
 
 state 17
 
-    (8) term -> term MODULO . factor
-    (10) factor -> . NUMBER
-    (11) factor -> . LPAREN expression RPAREN
+    (9) comparison -> expression LTH . expression
+    (15) expression -> . expression PLUS term
+    (16) expression -> . expression MINUS term
+    (17) expression -> . term
+    (18) term -> . term TIMES factor
+    (19) term -> . term DIVIDE factor
+    (20) term -> . term MODULO factor
+    (21) term -> . factor
+    (22) factor -> . NUMBER
+    (23) factor -> . LPAREN expression RPAREN
 
-    NUMBER          shift and go to state 9
-    LPAREN          shift and go to state 4
+    NUMBER          shift and go to state 11
+    LPAREN          shift and go to state 8
 
-    factor                         shift and go to state 25
+    expression                     shift and go to state 33
+    term                           shift and go to state 6
+    factor                         shift and go to state 13
 
 state 18
 
-    (11) factor -> LPAREN expression RPAREN .
+    (10) comparison -> expression GTHOREQUAL . expression
+    (15) expression -> . expression PLUS term
+    (16) expression -> . expression MINUS term
+    (17) expression -> . term
+    (18) term -> . term TIMES factor
+    (19) term -> . term DIVIDE factor
+    (20) term -> . term MODULO factor
+    (21) term -> . factor
+    (22) factor -> . NUMBER
+    (23) factor -> . LPAREN expression RPAREN
 
-    TIMES           reduce using rule 11 (factor -> LPAREN expression RPAREN .)
-    DIVIDE          reduce using rule 11 (factor -> LPAREN expression RPAREN .)
-    MODULO          reduce using rule 11 (factor -> LPAREN expression RPAREN .)
-    RPAREN          reduce using rule 11 (factor -> LPAREN expression RPAREN .)
-    PLUS            reduce using rule 11 (factor -> LPAREN expression RPAREN .)
-    MINUS           reduce using rule 11 (factor -> LPAREN expression RPAREN .)
+    NUMBER          shift and go to state 11
+    LPAREN          shift and go to state 8
 
+    expression                     shift and go to state 34
+    term                           shift and go to state 6
+    factor                         shift and go to state 13
 
 state 19
 
-    (1) print_statement -> PRINT LPAREN expression RPAREN SEMICOL .
+    (11) comparison -> expression LTHOREQUAL . expression
+    (15) expression -> . expression PLUS term
+    (16) expression -> . expression MINUS term
+    (17) expression -> . term
+    (18) term -> . term TIMES factor
+    (19) term -> . term DIVIDE factor
+    (20) term -> . term MODULO factor
+    (21) term -> . factor
+    (22) factor -> . NUMBER
+    (23) factor -> . LPAREN expression RPAREN
 
-    $end            reduce using rule 1 (print_statement -> PRINT LPAREN expression RPAREN SEMICOL .)
+    NUMBER          shift and go to state 11
+    LPAREN          shift and go to state 8
 
+    expression                     shift and go to state 35
+    term                           shift and go to state 6
+    factor                         shift and go to state 13
 
 state 20
 
-    (3) expression -> expression PLUS term .
-    (6) term -> term . TIMES factor
-    (7) term -> term . DIVIDE factor
-    (8) term -> term . MODULO factor
+    (12) comparison -> expression EQUALEQUAL . expression
+    (15) expression -> . expression PLUS term
+    (16) expression -> . expression MINUS term
+    (17) expression -> . term
+    (18) term -> . term TIMES factor
+    (19) term -> . term DIVIDE factor
+    (20) term -> . term MODULO factor
+    (21) term -> . factor
+    (22) factor -> . NUMBER
+    (23) factor -> . LPAREN expression RPAREN
 
-    RPAREN          reduce using rule 3 (expression -> expression PLUS term .)
-    PLUS            reduce using rule 3 (expression -> expression PLUS term .)
-    MINUS           reduce using rule 3 (expression -> expression PLUS term .)
-    TIMES           shift and go to state 15
-    DIVIDE          shift and go to state 16
-    MODULO          shift and go to state 17
+    NUMBER          shift and go to state 11
+    LPAREN          shift and go to state 8
 
+    expression                     shift and go to state 36
+    term                           shift and go to state 6
+    factor                         shift and go to state 13
 
 state 21
 
-    (4) expression -> expression MINUS term .
-    (6) term -> term . TIMES factor
-    (7) term -> term . DIVIDE factor
-    (8) term -> term . MODULO factor
+    (13) comparison -> expression NOTEQUAL . expression
+    (15) expression -> . expression PLUS term
+    (16) expression -> . expression MINUS term
+    (17) expression -> . term
+    (18) term -> . term TIMES factor
+    (19) term -> . term DIVIDE factor
+    (20) term -> . term MODULO factor
+    (21) term -> . factor
+    (22) factor -> . NUMBER
+    (23) factor -> . LPAREN expression RPAREN
 
-    RPAREN          reduce using rule 4 (expression -> expression MINUS term .)
-    PLUS            reduce using rule 4 (expression -> expression MINUS term .)
-    MINUS           reduce using rule 4 (expression -> expression MINUS term .)
-    TIMES           shift and go to state 15
-    DIVIDE          shift and go to state 16
-    MODULO          shift and go to state 17
+    NUMBER          shift and go to state 11
+    LPAREN          shift and go to state 8
 
+    expression                     shift and go to state 37
+    term                           shift and go to state 6
+    factor                         shift and go to state 13
 
 state 22
 
-    (2) print_statement -> PRINT LPAREN STRING RPAREN SEMICOL .
+    (18) term -> term TIMES . factor
+    (22) factor -> . NUMBER
+    (23) factor -> . LPAREN expression RPAREN
 
-    $end            reduce using rule 2 (print_statement -> PRINT LPAREN STRING RPAREN SEMICOL .)
+    NUMBER          shift and go to state 11
+    LPAREN          shift and go to state 8
 
+    factor                         shift and go to state 38
 
 state 23
 
-    (6) term -> term TIMES factor .
+    (19) term -> term DIVIDE . factor
+    (22) factor -> . NUMBER
+    (23) factor -> . LPAREN expression RPAREN
 
-    TIMES           reduce using rule 6 (term -> term TIMES factor .)
-    DIVIDE          reduce using rule 6 (term -> term TIMES factor .)
-    MODULO          reduce using rule 6 (term -> term TIMES factor .)
-    RPAREN          reduce using rule 6 (term -> term TIMES factor .)
-    PLUS            reduce using rule 6 (term -> term TIMES factor .)
-    MINUS           reduce using rule 6 (term -> term TIMES factor .)
+    NUMBER          shift and go to state 11
+    LPAREN          shift and go to state 8
 
+    factor                         shift and go to state 39
 
 state 24
 
-    (7) term -> term DIVIDE factor .
+    (20) term -> term MODULO . factor
+    (22) factor -> . NUMBER
+    (23) factor -> . LPAREN expression RPAREN
 
-    TIMES           reduce using rule 7 (term -> term DIVIDE factor .)
-    DIVIDE          reduce using rule 7 (term -> term DIVIDE factor .)
-    MODULO          reduce using rule 7 (term -> term DIVIDE factor .)
-    RPAREN          reduce using rule 7 (term -> term DIVIDE factor .)
-    PLUS            reduce using rule 7 (term -> term DIVIDE factor .)
-    MINUS           reduce using rule 7 (term -> term DIVIDE factor .)
+    NUMBER          shift and go to state 11
+    LPAREN          shift and go to state 8
 
+    factor                         shift and go to state 40
 
 state 25
 
-    (8) term -> term MODULO factor .
+    (14) if_statement -> IF LPAREN . comparison RPAREN
+    (8) comparison -> . expression GTH expression
+    (9) comparison -> . expression LTH expression
+    (10) comparison -> . expression GTHOREQUAL expression
+    (11) comparison -> . expression LTHOREQUAL expression
+    (12) comparison -> . expression EQUALEQUAL expression
+    (13) comparison -> . expression NOTEQUAL expression
+    (15) expression -> . expression PLUS term
+    (16) expression -> . expression MINUS term
+    (17) expression -> . term
+    (18) term -> . term TIMES factor
+    (19) term -> . term DIVIDE factor
+    (20) term -> . term MODULO factor
+    (21) term -> . factor
+    (22) factor -> . NUMBER
+    (23) factor -> . LPAREN expression RPAREN
 
-    TIMES           reduce using rule 8 (term -> term MODULO factor .)
-    DIVIDE          reduce using rule 8 (term -> term MODULO factor .)
-    MODULO          reduce using rule 8 (term -> term MODULO factor .)
-    RPAREN          reduce using rule 8 (term -> term MODULO factor .)
-    PLUS            reduce using rule 8 (term -> term MODULO factor .)
-    MINUS           reduce using rule 8 (term -> term MODULO factor .)
+    NUMBER          shift and go to state 11
+    LPAREN          shift and go to state 8
+
+    comparison                     shift and go to state 41
+    expression                     shift and go to state 42
+    term                           shift and go to state 6
+    factor                         shift and go to state 13
+
+state 26
+
+    (23) factor -> LPAREN expression . RPAREN
+    (15) expression -> expression . PLUS term
+    (16) expression -> expression . MINUS term
+
+    RPAREN          shift and go to state 43
+    PLUS            shift and go to state 14
+    MINUS           shift and go to state 15
+
+
+state 27
+
+    (5) var_statement -> CHAR ID . EQUALS STRING SEMICOL
+
+    EQUALS          shift and go to state 44
+
+
+state 28
+
+    (6) var_statement -> FLOATTYPE ID . EQUALS NUMBER SEMICOL
+
+    EQUALS          shift and go to state 45
+
+
+state 29
+
+    (7) var_statement -> INT ID . EQUALS NUMBER SEMICOL
+
+    EQUALS          shift and go to state 46
+
+
+state 30
+
+    (15) expression -> expression PLUS term .
+    (18) term -> term . TIMES factor
+    (19) term -> term . DIVIDE factor
+    (20) term -> term . MODULO factor
+
+    PLUS            reduce using rule 15 (expression -> expression PLUS term .)
+    MINUS           reduce using rule 15 (expression -> expression PLUS term .)
+    GTH             reduce using rule 15 (expression -> expression PLUS term .)
+    LTH             reduce using rule 15 (expression -> expression PLUS term .)
+    GTHOREQUAL      reduce using rule 15 (expression -> expression PLUS term .)
+    LTHOREQUAL      reduce using rule 15 (expression -> expression PLUS term .)
+    EQUALEQUAL      reduce using rule 15 (expression -> expression PLUS term .)
+    NOTEQUAL        reduce using rule 15 (expression -> expression PLUS term .)
+    $end            reduce using rule 15 (expression -> expression PLUS term .)
+    RPAREN          reduce using rule 15 (expression -> expression PLUS term .)
+    TIMES           shift and go to state 22
+    DIVIDE          shift and go to state 23
+    MODULO          shift and go to state 24
+
+
+state 31
+
+    (16) expression -> expression MINUS term .
+    (18) term -> term . TIMES factor
+    (19) term -> term . DIVIDE factor
+    (20) term -> term . MODULO factor
+
+    PLUS            reduce using rule 16 (expression -> expression MINUS term .)
+    MINUS           reduce using rule 16 (expression -> expression MINUS term .)
+    GTH             reduce using rule 16 (expression -> expression MINUS term .)
+    LTH             reduce using rule 16 (expression -> expression MINUS term .)
+    GTHOREQUAL      reduce using rule 16 (expression -> expression MINUS term .)
+    LTHOREQUAL      reduce using rule 16 (expression -> expression MINUS term .)
+    EQUALEQUAL      reduce using rule 16 (expression -> expression MINUS term .)
+    NOTEQUAL        reduce using rule 16 (expression -> expression MINUS term .)
+    $end            reduce using rule 16 (expression -> expression MINUS term .)
+    RPAREN          reduce using rule 16 (expression -> expression MINUS term .)
+    TIMES           shift and go to state 22
+    DIVIDE          shift and go to state 23
+    MODULO          shift and go to state 24
+
+
+state 32
+
+    (8) comparison -> expression GTH expression .
+    (15) expression -> expression . PLUS term
+    (16) expression -> expression . MINUS term
+
+    $end            reduce using rule 8 (comparison -> expression GTH expression .)
+    RPAREN          reduce using rule 8 (comparison -> expression GTH expression .)
+    PLUS            shift and go to state 14
+    MINUS           shift and go to state 15
+
+
+state 33
+
+    (9) comparison -> expression LTH expression .
+    (15) expression -> expression . PLUS term
+    (16) expression -> expression . MINUS term
+
+    $end            reduce using rule 9 (comparison -> expression LTH expression .)
+    RPAREN          reduce using rule 9 (comparison -> expression LTH expression .)
+    PLUS            shift and go to state 14
+    MINUS           shift and go to state 15
+
+
+state 34
+
+    (10) comparison -> expression GTHOREQUAL expression .
+    (15) expression -> expression . PLUS term
+    (16) expression -> expression . MINUS term
+
+    $end            reduce using rule 10 (comparison -> expression GTHOREQUAL expression .)
+    RPAREN          reduce using rule 10 (comparison -> expression GTHOREQUAL expression .)
+    PLUS            shift and go to state 14
+    MINUS           shift and go to state 15
+
+
+state 35
+
+    (11) comparison -> expression LTHOREQUAL expression .
+    (15) expression -> expression . PLUS term
+    (16) expression -> expression . MINUS term
+
+    $end            reduce using rule 11 (comparison -> expression LTHOREQUAL expression .)
+    RPAREN          reduce using rule 11 (comparison -> expression LTHOREQUAL expression .)
+    PLUS            shift and go to state 14
+    MINUS           shift and go to state 15
+
+
+state 36
+
+    (12) comparison -> expression EQUALEQUAL expression .
+    (15) expression -> expression . PLUS term
+    (16) expression -> expression . MINUS term
+
+    $end            reduce using rule 12 (comparison -> expression EQUALEQUAL expression .)
+    RPAREN          reduce using rule 12 (comparison -> expression EQUALEQUAL expression .)
+    PLUS            shift and go to state 14
+    MINUS           shift and go to state 15
+
+
+state 37
+
+    (13) comparison -> expression NOTEQUAL expression .
+    (15) expression -> expression . PLUS term
+    (16) expression -> expression . MINUS term
+
+    $end            reduce using rule 13 (comparison -> expression NOTEQUAL expression .)
+    RPAREN          reduce using rule 13 (comparison -> expression NOTEQUAL expression .)
+    PLUS            shift and go to state 14
+    MINUS           shift and go to state 15
+
+
+state 38
+
+    (18) term -> term TIMES factor .
+
+    TIMES           reduce using rule 18 (term -> term TIMES factor .)
+    DIVIDE          reduce using rule 18 (term -> term TIMES factor .)
+    MODULO          reduce using rule 18 (term -> term TIMES factor .)
+    PLUS            reduce using rule 18 (term -> term TIMES factor .)
+    MINUS           reduce using rule 18 (term -> term TIMES factor .)
+    GTH             reduce using rule 18 (term -> term TIMES factor .)
+    LTH             reduce using rule 18 (term -> term TIMES factor .)
+    GTHOREQUAL      reduce using rule 18 (term -> term TIMES factor .)
+    LTHOREQUAL      reduce using rule 18 (term -> term TIMES factor .)
+    EQUALEQUAL      reduce using rule 18 (term -> term TIMES factor .)
+    NOTEQUAL        reduce using rule 18 (term -> term TIMES factor .)
+    $end            reduce using rule 18 (term -> term TIMES factor .)
+    RPAREN          reduce using rule 18 (term -> term TIMES factor .)
+
+
+state 39
+
+    (19) term -> term DIVIDE factor .
+
+    TIMES           reduce using rule 19 (term -> term DIVIDE factor .)
+    DIVIDE          reduce using rule 19 (term -> term DIVIDE factor .)
+    MODULO          reduce using rule 19 (term -> term DIVIDE factor .)
+    PLUS            reduce using rule 19 (term -> term DIVIDE factor .)
+    MINUS           reduce using rule 19 (term -> term DIVIDE factor .)
+    GTH             reduce using rule 19 (term -> term DIVIDE factor .)
+    LTH             reduce using rule 19 (term -> term DIVIDE factor .)
+    GTHOREQUAL      reduce using rule 19 (term -> term DIVIDE factor .)
+    LTHOREQUAL      reduce using rule 19 (term -> term DIVIDE factor .)
+    EQUALEQUAL      reduce using rule 19 (term -> term DIVIDE factor .)
+    NOTEQUAL        reduce using rule 19 (term -> term DIVIDE factor .)
+    $end            reduce using rule 19 (term -> term DIVIDE factor .)
+    RPAREN          reduce using rule 19 (term -> term DIVIDE factor .)
+
+
+state 40
+
+    (20) term -> term MODULO factor .
+
+    TIMES           reduce using rule 20 (term -> term MODULO factor .)
+    DIVIDE          reduce using rule 20 (term -> term MODULO factor .)
+    MODULO          reduce using rule 20 (term -> term MODULO factor .)
+    PLUS            reduce using rule 20 (term -> term MODULO factor .)
+    MINUS           reduce using rule 20 (term -> term MODULO factor .)
+    GTH             reduce using rule 20 (term -> term MODULO factor .)
+    LTH             reduce using rule 20 (term -> term MODULO factor .)
+    GTHOREQUAL      reduce using rule 20 (term -> term MODULO factor .)
+    LTHOREQUAL      reduce using rule 20 (term -> term MODULO factor .)
+    EQUALEQUAL      reduce using rule 20 (term -> term MODULO factor .)
+    NOTEQUAL        reduce using rule 20 (term -> term MODULO factor .)
+    $end            reduce using rule 20 (term -> term MODULO factor .)
+    RPAREN          reduce using rule 20 (term -> term MODULO factor .)
+
+
+state 41
+
+    (14) if_statement -> IF LPAREN comparison . RPAREN
+
+    RPAREN          shift and go to state 47
+
+
+state 42
+
+    (8) comparison -> expression . GTH expression
+    (9) comparison -> expression . LTH expression
+    (10) comparison -> expression . GTHOREQUAL expression
+    (11) comparison -> expression . LTHOREQUAL expression
+    (12) comparison -> expression . EQUALEQUAL expression
+    (13) comparison -> expression . NOTEQUAL expression
+    (15) expression -> expression . PLUS term
+    (16) expression -> expression . MINUS term
+
+    GTH             shift and go to state 16
+    LTH             shift and go to state 17
+    GTHOREQUAL      shift and go to state 18
+    LTHOREQUAL      shift and go to state 19
+    EQUALEQUAL      shift and go to state 20
+    NOTEQUAL        shift and go to state 21
+    PLUS            shift and go to state 14
+    MINUS           shift and go to state 15
+
+
+state 43
+
+    (23) factor -> LPAREN expression RPAREN .
+
+    TIMES           reduce using rule 23 (factor -> LPAREN expression RPAREN .)
+    DIVIDE          reduce using rule 23 (factor -> LPAREN expression RPAREN .)
+    MODULO          reduce using rule 23 (factor -> LPAREN expression RPAREN .)
+    PLUS            reduce using rule 23 (factor -> LPAREN expression RPAREN .)
+    MINUS           reduce using rule 23 (factor -> LPAREN expression RPAREN .)
+    GTH             reduce using rule 23 (factor -> LPAREN expression RPAREN .)
+    LTH             reduce using rule 23 (factor -> LPAREN expression RPAREN .)
+    GTHOREQUAL      reduce using rule 23 (factor -> LPAREN expression RPAREN .)
+    LTHOREQUAL      reduce using rule 23 (factor -> LPAREN expression RPAREN .)
+    EQUALEQUAL      reduce using rule 23 (factor -> LPAREN expression RPAREN .)
+    NOTEQUAL        reduce using rule 23 (factor -> LPAREN expression RPAREN .)
+    $end            reduce using rule 23 (factor -> LPAREN expression RPAREN .)
+    RPAREN          reduce using rule 23 (factor -> LPAREN expression RPAREN .)
+
+
+state 44
+
+    (5) var_statement -> CHAR ID EQUALS . STRING SEMICOL
+
+    STRING          shift and go to state 48
+
+
+state 45
+
+    (6) var_statement -> FLOATTYPE ID EQUALS . NUMBER SEMICOL
+
+    NUMBER          shift and go to state 49
+
+
+state 46
+
+    (7) var_statement -> INT ID EQUALS . NUMBER SEMICOL
+
+    NUMBER          shift and go to state 50
+
+
+state 47
+
+    (14) if_statement -> IF LPAREN comparison RPAREN .
+
+    $end            reduce using rule 14 (if_statement -> IF LPAREN comparison RPAREN .)
+
+
+state 48
+
+    (5) var_statement -> CHAR ID EQUALS STRING . SEMICOL
+
+    SEMICOL         shift and go to state 51
+
+
+state 49
+
+    (6) var_statement -> FLOATTYPE ID EQUALS NUMBER . SEMICOL
+
+    SEMICOL         shift and go to state 52
+
+
+state 50
+
+    (7) var_statement -> INT ID EQUALS NUMBER . SEMICOL
+
+    SEMICOL         shift and go to state 53
+
+
+state 51
+
+    (5) var_statement -> CHAR ID EQUALS STRING SEMICOL .
+
+    $end            reduce using rule 5 (var_statement -> CHAR ID EQUALS STRING SEMICOL .)
+
+
+state 52
+
+    (6) var_statement -> FLOATTYPE ID EQUALS NUMBER SEMICOL .
+
+    $end            reduce using rule 6 (var_statement -> FLOATTYPE ID EQUALS NUMBER SEMICOL .)
+
+
+state 53
+
+    (7) var_statement -> INT ID EQUALS NUMBER SEMICOL .
+
+    $end            reduce using rule 7 (var_statement -> INT ID EQUALS NUMBER SEMICOL .)
 

@@ -5,43 +5,51 @@ literals = ('{', '}')
 
 #A list of reserved words
 reserved = {
-    'error'     : 'ID',
-    'tbe3'      : 'PRINT',
-    'doble'     : 'DOUBLE',
-    'sahih'     : 'INT',
-    'binya'     : 'STRUCT',
-    'hbes'      : 'BREAK',
-    'oula'      : 'ELSE',
-    'twil'      : 'LONG',
-    'mouhawil'  : 'SWITCH',
-    'hala'      : 'CASE',
-    'hseb'      : 'ENUM',
-    'sejel'     : 'REGISTER',
-    'marka'     : 'TYPEDEF',
-    'harf'      : 'CHAR',
-    'khariji'   : 'EXTERN',
-    'reje3'     : 'RETURN',
-    'itihad'    : 'UNION',
-    'kemel'     : 'CONTINUE',
-    'fkoula'    : 'FOR',
-    'msini'     : 'SIGNED',
+    'error'       : 'ID',
+    'tbe3'        : 'PRINT',
+    'doble'       : 'DOUBLE',
+    'sahih'       : 'INT',
+    'binya'       : 'STRUCT',
+    'hbes'        : 'BREAK',
+    'oula'        : 'ELSE',
+    'twil'        : 'LONG',
+    'mouhawil'    : 'SWITCH',
+    'hala'        : 'CASE',
+    'hseb'        : 'ENUM',
+    'sejel'       : 'REGISTER',
+    'marka'       : 'TYPEDEF',
+    'harf'        : 'CHAR',
+    'khariji'     : 'EXTERN',
+    'reje3'       : 'RETURN',
+    'itihad'      : 'UNION',
+    'kemel'       : 'CONTINUE',
+    'fkoula'      : 'FOR',
+    'msini'       : 'SIGNED',
     'lkhwalkhawi' : 'VOID',
-    'dir'       : 'DO',
-    'ila'       : 'IF',
-    'jamed'     : 'STATIC',
-    'ma7ed'     : 'WHILE',
-    'asl'       : 'DEFAULT',
-    'sir'       : 'GOTO',
-    'qyas'      : 'SIZEOF',
-    'tiyara'    : 'VOLATILE',
-    'tabet'     : 'CONST',
-    'achari'    : 'FLOATTYPE',
-    'qsir'      : 'SHORT',
-    'mamsinich' : 'UNSIGNED'
+    'dir'         : 'DO',
+    'ila'         : 'IF',
+    'jamed'       : 'STATIC',
+    'ma7ed'       : 'WHILE',
+    'asl'         : 'DEFAULT',
+    'sir'         : 'GOTO',
+    'qyas'        : 'SIZEOF',
+    'tiyara'      : 'VOLATILE',
+    'tabet'       : 'CONST',
+    'achari'      : 'FLOATTYPE',
+    'qsir'        : 'SHORT',
+    'mamsinich'   : 'UNSIGNED',
+    
 }
 
+
 # List of token names
-tokens = (
+tokens =(
+    "GTH",
+    "LTH",
+    "GTHOREQUAL",
+    "LTHOREQUAL",
+    "EQUALEQUAL",
+    "NOTEQUAL",
     'NUMBER',
     'FLOAT_CONST',
     'INT_CONST',
@@ -53,24 +61,26 @@ tokens = (
     'DIVIDE',
     'LPAREN',
     'RPAREN',
-    'INFERIOR',
-    'GREATER',
     'RBRACE',
     'LBRACE',
     'SEMICOL',
     'EQUALS'
-) + tuple(reserved.values()) 
+) + tuple(reserved.values())  
 
 
 # Regular expression rules for simple tokens
+t_EQUALEQUAL= r'=='
+t_GTH       = r'>'
+t_LTH       = r'<'
+t_GTHOREQUAL= r'>='
+t_LTHOREQUAL= r'<='
+t_NOTEQUAL  = r'!='
 t_PLUS     = r'\+'
 t_MINUS    = r'-'
 t_TIMES    = r'\*'
 t_DIVIDE   = r'/'
 t_LPAREN   = r'\('
 t_RPAREN   = r'\)'
-t_GREATER  = r'>'
-t_INFERIOR = r'<'
 t_SEMICOL  = r';'
 t_EQUALS   = r'='
 t_MODULO   = r'%'
