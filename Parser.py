@@ -1,14 +1,20 @@
 import ply.yacc as yacc
 from Lexer import tokens
 
-variables = []
-
+#variables = []
+variables = {}
 is_running = True
 
+errors = (
+    (0, "Kayn shi moshkil fl input"),
+    (1, "l motaghayyir dyalk rah "),
+    (2, "variable makaynash")
+)
+
 class variable:
-    dictionary  = {}
     
     def __init__(self, name, typee, value):
+        self.dictionary = {}
         self.dictionary["name"] = name
         self.dictionary["type"] = typee
         if typee == "sahih":
@@ -35,21 +41,49 @@ class variable:
 
 def variable_exists(v):
     global variables
-    if len(variables) >= 2:
-        print(variables[0])
-        print(variables[1])
-    for var in variables:
-        if v == var.get_name():
-            return var
-    return -1
+    value = None
+    if v in variables.keys():
+        value = variables[v]
+    else:
+        value = None
+    return value
 
 #Conditions
 def p_statement_expr(p):
     '''statement : expression
                  | comparison
                  | if_statement
-                 | var_statement'''
+                 | var_statement
+                 | var_assign
+                 '''
     print(p[1])
+
+#Change value of a variable
+def p_statement_assign_var(p):
+    '''
+    var_assign : ID EQUALS STRING SEMICOL
+               | ID EQUALS NUMBER SEMICOL
+    '''
+    found = variable_exists(p[1])
+    if found is not None:
+        if found.get_type() == "sahih":
+            if isinstance(p[3] , int):
+                found.set_value(p[3])
+                p[0] = found.get_value()
+            else:
+                p[0] = "l motaghayyir dyalk rah {0}".format(found.get_type())
+        elif found.get_type() == "achari":
+            if isinstance(p[3], float):
+                found.set_value(p[3])
+            else:
+                p[0]  = "l motaghayyir dyalk rah {0}".format(found.get_type())
+        elif found.get_type() == "harf":
+            if isinstance(p[3], str):
+                found.set_value(p[3])
+            else:
+                p[0]  = "l motaghayyir dyalk rah {0}".format(found.get_type())
+    else:
+        p[0] = "{0} makaynash a lkhawa".format(p[1])
 
 #Assign New Variable
 def p_statement_var(p):
@@ -61,8 +95,8 @@ def p_statement_var(p):
     
     global variables
     my_var = variable(p[2], p[1], p[4])
-    variables.append(my_var)
-    p[0] = my_var.get_value()
+    variables[my_var.get_name()] = my_var
+    p[0] = variables
     
 def p_variable_expression(p):
     '''
@@ -72,8 +106,8 @@ def p_variable_expression(p):
     '''
     global variables
     found = variable_exists(p[1])
-    
-    if found == -1:
+
+    if found == None:
         p[0] = "{0} makaynash a lkhawa".format(p[1])
     else:
         p[0] = found.get_value()
@@ -125,10 +159,23 @@ def p_expression_comparison(p):
 
 
 def p_IF(p):
-    '''if_statement : IF LPAREN comparison RPAREN'''
-    p[0] = p[3]
+    '''if_statement : IF LPAREN comparison RPAREN LBRACE expr_list RBRACE'''
+    #p[0] = p[3]
+    if p[3] == True:
+        p[0] = p[6]
+    else:
+        pass
 
-
+#Set of instructions
+def p_expr_list(p):
+    '''
+    expr_list : expression SEMICOL
+              | expression SEMICOL expr_list
+    '''
+    if len(p) == 2:
+        p[0] = [p[1]]
+    else:
+        p[0] = p[1] + [p[3]]
 #Arithmetic operations
 def p_expression_plus(p):
     'expression : expression PLUS term'
