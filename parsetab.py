@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'BREAK CASE CHAR CONST CONTINUE DEFAULT DIVIDE DO DOUBLE ELSE ENUM EQUALEQUAL EQUALS EXTERN FLOATTYPE FLOAT_CONST FOR GOTO GTH GTHOREQUAL ID IF INT INT_CONST LBRACE LONG LPAREN LTH LTHOREQUAL MINUS MODULO NOTEQUAL NUMBER PLUS PRINT RBRACE REGISTER RETURN RPAREN SEMICOL SHORT SIGNED SIZEOF STATIC STRING STRUCT SWITCH TIMES TYPEDEF UNION UNSIGNED VOID VOLATILE WHILEstatement : expression\n                 | comparison\n                 | if_statement\n                 | var_statement\n    var_statement : CHAR ID EQUALS STRING SEMICOL\n                  | FLOATTYPE ID EQUALS NUMBER SEMICOL\n                  | INT ID EQUALS NUMBER SEMICOL\n    \n    comparison : expression GTH expression\n                  | expression LTH expression\n                  | expression GTHOREQUAL expression\n                  | expression LTHOREQUAL expression\n                  | expression EQUALEQUAL expression\n                  | expression NOTEQUAL expression\n    if_statement : IF LPAREN comparison RPARENexpression : expression PLUS termexpression : expression MINUS termexpression : termterm : term TIMES factorterm : term DIVIDE factorterm : term MODULO factorterm : factorfactor : NUMBERfactor : LPAREN expression RPAREN\n    print_statement : PRINT LPAREN expression RPAREN SEMICOL\n                    | PRINT LPAREN STRING RPAREN SEMICOL  \n                       empty :'
+_lr_signature = 'BREAK CASE CHAR CONST CONTINUE DEFAULT DIVIDE DO DOUBLE ELSE ENUM EQUALEQUAL EQUALS EXTERN FLOATTYPE FLOAT_CONST FOR GOTO GTH GTHOREQUAL ID IF INT INT_CONST LBRACE LONG LPAREN LTH LTHOREQUAL MINUS MODULO NOTEQUAL NUMBER PLUS PRINT RBRACE REGISTER RETURN RPAREN SEMICOL SHORT SIGNED SIZEOF STATIC STRING STRUCT SWITCH TIMES TYPEDEF UNION UNSIGNED VOID VOLATILE WHILEstatement : expression\n                 | comparison\n                 | if_statement\n                 | var_statement\n    var_statement : CHAR ID EQUALS STRING SEMICOL\n                  | FLOATTYPE ID EQUALS NUMBER SEMICOL\n                  | INT ID EQUALS NUMBER SEMICOL\n    \n    expression : ID\n    term : ID\n    factor : ID\n    \n    comparison : expression GTH expression\n                  | expression LTH expression\n                  | expression GTHOREQUAL expression\n                  | expression LTHOREQUAL expression\n                  | expression EQUALEQUAL expression\n                  | expression NOTEQUAL expression\n    if_statement : IF LPAREN comparison RPARENexpression : expression PLUS termexpression : expression MINUS termexpression : termterm : term TIMES factorterm : term DIVIDE factorterm : term MODULO factorterm : factorfactor : NUMBERfactor : LPAREN expression RPAREN\n    print_statement : PRINT LPAREN expression RPAREN SEMICOL\n                    | PRINT LPAREN STRING RPAREN SEMICOL  \n    empty :'
     
-_lr_action_items = {'IF':([0,],[7,]),'CHAR':([0,],[9,]),'FLOATTYPE':([0,],[10,]),'INT':([0,],[12,]),'NUMBER':([0,8,14,15,16,17,18,19,20,21,22,23,24,25,45,46,],[11,11,11,11,11,11,11,11,11,11,11,11,11,11,49,50,]),'LPAREN':([0,7,8,14,15,16,17,18,19,20,21,22,23,24,25,],[8,25,8,8,8,8,8,8,8,8,8,8,8,8,8,]),'$end':([1,2,3,4,5,6,11,13,30,31,32,33,34,35,36,37,38,39,40,43,47,51,52,53,],[0,-1,-2,-3,-4,-17,-22,-21,-15,-16,-8,-9,-10,-11,-12,-13,-18,-19,-20,-23,-14,-5,-6,-7,]),'PLUS':([2,6,11,13,26,30,31,32,33,34,35,36,37,38,39,40,42,43,],[14,-17,-22,-21,14,-15,-16,14,14,14,14,14,14,-18,-19,-20,14,-23,]),'MINUS':([2,6,11,13,26,30,31,32,33,34,35,36,37,38,39,40,42,43,],[15,-17,-22,-21,15,-15,-16,15,15,15,15,15,15,-18,-19,-20,15,-23,]),'GTH':([2,6,11,13,30,31,38,39,40,42,43,],[16,-17,-22,-21,-15,-16,-18,-19,-20,16,-23,]),'LTH':([2,6,11,13,30,31,38,39,40,42,43,],[17,-17,-22,-21,-15,-16,-18,-19,-20,17,-23,]),'GTHOREQUAL':([2,6,11,13,30,31,38,39,40,42,43,],[18,-17,-22,-21,-15,-16,-18,-19,-20,18,-23,]),'LTHOREQUAL':([2,6,11,13,30,31,38,39,40,42,43,],[19,-17,-22,-21,-15,-16,-18,-19,-20,19,-23,]),'EQUALEQUAL':([2,6,11,13,30,31,38,39,40,42,43,],[20,-17,-22,-21,-15,-16,-18,-19,-20,20,-23,]),'NOTEQUAL':([2,6,11,13,30,31,38,39,40,42,43,],[21,-17,-22,-21,-15,-16,-18,-19,-20,21,-23,]),'RPAREN':([6,11,13,26,30,31,32,33,34,35,36,37,38,39,40,41,43,],[-17,-22,-21,43,-15,-16,-8,-9,-10,-11,-12,-13,-18,-19,-20,47,-23,]),'TIMES':([6,11,13,30,31,38,39,40,43,],[22,-22,-21,22,22,-18,-19,-20,-23,]),'DIVIDE':([6,11,13,30,31,38,39,40,43,],[23,-22,-21,23,23,-18,-19,-20,-23,]),'MODULO':([6,11,13,30,31,38,39,40,43,],[24,-22,-21,24,24,-18,-19,-20,-23,]),'ID':([9,10,12,],[27,28,29,]),'EQUALS':([27,28,29,],[44,45,46,]),'STRING':([44,],[48,]),'SEMICOL':([48,49,50,],[51,52,53,]),}
+_lr_action_items = {'ID':([0,9,10,11,13,15,16,17,18,19,20,21,22,23,24,25,26,],[6,6,28,29,30,32,32,6,6,6,6,6,6,41,41,41,6,]),'IF':([0,],[8,]),'CHAR':([0,],[10,]),'FLOATTYPE':([0,],[11,]),'INT':([0,],[13,]),'NUMBER':([0,9,15,16,17,18,19,20,21,22,23,24,25,26,48,49,],[12,12,12,12,12,12,12,12,12,12,12,12,12,12,52,53,]),'LPAREN':([0,8,9,15,16,17,18,19,20,21,22,23,24,25,26,],[9,26,9,9,9,9,9,9,9,9,9,9,9,9,9,]),'$end':([1,2,3,4,5,6,7,12,14,31,32,33,34,35,36,37,38,39,40,41,42,43,46,50,54,55,56,],[0,-1,-2,-3,-4,-8,-20,-25,-24,-18,-9,-19,-11,-12,-13,-14,-15,-16,-21,-10,-22,-23,-26,-17,-5,-6,-7,]),'PLUS':([2,6,7,12,14,27,31,32,33,34,35,36,37,38,39,40,41,42,43,45,46,],[15,-8,-20,-25,-24,15,-18,-9,-19,15,15,15,15,15,15,-21,-10,-22,-23,15,-26,]),'MINUS':([2,6,7,12,14,27,31,32,33,34,35,36,37,38,39,40,41,42,43,45,46,],[16,-8,-20,-25,-24,16,-18,-9,-19,16,16,16,16,16,16,-21,-10,-22,-23,16,-26,]),'GTH':([2,6,7,12,14,31,32,33,40,41,42,43,45,46,],[17,-8,-20,-25,-24,-18,-9,-19,-21,-10,-22,-23,17,-26,]),'LTH':([2,6,7,12,14,31,32,33,40,41,42,43,45,46,],[18,-8,-20,-25,-24,-18,-9,-19,-21,-10,-22,-23,18,-26,]),'GTHOREQUAL':([2,6,7,12,14,31,32,33,40,41,42,43,45,46,],[19,-8,-20,-25,-24,-18,-9,-19,-21,-10,-22,-23,19,-26,]),'LTHOREQUAL':([2,6,7,12,14,31,32,33,40,41,42,43,45,46,],[20,-8,-20,-25,-24,-18,-9,-19,-21,-10,-22,-23,20,-26,]),'EQUALEQUAL':([2,6,7,12,14,31,32,33,40,41,42,43,45,46,],[21,-8,-20,-25,-24,-18,-9,-19,-21,-10,-22,-23,21,-26,]),'NOTEQUAL':([2,6,7,12,14,31,32,33,40,41,42,43,45,46,],[22,-8,-20,-25,-24,-18,-9,-19,-21,-10,-22,-23,22,-26,]),'RPAREN':([6,7,12,14,27,31,32,33,34,35,36,37,38,39,40,41,42,43,44,46,],[-8,-20,-25,-24,46,-18,-9,-19,-11,-12,-13,-14,-15,-16,-21,-10,-22,-23,50,-26,]),'TIMES':([6,7,12,14,31,32,33,40,41,42,43,46,],[-9,23,-25,-24,23,-9,23,-21,-10,-22,-23,-26,]),'DIVIDE':([6,7,12,14,31,32,33,40,41,42,43,46,],[-9,24,-25,-24,24,-9,24,-21,-10,-22,-23,-26,]),'MODULO':([6,7,12,14,31,32,33,40,41,42,43,46,],[-9,25,-25,-24,25,-9,25,-21,-10,-22,-23,-26,]),'EQUALS':([28,29,30,],[47,48,49,]),'STRING':([47,],[51,]),'SEMICOL':([51,52,53,],[54,55,56,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'statement':([0,],[1,]),'expression':([0,8,16,17,18,19,20,21,25,],[2,26,32,33,34,35,36,37,42,]),'comparison':([0,25,],[3,41,]),'if_statement':([0,],[4,]),'var_statement':([0,],[5,]),'term':([0,8,14,15,16,17,18,19,20,21,25,],[6,6,30,31,6,6,6,6,6,6,6,]),'factor':([0,8,14,15,16,17,18,19,20,21,22,23,24,25,],[13,13,13,13,13,13,13,13,13,13,38,39,40,13,]),}
+_lr_goto_items = {'statement':([0,],[1,]),'expression':([0,9,17,18,19,20,21,22,26,],[2,27,34,35,36,37,38,39,45,]),'comparison':([0,26,],[3,44,]),'if_statement':([0,],[4,]),'var_statement':([0,],[5,]),'term':([0,9,15,16,17,18,19,20,21,22,26,],[7,7,31,33,7,7,7,7,7,7,7,]),'factor':([0,9,15,16,17,18,19,20,21,22,23,24,25,26,],[14,14,14,14,14,14,14,14,14,14,40,42,43,14,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -27,30 +27,33 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> statement","S'",1,None,None,None),
-  ('statement -> expression','statement',1,'p_statement_expr','Parser.py',34),
-  ('statement -> comparison','statement',1,'p_statement_expr','Parser.py',35),
-  ('statement -> if_statement','statement',1,'p_statement_expr','Parser.py',36),
-  ('statement -> var_statement','statement',1,'p_statement_expr','Parser.py',37),
-  ('var_statement -> CHAR ID EQUALS STRING SEMICOL','var_statement',5,'p_statement_var','Parser.py',43),
-  ('var_statement -> FLOATTYPE ID EQUALS NUMBER SEMICOL','var_statement',5,'p_statement_var','Parser.py',44),
-  ('var_statement -> INT ID EQUALS NUMBER SEMICOL','var_statement',5,'p_statement_var','Parser.py',45),
-  ('comparison -> expression GTH expression','comparison',3,'p_expression_comparison','Parser.py',56),
-  ('comparison -> expression LTH expression','comparison',3,'p_expression_comparison','Parser.py',57),
-  ('comparison -> expression GTHOREQUAL expression','comparison',3,'p_expression_comparison','Parser.py',58),
-  ('comparison -> expression LTHOREQUAL expression','comparison',3,'p_expression_comparison','Parser.py',59),
-  ('comparison -> expression EQUALEQUAL expression','comparison',3,'p_expression_comparison','Parser.py',60),
-  ('comparison -> expression NOTEQUAL expression','comparison',3,'p_expression_comparison','Parser.py',61),
-  ('if_statement -> IF LPAREN comparison RPAREN','if_statement',4,'p_IF','Parser.py',101),
-  ('expression -> expression PLUS term','expression',3,'p_expression_plus','Parser.py',107),
-  ('expression -> expression MINUS term','expression',3,'p_expression_minus','Parser.py',111),
-  ('expression -> term','expression',1,'p_expression_term','Parser.py',115),
-  ('term -> term TIMES factor','term',3,'p_term_times','Parser.py',119),
-  ('term -> term DIVIDE factor','term',3,'p_term_div','Parser.py',123),
-  ('term -> term MODULO factor','term',3,'p_term_modulo','Parser.py',127),
-  ('term -> factor','term',1,'p_term_factor','Parser.py',131),
-  ('factor -> NUMBER','factor',1,'p_factor_num','Parser.py',135),
-  ('factor -> LPAREN expression RPAREN','factor',3,'p_factor_expr','Parser.py',139),
-  ('print_statement -> PRINT LPAREN expression RPAREN SEMICOL','print_statement',5,'p_statement_print','Parser.py',148),
-  ('print_statement -> PRINT LPAREN STRING RPAREN SEMICOL','print_statement',5,'p_statement_print','Parser.py',149),
-  ('empty -> <empty>','empty',0,'p_empty','Parser.py',157),
+  ('statement -> expression','statement',1,'p_statement_expr','Parser.py',36),
+  ('statement -> comparison','statement',1,'p_statement_expr','Parser.py',37),
+  ('statement -> if_statement','statement',1,'p_statement_expr','Parser.py',38),
+  ('statement -> var_statement','statement',1,'p_statement_expr','Parser.py',39),
+  ('var_statement -> CHAR ID EQUALS STRING SEMICOL','var_statement',5,'p_statement_var','Parser.py',45),
+  ('var_statement -> FLOATTYPE ID EQUALS NUMBER SEMICOL','var_statement',5,'p_statement_var','Parser.py',46),
+  ('var_statement -> INT ID EQUALS NUMBER SEMICOL','var_statement',5,'p_statement_var','Parser.py',47),
+  ('expression -> ID','expression',1,'p_variable_expression','Parser.py',57),
+  ('term -> ID','term',1,'p_variable_expression','Parser.py',58),
+  ('factor -> ID','factor',1,'p_variable_expression','Parser.py',59),
+  ('comparison -> expression GTH expression','comparison',3,'p_expression_comparison','Parser.py',79),
+  ('comparison -> expression LTH expression','comparison',3,'p_expression_comparison','Parser.py',80),
+  ('comparison -> expression GTHOREQUAL expression','comparison',3,'p_expression_comparison','Parser.py',81),
+  ('comparison -> expression LTHOREQUAL expression','comparison',3,'p_expression_comparison','Parser.py',82),
+  ('comparison -> expression EQUALEQUAL expression','comparison',3,'p_expression_comparison','Parser.py',83),
+  ('comparison -> expression NOTEQUAL expression','comparison',3,'p_expression_comparison','Parser.py',84),
+  ('if_statement -> IF LPAREN comparison RPAREN','if_statement',4,'p_IF','Parser.py',124),
+  ('expression -> expression PLUS term','expression',3,'p_expression_plus','Parser.py',130),
+  ('expression -> expression MINUS term','expression',3,'p_expression_minus','Parser.py',134),
+  ('expression -> term','expression',1,'p_expression_term','Parser.py',138),
+  ('term -> term TIMES factor','term',3,'p_term_times','Parser.py',142),
+  ('term -> term DIVIDE factor','term',3,'p_term_div','Parser.py',146),
+  ('term -> term MODULO factor','term',3,'p_term_modulo','Parser.py',150),
+  ('term -> factor','term',1,'p_term_factor','Parser.py',154),
+  ('factor -> NUMBER','factor',1,'p_factor_num','Parser.py',158),
+  ('factor -> LPAREN expression RPAREN','factor',3,'p_factor_expr','Parser.py',162),
+  ('print_statement -> PRINT LPAREN expression RPAREN SEMICOL','print_statement',5,'p_statement_print','Parser.py',169),
+  ('print_statement -> PRINT LPAREN STRING RPAREN SEMICOL','print_statement',5,'p_statement_print','Parser.py',170),
+  ('empty -> <empty>','empty',0,'p_empty','Parser.py',178),
 ]

@@ -3,14 +3,20 @@ from Lexer import tokens
 
 variables = []
 
+is_running = True
+
 class variable:
-    #_fields     = ["name","type", "value"]
     dictionary  = {}
     
     def __init__(self, name, typee, value):
         self.dictionary["name"] = name
         self.dictionary["type"] = typee
-        self.dictionary["value"] = value
+        if typee == "sahih":
+            self.dictionary["value"] = int(value)
+        elif typee == "achari":
+            self.dictionary["value"] = float(value)
+        else:
+            self.dictionary["value"] = value
 
     def __str__(self):
         return "{0} {1} = {2}".format(self.dictionary["type"], self.dictionary["name"], self.dictionary["value"]) 
@@ -27,7 +33,15 @@ class variable:
     def set_value(self, value):
         self.dictionary["value"] = value
 
-
+def variable_exists(v):
+    global variables
+    if len(variables) >= 2:
+        print(variables[0])
+        print(variables[1])
+    for var in variables:
+        if v == var.get_name():
+            return var
+    return -1
 
 #Conditions
 def p_statement_expr(p):
@@ -50,6 +64,19 @@ def p_statement_var(p):
     variables.append(my_var)
     p[0] = my_var.get_value()
     
+def p_variable_expression(p):
+    '''
+    expression : ID
+    term : ID
+    factor : ID
+    '''
+    global variables
+    found = variable_exists(p[1])
+    
+    if found == -1:
+        p[0] = "{0} makaynash a lkhawa".format(p[1])
+    else:
+        p[0] = found.get_value()
 
 def p_expression_comparison(p):
     '''
@@ -140,14 +167,12 @@ def p_factor_expr(p):
     p[0] = p[2]
 
 
-
-
 #Basic Functions
 def p_statement_print(p):
     '''
     print_statement : PRINT LPAREN expression RPAREN SEMICOL
                     | PRINT LPAREN STRING RPAREN SEMICOL  
-                       '''
+    '''
     p[0] = p[3]
 
 
@@ -164,13 +189,15 @@ def p_error(p):
 # Build the parser
 parser = yacc.yacc()
 
-while True:
-   try:
-       s = input('calc > ')
-   except EOFError:
-       break
-   if not s: 
-       continue
-   result = parser.parse(s)
-   if result != None:
-    print(result)
+while is_running:
+    try:
+        s = input('calc > ')
+    except EOFError:
+        break
+    if not s: 
+        continue
+    result = parser.parse(s)
+    if result != None:
+        print(result)
+   
+
