@@ -51,8 +51,8 @@ def p_statements_multiple(p):
     '''
     statements : statements statement
     '''
-    #p[0] = p[1] + [p[2]]
-    pass
+    for i in range(1,len(p)):
+       print(p[i]) 
 
 def p_statements_single(p):
     '''
@@ -72,7 +72,7 @@ def p_statement_print(p):
 
 #Conditions
 def p_statement_expr(p):
-    '''statement : expression
+    '''statement : expression SEMICOL
                  | if_statement
                  | comparison
                  | var_statement
