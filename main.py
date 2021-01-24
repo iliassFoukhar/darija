@@ -1,7 +1,7 @@
 #Modules used
 from tkinter import *
 from tkinter import filedialog
-import importlib
+#import importlib
 import Lexer
 
 #Functions

@@ -89,13 +89,13 @@ t_MODULO   = r'%'
 #Check for curly braces
 def t_LBRACE(t):
     r'\{'
-    t.type = '{'      
+    t.type = 'LBRACE'      
     return t
 
 
 def t_RBRACE(t):
     r'\}'
-    t.type = '}'    
+    t.type = 'RBRACE'    
     return t
 
 #Check for reserved words 

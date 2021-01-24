@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'BREAK CASE CHAR CONST CONTINUE DEFAULT DIVIDE DO DOUBLE ELSE ENUM EQUALEQUAL EQUALS EXTERN FLOATTYPE FLOAT_CONST FOR GOTO GTH GTHOREQUAL ID IF INT INT_CONST LBRACE LONG LPAREN LTH LTHOREQUAL MINUS MODULO NOTEQUAL NUMBER PLUS PRINT RBRACE REGISTER RETURN RPAREN SEMICOL SHORT SIGNED SIZEOF STATIC STRING STRUCT SWITCH TIMES TYPEDEF UNION UNSIGNED VOID VOLATILE WHILEstatement : expression\n                 | comparison\n                 | if_statement\n                 | var_statement\n                 | var_assign\n                 \n    var_assign : ID EQUALS STRING SEMICOL\n               | ID EQUALS NUMBER SEMICOL\n    \n    var_statement : CHAR ID EQUALS STRING SEMICOL\n                  | FLOATTYPE ID EQUALS NUMBER SEMICOL\n                  | INT ID EQUALS NUMBER SEMICOL\n    \n    expression : ID\n    term : ID\n    factor : ID\n    \n    comparison : expression GTH expression\n                  | expression LTH expression\n                  | expression GTHOREQUAL expression\n                  | expression LTHOREQUAL expression\n                  | expression EQUALEQUAL expression\n                  | expression NOTEQUAL expression\n    if_statement : IF LPAREN comparison RPAREN LBRACE expr_list RBRACE\n    expr_list : expression SEMICOL\n              | expression SEMICOL expr_list\n    expression : expression PLUS termexpression : expression MINUS termexpression : termterm : term TIMES factorterm : term DIVIDE factorterm : term MODULO factorterm : factorfactor : NUMBERfactor : LPAREN expression RPAREN\n    print_statement : PRINT LPAREN expression RPAREN SEMICOL\n                    | PRINT LPAREN STRING RPAREN SEMICOL  \n    empty :'
+_lr_signature = 'BREAK CASE CHAR CONST CONTINUE DEFAULT DIVIDE DO DOUBLE ELSE ENUM EQUALEQUAL EQUALS EXTERN FLOATTYPE FLOAT_CONST FOR GOTO GTH GTHOREQUAL ID IF INT INT_CONST LBRACE LONG LPAREN LTH LTHOREQUAL MINUS MODULO NOTEQUAL NUMBER PLUS PRINT RBRACE REGISTER RETURN RPAREN SEMICOL SHORT SIGNED SIZEOF STATIC STRING STRUCT SWITCH TIMES TYPEDEF UNION UNSIGNED VOID VOLATILE WHILE\n    statements : statements statement\n    \n    statements : statement\n    \n    print_statement : PRINT LPAREN expression RPAREN SEMICOL\n                    | PRINT LPAREN STRING RPAREN SEMICOL  \n    statement : expression\n                 | if_statement\n                 | comparison\n                 | var_statement\n                 | var_assign\n                 | print_statement\n                 \n    var_assign : ID EQUALS STRING SEMICOL\n               | ID EQUALS NUMBER SEMICOL\n    \n    var_statement : CHAR ID EQUALS STRING SEMICOL\n                  | FLOATTYPE ID EQUALS NUMBER SEMICOL\n                  | INT ID EQUALS NUMBER SEMICOL\n    \n    expression : ID\n    term : ID\n    factor : ID\n    \n    comparison : expression GTH expression\n                  | expression LTH expression\n                  | expression GTHOREQUAL expression\n                  | expression LTHOREQUAL expression\n                  | expression EQUALEQUAL expression\n                  | expression NOTEQUAL expression\n    if_statement : IF LPAREN comparison RPAREN LBRACE statements RBRACEexpression : expression PLUS termexpression : expression MINUS termexpression : termterm : term TIMES factorterm : term DIVIDE factorterm : term MODULO factorterm : factorfactor : NUMBERfactor : LPAREN expression RPARENempty :'
     
-_lr_action_items = {'ID':([0,10,11,12,14,16,17,18,19,20,21,22,23,25,26,27,28,61,68,],[7,30,31,32,33,35,35,30,30,30,30,30,30,46,46,46,30,30,30,]),'IF':([0,],[9,]),'CHAR':([0,],[11,]),'FLOATTYPE':([0,],[12,]),'INT':([0,],[14,]),'NUMBER':([0,10,16,17,18,19,20,21,22,23,24,25,26,27,28,53,54,61,68,],[13,13,13,13,13,13,13,13,13,13,44,13,13,13,13,59,60,13,13,]),'LPAREN':([0,9,10,16,17,18,19,20,21,22,23,25,26,27,28,61,68,],[10,28,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,]),'$end':([1,2,3,4,5,6,7,8,13,15,30,34,35,36,37,38,39,40,41,42,45,46,47,48,51,55,56,62,63,64,67,],[0,-1,-2,-3,-4,-5,-11,-25,-30,-29,-11,-23,-12,-24,-14,-15,-16,-17,-18,-19,-26,-13,-27,-28,-31,-6,-7,-8,-9,-10,-20,]),'PLUS':([2,7,8,13,15,29,30,34,35,36,37,38,39,40,41,42,45,46,47,48,50,51,66,],[16,-11,-25,-30,-29,16,-11,-23,-12,-24,16,16,16,16,16,16,-26,-13,-27,-28,16,-31,16,]),'MINUS':([2,7,8,13,15,29,30,34,35,36,37,38,39,40,41,42,45,46,47,48,50,51,66,],[17,-11,-25,-30,-29,17,-11,-23,-12,-24,17,17,17,17,17,17,-26,-13,-27,-28,17,-31,17,]),'GTH':([2,7,8,13,15,30,34,35,36,45,46,47,48,50,51,],[18,-11,-25,-30,-29,-11,-23,-12,-24,-26,-13,-27,-28,18,-31,]),'LTH':([2,7,8,13,15,30,34,35,36,45,46,47,48,50,51,],[19,-11,-25,-30,-29,-11,-23,-12,-24,-26,-13,-27,-28,19,-31,]),'GTHOREQUAL':([2,7,8,13,15,30,34,35,36,45,46,47,48,50,51,],[20,-11,-25,-30,-29,-11,-23,-12,-24,-26,-13,-27,-28,20,-31,]),'LTHOREQUAL':([2,7,8,13,15,30,34,35,36,45,46,47,48,50,51,],[21,-11,-25,-30,-29,-11,-23,-12,-24,-26,-13,-27,-28,21,-31,]),'EQUALEQUAL':([2,7,8,13,15,30,34,35,36,45,46,47,48,50,51,],[22,-11,-25,-30,-29,-11,-23,-12,-24,-26,-13,-27,-28,22,-31,]),'NOTEQUAL':([2,7,8,13,15,30,34,35,36,45,46,47,48,50,51,],[23,-11,-25,-30,-29,-11,-23,-12,-24,-26,-13,-27,-28,23,-31,]),'EQUALS':([7,31,32,33,],[24,52,53,54,]),'TIMES':([7,8,13,15,30,34,35,36,45,46,47,48,51,],[-12,25,-30,-29,-12,25,-12,25,-26,-13,-27,-28,-31,]),'DIVIDE':([7,8,13,15,30,34,35,36,45,46,47,48,51,],[-12,26,-30,-29,-12,26,-12,26,-26,-13,-27,-28,-31,]),'MODULO':([7,8,13,15,30,34,35,36,45,46,47,48,51,],[-12,27,-30,-29,-12,27,-12,27,-26,-13,-27,-28,-31,]),'RPAREN':([8,13,15,29,30,34,35,36,37,38,39,40,41,42,45,46,47,48,49,51,],[-25,-30,-29,51,-11,-23,-12,-24,-14,-15,-16,-17,-18,-19,-26,-13,-27,-28,57,-31,]),'SEMICOL':([8,13,15,30,34,35,36,43,44,45,46,47,48,51,58,59,60,66,],[-25,-30,-29,-11,-23,-12,-24,55,56,-26,-13,-27,-28,-31,62,63,64,68,]),'STRING':([24,52,],[43,58,]),'LBRACE':([57,],[61,]),'RBRACE':([65,68,69,],[67,-21,-22,]),}
+_lr_action_items = {'ID':([0,1,2,3,4,5,6,7,8,9,10,12,13,14,15,16,18,19,20,21,22,23,24,25,26,27,29,30,31,32,34,38,39,40,41,42,43,44,45,46,47,50,51,52,53,56,62,63,70,71,72,73,74,75,76,77,],[9,9,-2,-5,-6,-7,-8,-9,-10,-16,-28,34,35,36,-33,37,-32,-1,40,40,34,34,34,34,34,34,51,51,51,34,-16,34,-26,-17,-27,-19,-20,-21,-22,-23,-24,-29,-18,-30,-31,-34,-11,-12,9,-13,-14,-15,-3,-4,9,-25,]),'IF':([0,1,2,3,4,5,6,7,8,9,10,15,18,19,34,39,40,41,42,43,44,45,46,47,50,51,52,53,56,62,63,70,71,72,73,74,75,76,77,],[11,11,-2,-5,-6,-7,-8,-9,-10,-16,-28,-33,-32,-1,-16,-26,-17,-27,-19,-20,-21,-22,-23,-24,-29,-18,-30,-31,-34,-11,-12,11,-13,-14,-15,-3,-4,11,-25,]),'CHAR':([0,1,2,3,4,5,6,7,8,9,10,15,18,19,34,39,40,41,42,43,44,45,46,47,50,51,52,53,56,62,63,70,71,72,73,74,75,76,77,],[13,13,-2,-5,-6,-7,-8,-9,-10,-16,-28,-33,-32,-1,-16,-26,-17,-27,-19,-20,-21,-22,-23,-24,-29,-18,-30,-31,-34,-11,-12,13,-13,-14,-15,-3,-4,13,-25,]),'FLOATTYPE':([0,1,2,3,4,5,6,7,8,9,10,15,18,19,34,39,40,41,42,43,44,45,46,47,50,51,52,53,56,62,63,70,71,72,73,74,75,76,77,],[14,14,-2,-5,-6,-7,-8,-9,-10,-16,-28,-33,-32,-1,-16,-26,-17,-27,-19,-20,-21,-22,-23,-24,-29,-18,-30,-31,-34,-11,-12,14,-13,-14,-15,-3,-4,14,-25,]),'INT':([0,1,2,3,4,5,6,7,8,9,10,15,18,19,34,39,40,41,42,43,44,45,46,47,50,51,52,53,56,62,63,70,71,72,73,74,75,76,77,],[16,16,-2,-5,-6,-7,-8,-9,-10,-16,-28,-33,-32,-1,-16,-26,-17,-27,-19,-20,-21,-22,-23,-24,-29,-18,-30,-31,-34,-11,-12,16,-13,-14,-15,-3,-4,16,-25,]),'PRINT':([0,1,2,3,4,5,6,7,8,9,10,15,18,19,34,39,40,41,42,43,44,45,46,47,50,51,52,53,56,62,63,70,71,72,73,74,75,76,77,],[17,17,-2,-5,-6,-7,-8,-9,-10,-16,-28,-33,-32,-1,-16,-26,-17,-27,-19,-20,-21,-22,-23,-24,-29,-18,-30,-31,-34,-11,-12,17,-13,-14,-15,-3,-4,17,-25,]),'NUMBER':([0,1,2,3,4,5,6,7,8,9,10,12,15,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,34,38,39,40,41,42,43,44,45,46,47,50,51,52,53,56,58,59,62,63,70,71,72,73,74,75,76,77,],[15,15,-2,-5,-6,-7,-8,-9,-10,-16,-28,15,-33,-32,-1,15,15,15,15,15,15,15,15,49,15,15,15,15,-16,15,-26,-17,-27,-19,-20,-21,-22,-23,-24,-29,-18,-30,-31,-34,66,67,-11,-12,15,-13,-14,-15,-3,-4,15,-25,]),'LPAREN':([0,1,2,3,4,5,6,7,8,9,10,11,12,15,17,18,19,20,21,22,23,24,25,26,27,29,30,31,32,34,38,39,40,41,42,43,44,45,46,47,50,51,52,53,56,62,63,70,71,72,73,74,75,76,77,],[12,12,-2,-5,-6,-7,-8,-9,-10,-16,-28,32,12,-33,38,-32,-1,12,12,12,12,12,12,12,12,12,12,12,12,-16,12,-26,-17,-27,-19,-20,-21,-22,-23,-24,-29,-18,-30,-31,-34,-11,-12,12,-13,-14,-15,-3,-4,12,-25,]),'$end':([1,2,3,4,5,6,7,8,9,10,15,18,19,34,39,40,41,42,43,44,45,46,47,50,51,52,53,56,62,63,71,72,73,74,75,77,],[0,-2,-5,-6,-7,-8,-9,-10,-16,-28,-33,-32,-1,-16,-26,-17,-27,-19,-20,-21,-22,-23,-24,-29,-18,-30,-31,-34,-11,-12,-13,-14,-15,-3,-4,-25,]),'RBRACE':([2,3,4,5,6,7,8,9,10,15,18,19,34,39,40,41,42,43,44,45,46,47,50,51,52,53,56,62,63,71,72,73,74,75,76,77,],[-2,-5,-6,-7,-8,-9,-10,-16,-28,-33,-32,-1,-16,-26,-17,-27,-19,-20,-21,-22,-23,-24,-29,-18,-30,-31,-34,-11,-12,-13,-14,-15,-3,-4,77,-25,]),'PLUS':([3,9,10,15,18,33,34,39,40,41,42,43,44,45,46,47,50,51,52,53,55,56,60,],[20,-16,-28,-33,-32,20,-16,-26,-17,-27,20,20,20,20,20,20,-29,-18,-30,-31,20,-34,20,]),'MINUS':([3,9,10,15,18,33,34,39,40,41,42,43,44,45,46,47,50,51,52,53,55,56,60,],[21,-16,-28,-33,-32,21,-16,-26,-17,-27,21,21,21,21,21,21,-29,-18,-30,-31,21,-34,21,]),'GTH':([3,9,10,15,18,34,39,40,41,50,51,52,53,55,56,],[22,-16,-28,-33,-32,-16,-26,-17,-27,-29,-18,-30,-31,22,-34,]),'LTH':([3,9,10,15,18,34,39,40,41,50,51,52,53,55,56,],[23,-16,-28,-33,-32,-16,-26,-17,-27,-29,-18,-30,-31,23,-34,]),'GTHOREQUAL':([3,9,10,15,18,34,39,40,41,50,51,52,53,55,56,],[24,-16,-28,-33,-32,-16,-26,-17,-27,-29,-18,-30,-31,24,-34,]),'LTHOREQUAL':([3,9,10,15,18,34,39,40,41,50,51,52,53,55,56,],[25,-16,-28,-33,-32,-16,-26,-17,-27,-29,-18,-30,-31,25,-34,]),'EQUALEQUAL':([3,9,10,15,18,34,39,40,41,50,51,52,53,55,56,],[26,-16,-28,-33,-32,-16,-26,-17,-27,-29,-18,-30,-31,26,-34,]),'NOTEQUAL':([3,9,10,15,18,34,39,40,41,50,51,52,53,55,56,],[27,-16,-28,-33,-32,-16,-26,-17,-27,-29,-18,-30,-31,27,-34,]),'EQUALS':([9,35,36,37,],[28,57,58,59,]),'TIMES':([9,10,15,18,34,39,40,41,50,51,52,53,56,],[-17,29,-33,-32,-17,29,-17,29,-29,-18,-30,-31,-34,]),'DIVIDE':([9,10,15,18,34,39,40,41,50,51,52,53,56,],[-17,30,-33,-32,-17,30,-17,30,-29,-18,-30,-31,-34,]),'MODULO':([9,10,15,18,34,39,40,41,50,51,52,53,56,],[-17,31,-33,-32,-17,31,-17,31,-29,-18,-30,-31,-34,]),'RPAREN':([10,15,18,33,34,39,40,41,42,43,44,45,46,47,50,51,52,53,54,56,60,61,],[-28,-33,-32,56,-16,-26,-17,-27,-19,-20,-21,-22,-23,-24,-29,-18,-30,-31,64,-34,68,69,]),'STRING':([28,38,57,],[48,61,65,]),'SEMICOL':([48,49,65,66,67,68,69,],[62,63,71,72,73,74,75,]),'LBRACE':([64,],[70,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'statement':([0,],[1,]),'expression':([0,10,18,19,20,21,22,23,28,61,68,],[2,29,37,38,39,40,41,42,50,66,66,]),'comparison':([0,28,],[3,49,]),'if_statement':([0,],[4,]),'var_statement':([0,],[5,]),'var_assign':([0,],[6,]),'term':([0,10,16,17,18,19,20,21,22,23,28,61,68,],[8,8,34,36,8,8,8,8,8,8,8,8,8,]),'factor':([0,10,16,17,18,19,20,21,22,23,25,26,27,28,61,68,],[15,15,15,15,15,15,15,15,15,15,45,47,48,15,15,15,]),'expr_list':([61,68,],[65,69,]),}
+_lr_goto_items = {'statements':([0,70,],[1,76,]),'statement':([0,1,70,76,],[2,19,2,19,]),'expression':([0,1,12,22,23,24,25,26,27,32,38,70,76,],[3,3,33,42,43,44,45,46,47,55,60,3,3,]),'if_statement':([0,1,70,76,],[4,4,4,4,]),'comparison':([0,1,32,70,76,],[5,5,54,5,5,]),'var_statement':([0,1,70,76,],[6,6,6,6,]),'var_assign':([0,1,70,76,],[7,7,7,7,]),'print_statement':([0,1,70,76,],[8,8,8,8,]),'term':([0,1,12,20,21,22,23,24,25,26,27,32,38,70,76,],[10,10,10,39,41,10,10,10,10,10,10,10,10,10,10,]),'factor':([0,1,12,20,21,22,23,24,25,26,27,29,30,31,32,38,70,76,],[18,18,18,18,18,18,18,18,18,18,18,50,52,53,18,18,18,18,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -26,39 +26,40 @@ for _k, _v in _lr_goto_items.items():
        _lr_goto[_x][_k] = _y
 del _lr_goto_items
 _lr_productions = [
-  ("S' -> statement","S'",1,None,None,None),
-  ('statement -> expression','statement',1,'p_statement_expr','Parser.py',53),
-  ('statement -> comparison','statement',1,'p_statement_expr','Parser.py',54),
-  ('statement -> if_statement','statement',1,'p_statement_expr','Parser.py',55),
-  ('statement -> var_statement','statement',1,'p_statement_expr','Parser.py',56),
-  ('statement -> var_assign','statement',1,'p_statement_expr','Parser.py',57),
-  ('var_assign -> ID EQUALS STRING SEMICOL','var_assign',4,'p_statement_assign_var','Parser.py',64),
-  ('var_assign -> ID EQUALS NUMBER SEMICOL','var_assign',4,'p_statement_assign_var','Parser.py',65),
-  ('var_statement -> CHAR ID EQUALS STRING SEMICOL','var_statement',5,'p_statement_var','Parser.py',91),
-  ('var_statement -> FLOATTYPE ID EQUALS NUMBER SEMICOL','var_statement',5,'p_statement_var','Parser.py',92),
-  ('var_statement -> INT ID EQUALS NUMBER SEMICOL','var_statement',5,'p_statement_var','Parser.py',93),
-  ('expression -> ID','expression',1,'p_variable_expression','Parser.py',103),
-  ('term -> ID','term',1,'p_variable_expression','Parser.py',104),
-  ('factor -> ID','factor',1,'p_variable_expression','Parser.py',105),
-  ('comparison -> expression GTH expression','comparison',3,'p_expression_comparison','Parser.py',117),
-  ('comparison -> expression LTH expression','comparison',3,'p_expression_comparison','Parser.py',118),
-  ('comparison -> expression GTHOREQUAL expression','comparison',3,'p_expression_comparison','Parser.py',119),
-  ('comparison -> expression LTHOREQUAL expression','comparison',3,'p_expression_comparison','Parser.py',120),
-  ('comparison -> expression EQUALEQUAL expression','comparison',3,'p_expression_comparison','Parser.py',121),
-  ('comparison -> expression NOTEQUAL expression','comparison',3,'p_expression_comparison','Parser.py',122),
-  ('if_statement -> IF LPAREN comparison RPAREN LBRACE expr_list RBRACE','if_statement',7,'p_IF','Parser.py',162),
-  ('expr_list -> expression SEMICOL','expr_list',2,'p_expr_list','Parser.py',172),
-  ('expr_list -> expression SEMICOL expr_list','expr_list',3,'p_expr_list','Parser.py',173),
-  ('expression -> expression PLUS term','expression',3,'p_expression_plus','Parser.py',181),
-  ('expression -> expression MINUS term','expression',3,'p_expression_minus','Parser.py',185),
-  ('expression -> term','expression',1,'p_expression_term','Parser.py',189),
-  ('term -> term TIMES factor','term',3,'p_term_times','Parser.py',193),
-  ('term -> term DIVIDE factor','term',3,'p_term_div','Parser.py',197),
-  ('term -> term MODULO factor','term',3,'p_term_modulo','Parser.py',201),
-  ('term -> factor','term',1,'p_term_factor','Parser.py',205),
-  ('factor -> NUMBER','factor',1,'p_factor_num','Parser.py',209),
-  ('factor -> LPAREN expression RPAREN','factor',3,'p_factor_expr','Parser.py',213),
-  ('print_statement -> PRINT LPAREN expression RPAREN SEMICOL','print_statement',5,'p_statement_print','Parser.py',220),
-  ('print_statement -> PRINT LPAREN STRING RPAREN SEMICOL','print_statement',5,'p_statement_print','Parser.py',221),
-  ('empty -> <empty>','empty',0,'p_empty','Parser.py',229),
+  ("S' -> statements","S'",1,None,None,None),
+  ('statements -> statements statement','statements',2,'p_statements_multiple','Parser.py',52),
+  ('statements -> statement','statements',1,'p_statements_single','Parser.py',59),
+  ('print_statement -> PRINT LPAREN expression RPAREN SEMICOL','print_statement',5,'p_statement_print','Parser.py',66),
+  ('print_statement -> PRINT LPAREN STRING RPAREN SEMICOL','print_statement',5,'p_statement_print','Parser.py',67),
+  ('statement -> expression','statement',1,'p_statement_expr','Parser.py',75),
+  ('statement -> if_statement','statement',1,'p_statement_expr','Parser.py',76),
+  ('statement -> comparison','statement',1,'p_statement_expr','Parser.py',77),
+  ('statement -> var_statement','statement',1,'p_statement_expr','Parser.py',78),
+  ('statement -> var_assign','statement',1,'p_statement_expr','Parser.py',79),
+  ('statement -> print_statement','statement',1,'p_statement_expr','Parser.py',80),
+  ('var_assign -> ID EQUALS STRING SEMICOL','var_assign',4,'p_statement_assign_var','Parser.py',87),
+  ('var_assign -> ID EQUALS NUMBER SEMICOL','var_assign',4,'p_statement_assign_var','Parser.py',88),
+  ('var_statement -> CHAR ID EQUALS STRING SEMICOL','var_statement',5,'p_statement_var','Parser.py',114),
+  ('var_statement -> FLOATTYPE ID EQUALS NUMBER SEMICOL','var_statement',5,'p_statement_var','Parser.py',115),
+  ('var_statement -> INT ID EQUALS NUMBER SEMICOL','var_statement',5,'p_statement_var','Parser.py',116),
+  ('expression -> ID','expression',1,'p_variable_expression','Parser.py',127),
+  ('term -> ID','term',1,'p_variable_expression','Parser.py',128),
+  ('factor -> ID','factor',1,'p_variable_expression','Parser.py',129),
+  ('comparison -> expression GTH expression','comparison',3,'p_expression_comparison','Parser.py',142),
+  ('comparison -> expression LTH expression','comparison',3,'p_expression_comparison','Parser.py',143),
+  ('comparison -> expression GTHOREQUAL expression','comparison',3,'p_expression_comparison','Parser.py',144),
+  ('comparison -> expression LTHOREQUAL expression','comparison',3,'p_expression_comparison','Parser.py',145),
+  ('comparison -> expression EQUALEQUAL expression','comparison',3,'p_expression_comparison','Parser.py',146),
+  ('comparison -> expression NOTEQUAL expression','comparison',3,'p_expression_comparison','Parser.py',147),
+  ('if_statement -> IF LPAREN comparison RPAREN LBRACE statements RBRACE','if_statement',7,'p_IF','Parser.py',188),
+  ('expression -> expression PLUS term','expression',3,'p_expression_plus','Parser.py',195),
+  ('expression -> expression MINUS term','expression',3,'p_expression_minus','Parser.py',199),
+  ('expression -> term','expression',1,'p_expression_term','Parser.py',203),
+  ('term -> term TIMES factor','term',3,'p_term_times','Parser.py',207),
+  ('term -> term DIVIDE factor','term',3,'p_term_div','Parser.py',211),
+  ('term -> term MODULO factor','term',3,'p_term_modulo','Parser.py',215),
+  ('term -> factor','term',1,'p_term_factor','Parser.py',219),
+  ('factor -> NUMBER','factor',1,'p_factor_num','Parser.py',223),
+  ('factor -> LPAREN expression RPAREN','factor',3,'p_factor_expr','Parser.py',227),
+  ('empty -> <empty>','empty',0,'p_empty','Parser.py',232),
 ]

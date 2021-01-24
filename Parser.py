@@ -12,7 +12,6 @@ errors = (
 )
 
 class variable:
-    
     def __init__(self, name, typee, value):
         self.dictionary = {}
         self.dictionary["name"] = name
@@ -48,16 +47,40 @@ def variable_exists(v):
         value = None
     return value
 
+def p_statements_multiple(p):
+    '''
+    statements : statements statement
+    '''
+    #p[0] = p[1] + [p[2]]
+    pass
+
+def p_statements_single(p):
+    '''
+    statements : statement
+    '''
+    p[0] = p[1]
+
+#Basic Functions
+def p_statement_print(p):
+    '''
+    print_statement : PRINT LPAREN expression RPAREN SEMICOL
+                    | PRINT LPAREN STRING RPAREN SEMICOL  
+    '''
+    p[0] = p[3]
+
+
+
 #Conditions
 def p_statement_expr(p):
     '''statement : expression
-                 | comparison
                  | if_statement
+                 | comparison
                  | var_statement
                  | var_assign
+                 | print_statement
                  '''
-    print(p[1])
-
+    #print(p[1])
+    p[0] = p[1]
 #Change value of a variable
 def p_statement_assign_var(p):
     '''
@@ -96,7 +119,8 @@ def p_statement_var(p):
     global variables
     my_var = variable(p[2], p[1], p[4])
     variables[my_var.get_name()] = my_var
-    p[0] = variables
+    # ERROR Gestion
+    p[0] = my_var.get_value()
     
 def p_variable_expression(p):
     '''
@@ -111,6 +135,7 @@ def p_variable_expression(p):
         p[0] = "{0} makaynash a lkhawa".format(p[1])
     else:
         p[0] = found.get_value()
+
 
 def p_expression_comparison(p):
     '''
@@ -158,24 +183,14 @@ def p_expression_comparison(p):
             p[0] = False
 
 
+
 def p_IF(p):
-    '''if_statement : IF LPAREN comparison RPAREN LBRACE expr_list RBRACE'''
-    #p[0] = p[3]
+    '''if_statement : IF LPAREN comparison RPAREN LBRACE statements RBRACE'''
     if p[3] == True:
         p[0] = p[6]
     else:
         pass
 
-#Set of instructions
-def p_expr_list(p):
-    '''
-    expr_list : expression SEMICOL
-              | expression SEMICOL expr_list
-    '''
-    if len(p) == 2:
-        p[0] = [p[1]]
-    else:
-        p[0] = p[1] + [p[3]]
 #Arithmetic operations
 def p_expression_plus(p):
     'expression : expression PLUS term'
@@ -213,18 +228,7 @@ def p_factor_expr(p):
     'factor : LPAREN expression RPAREN'
     p[0] = p[2]
 
-
-#Basic Functions
-def p_statement_print(p):
-    '''
-    print_statement : PRINT LPAREN expression RPAREN SEMICOL
-                    | PRINT LPAREN STRING RPAREN SEMICOL  
-    '''
-    p[0] = p[3]
-
-
-
-
+#Empty
 def p_empty(p):
     'empty :'
     pass
