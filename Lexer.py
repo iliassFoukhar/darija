@@ -113,7 +113,7 @@ def t_STRING(t):
 
 # A regular expression rule for integers
 def t_NUMBER(t):
-    r'[0-9]*\.?[0-9]+((E|e)(\+|-)?[0-9]+)?'
+    r'-?[0-9]*\.?[0-9]+((E|e)(\+|-)?[0-9]+)?'
     try:
         t.value = int(t.value)
         t.type = 'NUMBER'

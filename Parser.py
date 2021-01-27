@@ -8,7 +8,10 @@ is_running = True
 errors = (
     (0, "Kayn shi moshkil fl input"),
     (1, "l motaghayyir dyalk rah "),
-    (2, "variable makaynash")
+    (2, "variable makaynash"),
+    (3, "variable dyalk mashi mn nfs nou3 alkhawa"),
+    (4, "machi 3adad rkkez al khawa"),
+    (5, "had ma7ed dyalk 3merha tsala")
 )
 
 class variable:
@@ -51,14 +54,18 @@ def p_statements_multiple(p):
     '''
     statements : statements statement
     '''
-    for i in range(1,len(p)):
-       print(p[i]) 
+    #result = p[1]
+    #for i in range(1,len(p)):
+        #if p[i] is not None:
+            #print(p[i]) 
+            #p[0] += p[i]
+    p[0] = p[1] + [p[2]]
 
 def p_statements_single(p):
     '''
     statements : statement
     '''
-    p[0] = p[1]
+    p[0] = [p[1]]
 
 #Basic Functions
 def p_statement_print(p):
@@ -73,15 +80,50 @@ def p_statement_print(p):
 #Conditions
 def p_statement_expr(p):
     '''statement : expression SEMICOL
+                 | while_statement
                  | if_statement
                  | comparison
                  | var_statement
                  | var_assign
+                 | var_inc
                  | print_statement
                  '''
     #print(p[1])
-    p[0] = p[1]
+    if isinstance(p[1], list):
+        if isinstance(p[1][0], list):
+            p[0] = p[1][0][0]
+        else:
+            p[0] = p[1][0]
+    else:
+        p[0] = p[1]
+
+
 #Change value of a variable
+def p_statement_assign_var_id(p):
+    '''
+    var_assign : ID EQUALS ID SEMICOL
+    '''
+    global errors
+    found_one = variable_exists(p[1])
+    found_two = variable_exists(p[3])
+
+    if found_one is None and found_two is None:
+        p[0] = f'{p[1]} {errors[2][1]}\n{p[3]} {errors[2][1]}'
+        pass
+    elif found_one is None and found_two is not None:
+        p[0] = f'{p[1]} {errors[2][1]}'
+        pass
+    elif found_two is None and found_one is not None:
+        p[0] = f'{p[3]} {errors[2][1]}'
+        pass
+    
+    elif found_one is not None and found_two is not None:
+        if found_one.get_type() == found_two.get_type():
+            found_one.set_value(found_two.get_value())
+        else:
+            p[0] = errors[3][2]
+    
+
 def p_statement_assign_var(p):
     '''
     var_assign : ID EQUALS STRING SEMICOL
@@ -107,6 +149,25 @@ def p_statement_assign_var(p):
                 p[0]  = "l motaghayyir dyalk rah {0}".format(found.get_type())
     else:
         p[0] = "{0} makaynash a lkhawa".format(p[1])
+
+#Increment and decrement variables
+def p_increment_var(p):
+    '''
+    var_inc : ID PLUS PLUS SEMICOL
+    '''
+    global errors
+    found = variable_exists(p[1])
+    if found is None:
+        p[0] = f'{p[1]} {errors[2][1]}'
+    else:
+        if found.get_type() == "sahih":
+            found.set_value(found.get_value() + 1)
+            p[0] = found.get_value()
+        elif found.get_type() == "achari":
+            found.set_value(found.get_value() + 1.0)
+            p[0] = found.get_value()
+        else:
+            p[0] = f'{p[1]} {errors[4][1]}'
 
 #Assign New Variable
 def p_statement_var(p):
@@ -183,13 +244,33 @@ def p_expression_comparison(p):
             p[0] = False
 
 
-
+#IF STATEMENTS
 def p_IF(p):
     '''if_statement : IF LPAREN comparison RPAREN LBRACE statements RBRACE'''
     if p[3] == True:
         p[0] = p[6]
     else:
         pass
+
+def p_IF_ELSE(p):
+    '''
+        if_statement : IF LPAREN comparison RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
+    '''
+    if p[3] == True:
+        p[0] = p[6]
+    else:
+        p[0] = p[10]
+
+
+#WHILE STATEMENTS
+def p_WHILE(p):
+    '''
+        while_statement : WHILE LPAREN comparison RPAREN LBRACE statements RBRACE
+    '''
+    pass
+
+
+        
 
 #Arithmetic operations
 def p_expression_plus(p):
@@ -240,6 +321,9 @@ def p_error(p):
 # Build the parser
 parser = yacc.yacc()
 
+#def parsii(s):
+    #result = parser.parse(s)
+    #if result != None:
 while is_running:
     try:
         s = input('calc > ')
@@ -249,6 +333,8 @@ while is_running:
         continue
     result = parser.parse(s)
     if result != None:
-        print(result)
+        #print(result)
+        for r in result:
+            print(r)
    
 
