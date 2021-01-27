@@ -331,10 +331,21 @@ while is_running:
         break
     if not s: 
         continue
-    result = parser.parse(s)
-    if result != None:
-        #print(result)
-        for r in result:
-            print(r)
+    #WHILE 
+    if "ma7ed" in s:
+        statements = s.split("{")[1].split("}")[0]
+        condition = s.split("(")[1].split(")")[0]
+        statements = str(statements)
+        while parser.parse(condition)[0] == True:
+            result = parser.parse(statements)    
+            if result != None:
+                for r in result:
+                    print(r)
+    else:
+        result = parser.parse(s)
+
+        if result != None:
+            for r in result:
+                print(r)
    
 
