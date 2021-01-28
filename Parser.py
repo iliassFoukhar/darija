@@ -59,11 +59,6 @@ def p_statements_multiple(p):
     '''
     statements : statements statement
     '''
-    #result = p[1]
-    #for i in range(1,len(p)):
-        #if p[i] is not None:
-            #print(p[i]) 
-            #p[0] += p[i]
     p[0] = p[1] + [p[2]]
 
 def p_statements_single(p):
@@ -89,6 +84,7 @@ def p_statement_expr(p):
                  | for_statement
                  | if_statement
                  | comparison
+                 | bool_comparison
                  | var_statement
                  | var_assign
                  | var_inc
@@ -236,7 +232,7 @@ def p_variable_expression(p):
     else:
         p[0] = found.get_value()
 
-
+# Comparisons
 def p_expression_comparison(p):
     '''
     comparison : expression GTH expression
@@ -282,7 +278,57 @@ def p_expression_comparison(p):
         else:
             p[0] = False
 
+def p_bool_comparison(p):
+    '''
+        bool_comparison : ID EQUALEQUAL ID
+                        | ID EQUALEQUAL TRUE
+                        | ID EQUALEQUAL FALSE
+                        | ID NOTEQUAL ID
+                        | ID NOTEQUAL TRUE
+                        | ID NOTEQUAL FALSE
+    '''
+    # Check if the second operand is a variable and if it is the case, check if it exists 
+    if p[3] != "vri" and p[3] != "ffo":
+        found_two = variable_exists(p[3])
+        if found_two is not None:
+            if found_two.get_type() == 'manti9i':
+                value_two = found_two.get_value()
+            else:
+                p[0] = '{0} mashi manti9i'.format(found_two.get_name())
+                pass
+        else:
+            p[0] = '{0} mam3rfash al khawa'.format(p[3])
+            pass
+    elif p[3] == 'vri':
+        value_two = True
+    elif p[3] == 'ffo':
+        value_two = False
 
+    found = variable_exists(p[1])
+    if found is not None:
+        if found.get_type() == 'manti9i':
+            value_one = found.get_value()
+        else:
+            p[0] = '{0} mashi manti9i'.format(found_two.get_name())
+            pass
+    else:
+        p[0] = '{0} mam3rfash al khawa'.format(p[1])
+        pass
+    
+    if p[2] == "==":
+        if value_one == value_two:
+            p[0] = True
+            pass
+        else:
+            p[0] = False
+            pass
+    elif p[2] == "!=":
+        if value_one == value_two:
+            p[0] = False
+            pass
+        else:
+            p[0] = True
+            pass
 #IF STATEMENTS
 def p_IF(p):
     '''if_statement : IF LPAREN comparison RPAREN LBRACE statements RBRACE'''

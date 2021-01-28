@@ -22,10 +22,9 @@ reserved = {
     'ma7ed'       : 'WHILE',
     'qyas'        : 'SIZEOF',
     'achari'      : 'FLOATTYPE',
-    'manti9i'         : 'BOOL',
-    'vri'          : 'TRUE',
-    'ffo'          : 'FALSE'
-    
+    'manti9i'     : 'BOOL',
+    'vri'         : 'TRUE',
+    'ffo'         : 'FALSE'    
 }
 
 
