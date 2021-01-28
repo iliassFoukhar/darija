@@ -8,19 +8,19 @@ reserved = {
     'error'       : 'ID',
     'tbe3'        : 'PRINT',
     'sahih'       : 'INT',
-    'hbes'        : 'BREAK',
+    'hbes'        : 'BREAK', # 1
     'oula'        : 'ELSE',
-    'marka'       : 'VAR_TYPE',
-    'harf'        : 'CHAR',
-    'reje3'       : 'RETURN',
-    'itihad'      : 'UNION',
-    'kemel'       : 'CONTINUE',
+    'marka'       : 'VAR_TYPE', # 2
+    'harf'        : 'CHAR', 
+    'reje3'       : 'RETURN', # 3
+    'itihad'      : 'UNION', # 4
+    'kemel'       : 'CONTINUE', # 5
     'fkoula'      : 'FOR',
-    'lkhwalkhawi' : 'VOID',
+    'lkhwalkhawi' : 'VOID', # 6
     'ila'         : 'IF',
-    'jamed'       : 'CONSTANT',
+    'jamed'       : 'CONSTANT', # 7
     'ma7ed'       : 'WHILE',
-    'qyas'        : 'SIZEOF',
+    'qyas'        : 'SIZEOF', # 8
     'achari'      : 'FLOATTYPE',
     'manti9i'     : 'BOOL',
     'vri'         : 'TRUE',
@@ -55,21 +55,21 @@ tokens =(
 
 
 # Regular expression rules for simple tokens
-t_EQUALEQUAL= r'=='
-t_GTH       = r'>'
-t_LTH       = r'<'
-t_GTHOREQUAL= r'>='
-t_LTHOREQUAL= r'<='
-t_NOTEQUAL  = r'!='
-t_PLUS     = r'\+'
-t_MINUS    = r'-'
-t_TIMES    = r'\*'
-t_DIVIDE   = r'/'
-t_LPAREN   = r'\('
-t_RPAREN   = r'\)'
-t_SEMICOL  = r';'
-t_EQUALS   = r'='
-t_MODULO   = r'%'
+t_EQUALEQUAL = r'=='
+t_GTH        = r'>'
+t_LTH        = r'<'
+t_GTHOREQUAL = r'>='
+t_LTHOREQUAL = r'<='
+t_NOTEQUAL   = r'!='
+t_PLUS       = r'\+'
+t_MINUS      = r'-'
+t_TIMES      = r'\*'
+t_DIVIDE     = r'/'
+t_LPAREN     = r'\('
+t_RPAREN     = r'\)'
+t_SEMICOL    = r';'
+t_EQUALS     = r'='
+t_MODULO     = r'%'
 
 
 #Check for curly braces

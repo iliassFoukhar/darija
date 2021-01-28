@@ -84,12 +84,14 @@ def p_statement_expr(p):
                  | for_statement
                  | if_statement
                  | comparison
+                 | compare_id_value
                  | bool_comparison
                  | var_statement
                  | var_assign
                  | var_inc
                  | var_dec
                  | print_statement
+                 | break_statement
                  '''
     #print(p[1])
     if isinstance(p[1], list):
@@ -278,6 +280,63 @@ def p_expression_comparison(p):
         else:
             p[0] = False
 
+def p_compare_id_value(p):
+    '''
+        compare_id_value : ID GTH expression
+                         | ID LTH expression
+                         | ID GTHOREQUAL expression
+                         | ID LTHOREQUAL expression
+                         | ID EQUALEQUAL expression
+                         | ID NOTEQUAL expression 
+    '''
+    found = variable_exists(p[1])
+    if found is not None:
+        if found.get_type() == 'achari' or found.get_type() == 'sahih':
+            value = found.get_value()
+        else:
+            print('mat9drsh dir had l mo9arana al khawa')
+            pass
+    else:
+        print('motaghayir makaynsh al khawa')
+        pass
+    
+    if p[2] == '>':
+        if value > p[3]:
+            p[0] = True
+        else:
+            p[0] = False
+
+    elif p[2] == '<':
+        if value < p[3]:
+            p[0] = True
+        else:
+            p[0] = False
+
+    elif p[2] == '>=':
+        if value >= p[3]:
+            p[0] = True
+        else:
+            p[0] = False
+
+    elif p[2] == '<=':
+        if value <= p[3]:
+            p[0] = True
+        else:
+            p[0] = False
+
+    elif p[2] == '==':
+        if value == p[3]:
+            p[0] = True
+        else:
+            p[0] = False
+
+    elif p[2] == '!=':
+        if value != p[3]:
+            p[0] = True
+        else:
+            p[0] = False
+
+# Comparing booleans
 def p_bool_comparison(p):
     '''
         bool_comparison : ID EQUALEQUAL ID
@@ -288,17 +347,19 @@ def p_bool_comparison(p):
                         | ID NOTEQUAL FALSE
     '''
     # Check if the second operand is a variable and if it is the case, check if it exists 
+    can = False
     if p[3] != "vri" and p[3] != "ffo":
         found_two = variable_exists(p[3])
         if found_two is not None:
             if found_two.get_type() == 'manti9i':
                 value_two = found_two.get_value()
             else:
-                p[0] = '{0} mashi manti9i'.format(found_two.get_name())
-                pass
+                print('{0} mashi manti9i'.format(found_two.get_name()))
+                
+                
         else:
-            p[0] = '{0} mam3rfash al khawa'.format(p[3])
-            pass
+            print('{0} mam3rfash al khawa'.format(p[3]))
+            
     elif p[3] == 'vri':
         value_two = True
     elif p[3] == 'ffo':
@@ -308,38 +369,46 @@ def p_bool_comparison(p):
     if found is not None:
         if found.get_type() == 'manti9i':
             value_one = found.get_value()
+            can = True
         else:
-            p[0] = '{0} mashi manti9i'.format(found_two.get_name())
-            pass
-    else:
-        p[0] = '{0} mam3rfash al khawa'.format(p[1])
-        pass
+            print('{0} mashi manti9i'.format(found.get_name()))
+            
+    elif found == None:
+        print('{0} mam3rfash al khawa'.format(p[1]))
+        
     
-    if p[2] == "==":
+    if p[2] == "==" and can == True and (value_two == True or value_two == False):
         if value_one == value_two:
             p[0] = True
-            pass
+            
         else:
             p[0] = False
-            pass
-    elif p[2] == "!=":
+            
+    elif p[2] == "!=" and can == True and (value_two == True or value_two == False):
         if value_one == value_two:
             p[0] = False
-            pass
+            
         else:
             p[0] = True
-            pass
+            
+    else:
+        p[0] = 'kayn shi moshkil'
 #IF STATEMENTS
 def p_IF(p):
-    '''if_statement : IF LPAREN comparison RPAREN LBRACE statements RBRACE'''
+    '''
+        if_statement : IF LPAREN comparison RPAREN LBRACE statements RBRACE
+                     | IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE
+                     | IF LPAREN bool_comparison RPAREN LBRACE statements RBRACE
+    '''
     if p[3] == True:
         p[0] = p[6]
     else:
-        pass
+        p[0] = None
 
 def p_IF_ELSE(p):
     '''
         if_statement : IF LPAREN comparison RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
+                     | IF LPAREN bool_comparison RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
     '''
     if p[3] == True:
         p[0] = p[6]
@@ -355,13 +424,21 @@ def p_WHILE(p):
                         | WHILE LPAREN FALSE RPAREN LBRACE statements RBRACE
     '''
     pass
-
+#FOR STATEMENT
 def p_FOR(p):
     '''
         for_statement : FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE
     '''
     #fkoula(sahih a = 1; a < 5; a++;){ task; task; }
     pass
+
+#Break
+def p_break_statement(p):
+    '''
+        break_statement : BREAK SEMICOL
+    '''
+    p[0] = ['hbes']
+
 
 #Arithmetic operations
 def p_expression_plus(p):
@@ -412,9 +489,7 @@ def p_error(p):
 # Build the parser
 parser = yacc.yacc()
 
-#def parsii(s):
-    #result = parser.parse(s)
-    #if result != None:
+
 while is_running:
     try:
         s = input('calc > ')
@@ -424,14 +499,41 @@ while is_running:
         continue
     #WHILE 
     if "ma7ed" in s:
-        statements = s.split("{")[1].split("}")[0]
+        #statements = s.split("{")[1].split("}")[0]
+        prestatements = s.split("{")
+        statements = ""
+        for i in range(1, len(prestatements)):
+            if i != len(prestatements) - 1:
+                statements += prestatements[i] + "{"
+            else:
+                statements += prestatements[i]
+        prestatements = statements.split("}")
+        statements = ""
+        for i in range(0, len(prestatements) - 1):
+            if i != len(prestatements) - 2:
+                statements += prestatements[i] + "}"
+            else:
+                statements += prestatements[i]
         condition = s.split("(")[1].split(")")[0]
         statements = str(statements)
+        is_looping = True
         while parser.parse(condition)[0] == True:
-            result = parser.parse(statements)    
-            if result != None:
+            if is_looping == True:
+                result = parser.parse(statements)    
+            else:
+                break
+            if result != None and 'hbes' not in result:
                 for r in result:
-                    print(r)
+                    if r == "hbes":
+                        is_looping = False
+                        print(is_looping)
+                        break
+                    else:
+                        if r is not None:
+                            print(r)
+            if is_looping == False:
+                break
+    
     elif "fkoula" in s:
         var       = s.split("(")[1].split(")")[0].split(";")[0] + ";"
         condition = s.split("(")[1].split(")")[0].split(";")[1]
@@ -440,7 +542,7 @@ while is_running:
     
         parser.parse(var)
         while(parser.parse(condition)[0] == True):
-            result = parser.parse(statements)
+            result = parser.parse(statements, tokenfunc = True)
             if result is not None:
                 for r in result:
                     print(r)
@@ -450,6 +552,7 @@ while is_running:
 
         if result != None:
             for r in result:
-                print(r)
+                if r is not None:
+                    print(r)
    
 
