@@ -23,6 +23,11 @@ class variable:
             self.dictionary["value"] = int(value)
         elif typee == "achari":
             self.dictionary["value"] = float(value)
+        elif typee == "manti9i":
+            if value == 'vri':
+                self.dictionary["value"] = True
+            elif value == 'ffo':
+                self.dictionary["value"] = False
         else:
             self.dictionary["value"] = value
 
@@ -81,11 +86,13 @@ def p_statement_print(p):
 def p_statement_expr(p):
     '''statement : expression SEMICOL
                  | while_statement
+                 | for_statement
                  | if_statement
                  | comparison
                  | var_statement
                  | var_assign
                  | var_inc
+                 | var_dec
                  | print_statement
                  '''
     #print(p[1])
@@ -128,6 +135,8 @@ def p_statement_assign_var(p):
     '''
     var_assign : ID EQUALS STRING SEMICOL
                | ID EQUALS NUMBER SEMICOL
+               | ID EQUALS TRUE SEMICOL
+               | ID EQUALS FALSE SEMICOL
     '''
     found = variable_exists(p[1])
     if found is not None:
@@ -147,6 +156,15 @@ def p_statement_assign_var(p):
                 found.set_value(p[3])
             else:
                 p[0]  = "l motaghayyir dyalk rah {0}".format(found.get_type())
+        elif found.get_type() == "manti9i":
+            if p[3] == 'vri':
+                found.set_value(True)
+                p[0] = True
+            elif p[3] == 'ffo':
+                found.set_value(False)
+                p[0] = False
+            else:
+                p[0] = "l motaghayyir dyalk rah {0}".format(found.get_type())
     else:
         p[0] = "{0} makaynash a lkhawa".format(p[1])
 
@@ -169,12 +187,33 @@ def p_increment_var(p):
         else:
             p[0] = f'{p[1]} {errors[4][1]}'
 
+def p_decrement_var(p):
+    '''
+    var_dec : ID MINUS MINUS SEMICOL
+    '''
+    global errors
+    found = variable_exists(p[1])
+    if found is None:
+        p[0] = f'{p[1]} {errors[2][1]}'
+    else:
+        if found.get_type() == "sahih":
+            found.set_value(found.get_value() - 1)
+            p[0] = found.get_value()
+        elif found.get_type() == "achari":
+            found.set_value(found.get_value() - 1.0)
+            p[0] = found.get_value()
+        else:
+            p[0] = f'{p[1]} {errors[4][1]}'
+
+
 #Assign New Variable
 def p_statement_var(p):
     '''
     var_statement : CHAR ID EQUALS STRING SEMICOL
                   | FLOATTYPE ID EQUALS NUMBER SEMICOL
                   | INT ID EQUALS NUMBER SEMICOL
+                  | BOOL ID EQUALS TRUE SEMICOL
+                  | BOOL ID EQUALS FALSE SEMICOL
     '''
     
     global variables
@@ -266,11 +305,17 @@ def p_IF_ELSE(p):
 def p_WHILE(p):
     '''
         while_statement : WHILE LPAREN comparison RPAREN LBRACE statements RBRACE
+                        | WHILE LPAREN TRUE RPAREN LBRACE statements RBRACE
+                        | WHILE LPAREN FALSE RPAREN LBRACE statements RBRACE
     '''
     pass
 
-
-        
+def p_FOR(p):
+    '''
+        for_statement : FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE
+    '''
+    #fkoula(sahih a = 1; a < 5; a++;){ task; task; }
+    pass
 
 #Arithmetic operations
 def p_expression_plus(p):
@@ -341,6 +386,19 @@ while is_running:
             if result != None:
                 for r in result:
                     print(r)
+    elif "fkoula" in s:
+        var       = s.split("(")[1].split(")")[0].split(";")[0] + ";"
+        condition = s.split("(")[1].split(")")[0].split(";")[1]
+        inc       = str(s.split("(")[1].split(")")[0].split(";")[2] + ";")
+        statements= str(s.split("{")[1].split("}")[0])
+    
+        parser.parse(var)
+        while(parser.parse(condition)[0] == True):
+            result = parser.parse(statements)
+            if result is not None:
+                for r in result:
+                    print(r)
+            parser.parse(inc)
     else:
         result = parser.parse(s)
 
