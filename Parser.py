@@ -11,7 +11,8 @@ errors = (
     (2, "variable makaynash"),
     (3, "variable dyalk mashi mn nfs nou3 alkhawa"),
     (4, "machi 3adad rkkez al khawa"),
-    (5, "had ma7ed dyalk 3merha tsala")
+    (5, "had ma7ed dyalk 3merha tsala"),
+    (6, "Ta malk baghi dkhl shi f shi ?")
 )
 
 class variable:
@@ -73,16 +74,89 @@ def p_statement_print(p):
     print_statement : PRINT LPAREN expression RPAREN SEMICOL
                     | PRINT LPAREN STRING RPAREN SEMICOL  
     '''
-    p[0] = p[3]
+    p[0] = [p[3]]
 
+def p_statement_vartype(p):
+    '''
+    vartype_statement : VAR_TYPE LPAREN ID RPAREN SEMICOL
+    '''
+    global errors
+    found = variable_exists(p[3])
+    if found is not None:
+        p[0] = found.get_type()
+    else:
+        print(errors[2][1])
+        pass
 
+def p_statement_union(p):
+    '''
+    union_statement : UNION LPAREN STRING COMMA STRING RPAREN SEMICOL
+    '''
+    listy = p[3].split('"') + p[5].split('"')
+    result = ""
+    for l in listy:
+        if l != " ":
+            result += l
+    p[0] = str(result)
 
+def p_statement_union_two(p):
+    '''
+    union_statement : UNION LPAREN STRING COMMA ID RPAREN SEMICOL
+    '''
+    global errors
+    found = variable_exists(p[5])
+    if found is not None:
+        if found.get_type() == 'harf':
+            v = found.get_value()
+            listy = p[3].split('"')
+            result = ""
+            for l in listy:
+                if l != " ":
+                    result += l
+            for vv in v.split('"'):
+                if vv != " ":
+                    result += vv
+            p[0] = result
+        else:
+            print(f'{found.get_name} mashi harf alkhawa')
+            pass
+    else:
+        print(errors[2][1])
+        pass
+
+def p_statement_union_three(p):
+    '''
+    union_statement : UNION LPAREN ID COMMA STRING RPAREN SEMICOL
+    '''
+    global errors
+    found = variable_exists(p[3])
+    if found is not None:
+        if found.get_type() == 'harf':
+            v = found.get_value()
+            listy = p[5].split('"')
+            result = ""
+            for vv in v.split('"'):
+                if vv != " ":
+                    result += vv
+            for l in listy:
+                if l != " ":
+                    result += l
+            p[0] = result
+        else:
+            print(f'{found.get_name} mashi harf alkhawa')
+            pass
+    else:
+        print(errors[2][1])
+        pass
 #Conditions
 def p_statement_expr(p):
     '''statement : expression SEMICOL
                  | while_statement
                  | for_statement
                  | if_statement
+                 | vartype_statement
+                 | input_statement
+                 | union_statement
                  | comparison
                  | compare_id_value
                  | bool_comparison
@@ -219,6 +293,47 @@ def p_statement_var(p):
     variables[my_var.get_name()] = my_var
     # ERROR Gestion
     p[0] = my_var.get_value()
+    
+
+# INPUT From user
+def p_input_statement(p):
+    '''
+        input_statement : INT ID EQUALS INPUT LPAREN INT RPAREN SEMICOL
+                        | CHAR ID EQUALS INPUT LPAREN CHAR RPAREN SEMICOL
+                        | FLOATTYPE ID EQUALS INPUT LPAREN FLOATTYPE RPAREN SEMICOL
+    ''' 
+    # Check for errors first
+    global errors, variables
+    if p[1] != p[6]:
+        print(errors[6][1])
+        pass
+    
+    done = False
+
+    #Get the input
+    value = input()
+
+    #Check for errors in input
+    if p[1] == 'sahih':
+        try:
+            value = int(value)
+            done = True
+        except:
+            print(errors[0][1])
+            pass
+    elif p[1] == "achari":
+        try:
+            value = float(value)
+            done = True
+        except:
+            print(errors[0][1])
+            pass
+
+    #Create the variable and store it in the dictionary
+    if done == True:
+        a = variable(p[2], p[1], value)
+        variables[a.get_name()] = a
+        p[0] = a.get_value()
     
 def p_variable_expression(p):
     '''
@@ -517,22 +632,19 @@ while is_running:
         condition = s.split("(")[1].split(")")[0]
         statements = str(statements)
         is_looping = True
-        while parser.parse(condition)[0] == True:
+        while parser.parse(condition)[0] == True and is_looping == True:
             if is_looping == True:
                 result = parser.parse(statements)    
             else:
                 break
-            if result != None and 'hbes' not in result:
+            if result != None:
                 for r in result:
-                    if r == "hbes":
+                    if r is not None and r != 'hbes':
+                        print(r)
+                    elif r is not None and r == 'hbes':
                         is_looping = False
-                        print(is_looping)
                         break
-                    else:
-                        if r is not None:
-                            print(r)
-            if is_looping == False:
-                break
+            
     
     elif "fkoula" in s:
         var       = s.split("(")[1].split(")")[0].split(";")[0] + ";"

@@ -8,12 +8,13 @@ reserved = {
     'error'       : 'ID',
     'tbe3'        : 'PRINT',
     'sahih'       : 'INT',
-    'hbes'        : 'BREAK', # 1
+    'hbes'        : 'BREAK', 
+    'dkhl'        : 'INPUT',
     'oula'        : 'ELSE',
-    'marka'       : 'VAR_TYPE', # 2
+    'marka'       : 'VAR_TYPE',
     'harf'        : 'CHAR', 
     'reje3'       : 'RETURN', # 3
-    'itihad'      : 'UNION', # 4
+    'jme3lia'     : 'UNION', # 4
     'kemel'       : 'CONTINUE', # 5
     'fkoula'      : 'FOR',
     'lkhwalkhawi' : 'VOID', # 6
@@ -50,7 +51,8 @@ tokens =(
     'RBRACE',
     'LBRACE',
     'SEMICOL',
-    'EQUALS'
+    'EQUALS',
+    'COMMA'
 ) + tuple(reserved.values())  
 
 
@@ -70,7 +72,7 @@ t_RPAREN     = r'\)'
 t_SEMICOL    = r';'
 t_EQUALS     = r'='
 t_MODULO     = r'%'
-
+t_COMMA      = r'\,'
 
 #Check for curly braces
 def t_LBRACE(t):
