@@ -151,9 +151,9 @@ def p_statement_union_three(p):
 #Conditions
 def p_statement_expr(p):
     '''statement : expression SEMICOL
+                 | if_statement
                  | while_statement
                  | for_statement
-                 | if_statement
                  | vartype_statement
                  | input_statement
                  | union_statement
@@ -166,6 +166,7 @@ def p_statement_expr(p):
                  | var_dec
                  | print_statement
                  | break_statement
+                 
                  '''
     #print(p[1])
     if isinstance(p[1], list):
@@ -515,10 +516,18 @@ def p_IF(p):
                      | IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE
                      | IF LPAREN bool_comparison RPAREN LBRACE statements RBRACE
     '''
+    global parser
     if p[3] == True:
-        p[0] = p[6]
+        for pp in p[6]:
+            if pp != 'hbes':
+                print(pp)
+        if 'hbes' in p[6]:
+            p[0] = 'hbes'
+        else:
+            p[0] = None
     else:
         p[0] = None
+        
 
 def p_IF_ELSE(p):
     '''
@@ -653,11 +662,16 @@ while is_running:
         statements= str(s.split("{")[1].split("}")[0])
     
         parser.parse(var)
-        while(parser.parse(condition)[0] == True):
-            result = parser.parse(statements, tokenfunc = True)
+        is_looping = True
+        while parser.parse(condition)[0] == True and is_looping == True:
+            result = parser.parse(statements)
             if result is not None:
                 for r in result:
-                    print(r)
+                    if r is not None and r != "hbes":
+                        print(r)
+                    elif r is not None and r == "hbes":
+                        is_looping = False
+                        break
             parser.parse(inc)
     else:
         result = parser.parse(s)
