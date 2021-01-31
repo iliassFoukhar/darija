@@ -533,6 +533,7 @@ def p_IF_ELSE(p):
     '''
         if_statement : IF LPAREN comparison RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
                      | IF LPAREN bool_comparison RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
+                     | IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
     '''
     if p[3] == True:
         p[0] = p[6]
@@ -613,14 +614,18 @@ def p_error(p):
 # Build the parser
 parser = yacc.yacc()
 
-
-while is_running:
-    try:
-        s = input('calc > ')
-    except EOFError:
-        break
+def build_parser(source):
+    global is_running
+    #while is_running:
+        # try:
+        #     #s = input('calc > ')
+        #     s = source
+        # except EOFError:
+        #     break
+    s = source
     if not s: 
-        continue
+    #    continue
+        return
     #WHILE 
     if "ma7ed" in s:
         #statements = s.split("{")[1].split("}")[0]
@@ -680,5 +685,5 @@ while is_running:
             for r in result:
                 if r is not None:
                     print(r)
-   
+
 

@@ -1,0 +1,4 @@
+sahih a = 3;
+sahih b = 2;
+tbe3("natija");
+a + b;

@@ -78,90 +78,91 @@ Rule 62    if_statement -> IF LPAREN compare_id_value RPAREN LBRACE statements R
 Rule 63    if_statement -> IF LPAREN bool_comparison RPAREN LBRACE statements RBRACE
 Rule 64    if_statement -> IF LPAREN comparison RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
 Rule 65    if_statement -> IF LPAREN bool_comparison RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
-Rule 66    while_statement -> WHILE LPAREN comparison RPAREN LBRACE statements RBRACE
-Rule 67    while_statement -> WHILE LPAREN TRUE RPAREN LBRACE statements RBRACE
-Rule 68    while_statement -> WHILE LPAREN FALSE RPAREN LBRACE statements RBRACE
-Rule 69    for_statement -> FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE
-Rule 70    break_statement -> BREAK SEMICOL
-Rule 71    expression -> expression PLUS term
-Rule 72    expression -> expression MINUS term
-Rule 73    expression -> term
-Rule 74    term -> term TIMES factor
-Rule 75    term -> term DIVIDE factor
-Rule 76    term -> term MODULO factor
-Rule 77    term -> factor
-Rule 78    factor -> NUMBER
-Rule 79    factor -> LPAREN expression RPAREN
-Rule 80    empty -> <empty>
+Rule 66    if_statement -> IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
+Rule 67    while_statement -> WHILE LPAREN comparison RPAREN LBRACE statements RBRACE
+Rule 68    while_statement -> WHILE LPAREN TRUE RPAREN LBRACE statements RBRACE
+Rule 69    while_statement -> WHILE LPAREN FALSE RPAREN LBRACE statements RBRACE
+Rule 70    for_statement -> FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE
+Rule 71    break_statement -> BREAK SEMICOL
+Rule 72    expression -> expression PLUS term
+Rule 73    expression -> expression MINUS term
+Rule 74    expression -> term
+Rule 75    term -> term TIMES factor
+Rule 76    term -> term DIVIDE factor
+Rule 77    term -> term MODULO factor
+Rule 78    term -> factor
+Rule 79    factor -> NUMBER
+Rule 80    factor -> LPAREN expression RPAREN
+Rule 81    empty -> <empty>
 
 Terminals, with rules where they appear
 
 BOOL                 : 35 36
-BREAK                : 70
+BREAK                : 71
 CHAR                 : 32 38 38
 COMMA                : 6 7 8
 CONSTANT             : 
 CONTINUE             : 
-DIVIDE               : 75
-ELSE                 : 64 65
+DIVIDE               : 76
+ELSE                 : 64 65 66
 EQUALEQUAL           : 47 53 55 56 57
 EQUALS               : 25 26 27 28 29 32 33 34 35 36 37 38 39
-FALSE                : 29 36 57 60 68
+FALSE                : 29 36 57 60 69
 FLOATTYPE            : 33 39 39
 FLOAT_CONST          : 
-FOR                  : 69
+FOR                  : 70
 GTH                  : 43 49
 GTHOREQUAL           : 45 51
 ID                   : 5 7 8 25 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 49 50 51 52 53 54 55 55 56 57 58 58 59 60
-IF                   : 61 62 63 64 65
+IF                   : 61 62 63 64 65 66
 INPUT                : 37 38 39
 INT                  : 34 37 37
 INT_CONST            : 
-LBRACE               : 61 62 63 64 64 65 65 66 67 68 69
-LPAREN               : 3 4 5 6 7 8 37 38 39 61 62 63 64 65 66 67 68 69 79
+LBRACE               : 61 62 63 64 64 65 65 66 66 67 68 69 70
+LPAREN               : 3 4 5 6 7 8 37 38 39 61 62 63 64 65 66 67 68 69 70 80
 LTH                  : 44 50
 LTHOREQUAL           : 46 52
-MINUS                : 31 31 72
-MODULO               : 76
+MINUS                : 31 31 73
+MODULO               : 77
 NOTEQUAL             : 48 54 58 59 60
-NUMBER               : 27 33 34 78
-PLUS                 : 30 30 71
+NUMBER               : 27 33 34 79
+PLUS                 : 30 30 72
 PRINT                : 3 4
-RBRACE               : 61 62 63 64 64 65 65 66 67 68 69
+RBRACE               : 61 62 63 64 64 65 65 66 66 67 68 69 70
 RETURN               : 
-RPAREN               : 3 4 5 6 7 8 37 38 39 61 62 63 64 65 66 67 68 69 79
-SEMICOL              : 3 4 5 6 7 8 9 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 69 70
+RPAREN               : 3 4 5 6 7 8 37 38 39 61 62 63 64 65 66 67 68 69 70 80
+SEMICOL              : 3 4 5 6 7 8 9 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 70 71
 SIZEOF               : 
 STRING               : 4 6 6 7 8 26 32
-TIMES                : 74
-TRUE                 : 28 35 56 59 67
+TIMES                : 75
+TRUE                 : 28 35 56 59 68
 UNION                : 6 7 8
 VAR_TYPE             : 5
 VOID                 : 
-WHILE                : 66 67 68
+WHILE                : 67 68 69
 error                : 
 
 Nonterminals, with rules where they appear
 
 bool_comparison      : 18 63 65
 break_statement      : 24
-compare_id_value     : 17 62
-comparison           : 16 61 64 66 69
+compare_id_value     : 17 62 66
+comparison           : 16 61 64 67 70
 empty                : 
-expression           : 3 9 43 43 44 44 45 45 46 46 47 47 48 48 49 50 51 52 53 54 71 72 79
-factor               : 74 75 76 77
+expression           : 3 9 43 43 44 44 45 45 46 46 47 47 48 48 49 50 51 52 53 54 72 73 80
+factor               : 75 76 77 78
 for_statement        : 12
 if_statement         : 10
 input_statement      : 14
 print_statement      : 23
 statement            : 1 2
-statements           : 1 61 62 63 64 64 65 65 66 67 68 69 0
-term                 : 71 72 73 74 75 76
+statements           : 1 61 62 63 64 64 65 65 66 66 67 68 69 70 0
+term                 : 72 73 74 75 76 77
 union_statement      : 15
 var_assign           : 20
 var_dec              : 22
-var_inc              : 21 69
-var_statement        : 19 69
+var_inc              : 21 70
+var_statement        : 19 70
 vartype_statement    : 13
 while_statement      : 11
 
@@ -189,18 +190,19 @@ state 0
     (23) statement -> . print_statement
     (24) statement -> . break_statement
     (40) expression -> . ID
-    (71) expression -> . expression PLUS term
-    (72) expression -> . expression MINUS term
-    (73) expression -> . term
+    (72) expression -> . expression PLUS term
+    (73) expression -> . expression MINUS term
+    (74) expression -> . term
     (61) if_statement -> . IF LPAREN comparison RPAREN LBRACE statements RBRACE
     (62) if_statement -> . IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE
     (63) if_statement -> . IF LPAREN bool_comparison RPAREN LBRACE statements RBRACE
     (64) if_statement -> . IF LPAREN comparison RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
     (65) if_statement -> . IF LPAREN bool_comparison RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
-    (66) while_statement -> . WHILE LPAREN comparison RPAREN LBRACE statements RBRACE
-    (67) while_statement -> . WHILE LPAREN TRUE RPAREN LBRACE statements RBRACE
-    (68) while_statement -> . WHILE LPAREN FALSE RPAREN LBRACE statements RBRACE
-    (69) for_statement -> . FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE
+    (66) if_statement -> . IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
+    (67) while_statement -> . WHILE LPAREN comparison RPAREN LBRACE statements RBRACE
+    (68) while_statement -> . WHILE LPAREN TRUE RPAREN LBRACE statements RBRACE
+    (69) while_statement -> . WHILE LPAREN FALSE RPAREN LBRACE statements RBRACE
+    (70) for_statement -> . FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE
     (5) vartype_statement -> . VAR_TYPE LPAREN ID RPAREN SEMICOL
     (37) input_statement -> . INT ID EQUALS INPUT LPAREN INT RPAREN SEMICOL
     (38) input_statement -> . CHAR ID EQUALS INPUT LPAREN CHAR RPAREN SEMICOL
@@ -240,15 +242,15 @@ state 0
     (31) var_dec -> . ID MINUS MINUS SEMICOL
     (3) print_statement -> . PRINT LPAREN expression RPAREN SEMICOL
     (4) print_statement -> . PRINT LPAREN STRING RPAREN SEMICOL
-    (70) break_statement -> . BREAK SEMICOL
+    (71) break_statement -> . BREAK SEMICOL
     (41) term -> . ID
-    (74) term -> . term TIMES factor
-    (75) term -> . term DIVIDE factor
-    (76) term -> . term MODULO factor
-    (77) term -> . factor
+    (75) term -> . term TIMES factor
+    (76) term -> . term DIVIDE factor
+    (77) term -> . term MODULO factor
+    (78) term -> . factor
     (42) factor -> . ID
-    (78) factor -> . NUMBER
-    (79) factor -> . LPAREN expression RPAREN
+    (79) factor -> . NUMBER
+    (80) factor -> . LPAREN expression RPAREN
 
     ID              shift and go to state 19
     IF              shift and go to state 21
@@ -307,18 +309,19 @@ state 1
     (23) statement -> . print_statement
     (24) statement -> . break_statement
     (40) expression -> . ID
-    (71) expression -> . expression PLUS term
-    (72) expression -> . expression MINUS term
-    (73) expression -> . term
+    (72) expression -> . expression PLUS term
+    (73) expression -> . expression MINUS term
+    (74) expression -> . term
     (61) if_statement -> . IF LPAREN comparison RPAREN LBRACE statements RBRACE
     (62) if_statement -> . IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE
     (63) if_statement -> . IF LPAREN bool_comparison RPAREN LBRACE statements RBRACE
     (64) if_statement -> . IF LPAREN comparison RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
     (65) if_statement -> . IF LPAREN bool_comparison RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
-    (66) while_statement -> . WHILE LPAREN comparison RPAREN LBRACE statements RBRACE
-    (67) while_statement -> . WHILE LPAREN TRUE RPAREN LBRACE statements RBRACE
-    (68) while_statement -> . WHILE LPAREN FALSE RPAREN LBRACE statements RBRACE
-    (69) for_statement -> . FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE
+    (66) if_statement -> . IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
+    (67) while_statement -> . WHILE LPAREN comparison RPAREN LBRACE statements RBRACE
+    (68) while_statement -> . WHILE LPAREN TRUE RPAREN LBRACE statements RBRACE
+    (69) while_statement -> . WHILE LPAREN FALSE RPAREN LBRACE statements RBRACE
+    (70) for_statement -> . FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE
     (5) vartype_statement -> . VAR_TYPE LPAREN ID RPAREN SEMICOL
     (37) input_statement -> . INT ID EQUALS INPUT LPAREN INT RPAREN SEMICOL
     (38) input_statement -> . CHAR ID EQUALS INPUT LPAREN CHAR RPAREN SEMICOL
@@ -358,15 +361,15 @@ state 1
     (31) var_dec -> . ID MINUS MINUS SEMICOL
     (3) print_statement -> . PRINT LPAREN expression RPAREN SEMICOL
     (4) print_statement -> . PRINT LPAREN STRING RPAREN SEMICOL
-    (70) break_statement -> . BREAK SEMICOL
+    (71) break_statement -> . BREAK SEMICOL
     (41) term -> . ID
-    (74) term -> . term TIMES factor
-    (75) term -> . term DIVIDE factor
-    (76) term -> . term MODULO factor
-    (77) term -> . factor
+    (75) term -> . term TIMES factor
+    (76) term -> . term DIVIDE factor
+    (77) term -> . term MODULO factor
+    (78) term -> . factor
     (42) factor -> . ID
-    (78) factor -> . NUMBER
-    (79) factor -> . LPAREN expression RPAREN
+    (79) factor -> . NUMBER
+    (80) factor -> . LPAREN expression RPAREN
 
     ID              shift and go to state 19
     IF              shift and go to state 21
@@ -428,8 +431,8 @@ state 2
 state 3
 
     (9) statement -> expression . SEMICOL
-    (71) expression -> expression . PLUS term
-    (72) expression -> expression . MINUS term
+    (72) expression -> expression . PLUS term
+    (73) expression -> expression . MINUS term
     (43) comparison -> expression . GTH expression
     (44) comparison -> expression . LTH expression
     (45) comparison -> expression . GTHOREQUAL expression
@@ -879,37 +882,37 @@ state 19
 
 state 20
 
-    (73) expression -> term .
-    (74) term -> term . TIMES factor
-    (75) term -> term . DIVIDE factor
-    (76) term -> term . MODULO factor
+    (74) expression -> term .
+    (75) term -> term . TIMES factor
+    (76) term -> term . DIVIDE factor
+    (77) term -> term . MODULO factor
 
-    SEMICOL         reduce using rule 73 (expression -> term .)
-    PLUS            reduce using rule 73 (expression -> term .)
-    MINUS           reduce using rule 73 (expression -> term .)
-    GTH             reduce using rule 73 (expression -> term .)
-    LTH             reduce using rule 73 (expression -> term .)
-    GTHOREQUAL      reduce using rule 73 (expression -> term .)
-    LTHOREQUAL      reduce using rule 73 (expression -> term .)
-    EQUALEQUAL      reduce using rule 73 (expression -> term .)
-    NOTEQUAL        reduce using rule 73 (expression -> term .)
-    RPAREN          reduce using rule 73 (expression -> term .)
-    ID              reduce using rule 73 (expression -> term .)
-    IF              reduce using rule 73 (expression -> term .)
-    WHILE           reduce using rule 73 (expression -> term .)
-    FOR             reduce using rule 73 (expression -> term .)
-    VAR_TYPE        reduce using rule 73 (expression -> term .)
-    INT             reduce using rule 73 (expression -> term .)
-    CHAR            reduce using rule 73 (expression -> term .)
-    FLOATTYPE       reduce using rule 73 (expression -> term .)
-    UNION           reduce using rule 73 (expression -> term .)
-    BOOL            reduce using rule 73 (expression -> term .)
-    PRINT           reduce using rule 73 (expression -> term .)
-    BREAK           reduce using rule 73 (expression -> term .)
-    NUMBER          reduce using rule 73 (expression -> term .)
-    LPAREN          reduce using rule 73 (expression -> term .)
-    $end            reduce using rule 73 (expression -> term .)
-    RBRACE          reduce using rule 73 (expression -> term .)
+    SEMICOL         reduce using rule 74 (expression -> term .)
+    PLUS            reduce using rule 74 (expression -> term .)
+    MINUS           reduce using rule 74 (expression -> term .)
+    GTH             reduce using rule 74 (expression -> term .)
+    LTH             reduce using rule 74 (expression -> term .)
+    GTHOREQUAL      reduce using rule 74 (expression -> term .)
+    LTHOREQUAL      reduce using rule 74 (expression -> term .)
+    EQUALEQUAL      reduce using rule 74 (expression -> term .)
+    NOTEQUAL        reduce using rule 74 (expression -> term .)
+    RPAREN          reduce using rule 74 (expression -> term .)
+    ID              reduce using rule 74 (expression -> term .)
+    IF              reduce using rule 74 (expression -> term .)
+    WHILE           reduce using rule 74 (expression -> term .)
+    FOR             reduce using rule 74 (expression -> term .)
+    VAR_TYPE        reduce using rule 74 (expression -> term .)
+    INT             reduce using rule 74 (expression -> term .)
+    CHAR            reduce using rule 74 (expression -> term .)
+    FLOATTYPE       reduce using rule 74 (expression -> term .)
+    UNION           reduce using rule 74 (expression -> term .)
+    BOOL            reduce using rule 74 (expression -> term .)
+    PRINT           reduce using rule 74 (expression -> term .)
+    BREAK           reduce using rule 74 (expression -> term .)
+    NUMBER          reduce using rule 74 (expression -> term .)
+    LPAREN          reduce using rule 74 (expression -> term .)
+    $end            reduce using rule 74 (expression -> term .)
+    RBRACE          reduce using rule 74 (expression -> term .)
     TIMES           shift and go to state 54
     DIVIDE          shift and go to state 55
     MODULO          shift and go to state 56
@@ -922,25 +925,26 @@ state 21
     (63) if_statement -> IF . LPAREN bool_comparison RPAREN LBRACE statements RBRACE
     (64) if_statement -> IF . LPAREN comparison RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
     (65) if_statement -> IF . LPAREN bool_comparison RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
+    (66) if_statement -> IF . LPAREN compare_id_value RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
 
     LPAREN          shift and go to state 57
 
 
 state 22
 
-    (79) factor -> LPAREN . expression RPAREN
+    (80) factor -> LPAREN . expression RPAREN
     (40) expression -> . ID
-    (71) expression -> . expression PLUS term
-    (72) expression -> . expression MINUS term
-    (73) expression -> . term
+    (72) expression -> . expression PLUS term
+    (73) expression -> . expression MINUS term
+    (74) expression -> . term
     (41) term -> . ID
-    (74) term -> . term TIMES factor
-    (75) term -> . term DIVIDE factor
-    (76) term -> . term MODULO factor
-    (77) term -> . factor
+    (75) term -> . term TIMES factor
+    (76) term -> . term DIVIDE factor
+    (77) term -> . term MODULO factor
+    (78) term -> . factor
     (42) factor -> . ID
-    (78) factor -> . NUMBER
-    (79) factor -> . LPAREN expression RPAREN
+    (79) factor -> . NUMBER
+    (80) factor -> . LPAREN expression RPAREN
 
     ID              shift and go to state 59
     NUMBER          shift and go to state 30
@@ -952,16 +956,16 @@ state 22
 
 state 23
 
-    (66) while_statement -> WHILE . LPAREN comparison RPAREN LBRACE statements RBRACE
-    (67) while_statement -> WHILE . LPAREN TRUE RPAREN LBRACE statements RBRACE
-    (68) while_statement -> WHILE . LPAREN FALSE RPAREN LBRACE statements RBRACE
+    (67) while_statement -> WHILE . LPAREN comparison RPAREN LBRACE statements RBRACE
+    (68) while_statement -> WHILE . LPAREN TRUE RPAREN LBRACE statements RBRACE
+    (69) while_statement -> WHILE . LPAREN FALSE RPAREN LBRACE statements RBRACE
 
     LPAREN          shift and go to state 60
 
 
 state 24
 
-    (69) for_statement -> FOR . LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE
+    (70) for_statement -> FOR . LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE
 
     LPAREN          shift and go to state 61
 
@@ -1008,37 +1012,37 @@ state 29
 
 state 30
 
-    (78) factor -> NUMBER .
+    (79) factor -> NUMBER .
 
-    TIMES           reduce using rule 78 (factor -> NUMBER .)
-    DIVIDE          reduce using rule 78 (factor -> NUMBER .)
-    MODULO          reduce using rule 78 (factor -> NUMBER .)
-    SEMICOL         reduce using rule 78 (factor -> NUMBER .)
-    PLUS            reduce using rule 78 (factor -> NUMBER .)
-    MINUS           reduce using rule 78 (factor -> NUMBER .)
-    GTH             reduce using rule 78 (factor -> NUMBER .)
-    LTH             reduce using rule 78 (factor -> NUMBER .)
-    GTHOREQUAL      reduce using rule 78 (factor -> NUMBER .)
-    LTHOREQUAL      reduce using rule 78 (factor -> NUMBER .)
-    EQUALEQUAL      reduce using rule 78 (factor -> NUMBER .)
-    NOTEQUAL        reduce using rule 78 (factor -> NUMBER .)
-    RPAREN          reduce using rule 78 (factor -> NUMBER .)
-    ID              reduce using rule 78 (factor -> NUMBER .)
-    IF              reduce using rule 78 (factor -> NUMBER .)
-    WHILE           reduce using rule 78 (factor -> NUMBER .)
-    FOR             reduce using rule 78 (factor -> NUMBER .)
-    VAR_TYPE        reduce using rule 78 (factor -> NUMBER .)
-    INT             reduce using rule 78 (factor -> NUMBER .)
-    CHAR            reduce using rule 78 (factor -> NUMBER .)
-    FLOATTYPE       reduce using rule 78 (factor -> NUMBER .)
-    UNION           reduce using rule 78 (factor -> NUMBER .)
-    BOOL            reduce using rule 78 (factor -> NUMBER .)
-    PRINT           reduce using rule 78 (factor -> NUMBER .)
-    BREAK           reduce using rule 78 (factor -> NUMBER .)
-    NUMBER          reduce using rule 78 (factor -> NUMBER .)
-    LPAREN          reduce using rule 78 (factor -> NUMBER .)
-    $end            reduce using rule 78 (factor -> NUMBER .)
-    RBRACE          reduce using rule 78 (factor -> NUMBER .)
+    TIMES           reduce using rule 79 (factor -> NUMBER .)
+    DIVIDE          reduce using rule 79 (factor -> NUMBER .)
+    MODULO          reduce using rule 79 (factor -> NUMBER .)
+    SEMICOL         reduce using rule 79 (factor -> NUMBER .)
+    PLUS            reduce using rule 79 (factor -> NUMBER .)
+    MINUS           reduce using rule 79 (factor -> NUMBER .)
+    GTH             reduce using rule 79 (factor -> NUMBER .)
+    LTH             reduce using rule 79 (factor -> NUMBER .)
+    GTHOREQUAL      reduce using rule 79 (factor -> NUMBER .)
+    LTHOREQUAL      reduce using rule 79 (factor -> NUMBER .)
+    EQUALEQUAL      reduce using rule 79 (factor -> NUMBER .)
+    NOTEQUAL        reduce using rule 79 (factor -> NUMBER .)
+    RPAREN          reduce using rule 79 (factor -> NUMBER .)
+    ID              reduce using rule 79 (factor -> NUMBER .)
+    IF              reduce using rule 79 (factor -> NUMBER .)
+    WHILE           reduce using rule 79 (factor -> NUMBER .)
+    FOR             reduce using rule 79 (factor -> NUMBER .)
+    VAR_TYPE        reduce using rule 79 (factor -> NUMBER .)
+    INT             reduce using rule 79 (factor -> NUMBER .)
+    CHAR            reduce using rule 79 (factor -> NUMBER .)
+    FLOATTYPE       reduce using rule 79 (factor -> NUMBER .)
+    UNION           reduce using rule 79 (factor -> NUMBER .)
+    BOOL            reduce using rule 79 (factor -> NUMBER .)
+    PRINT           reduce using rule 79 (factor -> NUMBER .)
+    BREAK           reduce using rule 79 (factor -> NUMBER .)
+    NUMBER          reduce using rule 79 (factor -> NUMBER .)
+    LPAREN          reduce using rule 79 (factor -> NUMBER .)
+    $end            reduce using rule 79 (factor -> NUMBER .)
+    RBRACE          reduce using rule 79 (factor -> NUMBER .)
 
 
 state 31
@@ -1059,44 +1063,44 @@ state 32
 
 state 33
 
-    (70) break_statement -> BREAK . SEMICOL
+    (71) break_statement -> BREAK . SEMICOL
 
     SEMICOL         shift and go to state 69
 
 
 state 34
 
-    (77) term -> factor .
+    (78) term -> factor .
 
-    TIMES           reduce using rule 77 (term -> factor .)
-    DIVIDE          reduce using rule 77 (term -> factor .)
-    MODULO          reduce using rule 77 (term -> factor .)
-    SEMICOL         reduce using rule 77 (term -> factor .)
-    PLUS            reduce using rule 77 (term -> factor .)
-    MINUS           reduce using rule 77 (term -> factor .)
-    GTH             reduce using rule 77 (term -> factor .)
-    LTH             reduce using rule 77 (term -> factor .)
-    GTHOREQUAL      reduce using rule 77 (term -> factor .)
-    LTHOREQUAL      reduce using rule 77 (term -> factor .)
-    EQUALEQUAL      reduce using rule 77 (term -> factor .)
-    NOTEQUAL        reduce using rule 77 (term -> factor .)
-    RPAREN          reduce using rule 77 (term -> factor .)
-    ID              reduce using rule 77 (term -> factor .)
-    IF              reduce using rule 77 (term -> factor .)
-    WHILE           reduce using rule 77 (term -> factor .)
-    FOR             reduce using rule 77 (term -> factor .)
-    VAR_TYPE        reduce using rule 77 (term -> factor .)
-    INT             reduce using rule 77 (term -> factor .)
-    CHAR            reduce using rule 77 (term -> factor .)
-    FLOATTYPE       reduce using rule 77 (term -> factor .)
-    UNION           reduce using rule 77 (term -> factor .)
-    BOOL            reduce using rule 77 (term -> factor .)
-    PRINT           reduce using rule 77 (term -> factor .)
-    BREAK           reduce using rule 77 (term -> factor .)
-    NUMBER          reduce using rule 77 (term -> factor .)
-    LPAREN          reduce using rule 77 (term -> factor .)
-    $end            reduce using rule 77 (term -> factor .)
-    RBRACE          reduce using rule 77 (term -> factor .)
+    TIMES           reduce using rule 78 (term -> factor .)
+    DIVIDE          reduce using rule 78 (term -> factor .)
+    MODULO          reduce using rule 78 (term -> factor .)
+    SEMICOL         reduce using rule 78 (term -> factor .)
+    PLUS            reduce using rule 78 (term -> factor .)
+    MINUS           reduce using rule 78 (term -> factor .)
+    GTH             reduce using rule 78 (term -> factor .)
+    LTH             reduce using rule 78 (term -> factor .)
+    GTHOREQUAL      reduce using rule 78 (term -> factor .)
+    LTHOREQUAL      reduce using rule 78 (term -> factor .)
+    EQUALEQUAL      reduce using rule 78 (term -> factor .)
+    NOTEQUAL        reduce using rule 78 (term -> factor .)
+    RPAREN          reduce using rule 78 (term -> factor .)
+    ID              reduce using rule 78 (term -> factor .)
+    IF              reduce using rule 78 (term -> factor .)
+    WHILE           reduce using rule 78 (term -> factor .)
+    FOR             reduce using rule 78 (term -> factor .)
+    VAR_TYPE        reduce using rule 78 (term -> factor .)
+    INT             reduce using rule 78 (term -> factor .)
+    CHAR            reduce using rule 78 (term -> factor .)
+    FLOATTYPE       reduce using rule 78 (term -> factor .)
+    UNION           reduce using rule 78 (term -> factor .)
+    BOOL            reduce using rule 78 (term -> factor .)
+    PRINT           reduce using rule 78 (term -> factor .)
+    BREAK           reduce using rule 78 (term -> factor .)
+    NUMBER          reduce using rule 78 (term -> factor .)
+    LPAREN          reduce using rule 78 (term -> factor .)
+    $end            reduce using rule 78 (term -> factor .)
+    RBRACE          reduce using rule 78 (term -> factor .)
 
 
 state 35
@@ -1145,15 +1149,15 @@ state 36
 
 state 37
 
-    (71) expression -> expression PLUS . term
+    (72) expression -> expression PLUS . term
     (41) term -> . ID
-    (74) term -> . term TIMES factor
-    (75) term -> . term DIVIDE factor
-    (76) term -> . term MODULO factor
-    (77) term -> . factor
+    (75) term -> . term TIMES factor
+    (76) term -> . term DIVIDE factor
+    (77) term -> . term MODULO factor
+    (78) term -> . factor
     (42) factor -> . ID
-    (78) factor -> . NUMBER
-    (79) factor -> . LPAREN expression RPAREN
+    (79) factor -> . NUMBER
+    (80) factor -> . LPAREN expression RPAREN
 
     ID              shift and go to state 71
     NUMBER          shift and go to state 30
@@ -1164,15 +1168,15 @@ state 37
 
 state 38
 
-    (72) expression -> expression MINUS . term
+    (73) expression -> expression MINUS . term
     (41) term -> . ID
-    (74) term -> . term TIMES factor
-    (75) term -> . term DIVIDE factor
-    (76) term -> . term MODULO factor
-    (77) term -> . factor
+    (75) term -> . term TIMES factor
+    (76) term -> . term DIVIDE factor
+    (77) term -> . term MODULO factor
+    (78) term -> . factor
     (42) factor -> . ID
-    (78) factor -> . NUMBER
-    (79) factor -> . LPAREN expression RPAREN
+    (79) factor -> . NUMBER
+    (80) factor -> . LPAREN expression RPAREN
 
     ID              shift and go to state 71
     NUMBER          shift and go to state 30
@@ -1185,17 +1189,17 @@ state 39
 
     (43) comparison -> expression GTH . expression
     (40) expression -> . ID
-    (71) expression -> . expression PLUS term
-    (72) expression -> . expression MINUS term
-    (73) expression -> . term
+    (72) expression -> . expression PLUS term
+    (73) expression -> . expression MINUS term
+    (74) expression -> . term
     (41) term -> . ID
-    (74) term -> . term TIMES factor
-    (75) term -> . term DIVIDE factor
-    (76) term -> . term MODULO factor
-    (77) term -> . factor
+    (75) term -> . term TIMES factor
+    (76) term -> . term DIVIDE factor
+    (77) term -> . term MODULO factor
+    (78) term -> . factor
     (42) factor -> . ID
-    (78) factor -> . NUMBER
-    (79) factor -> . LPAREN expression RPAREN
+    (79) factor -> . NUMBER
+    (80) factor -> . LPAREN expression RPAREN
 
     ID              shift and go to state 59
     NUMBER          shift and go to state 30
@@ -1209,17 +1213,17 @@ state 40
 
     (44) comparison -> expression LTH . expression
     (40) expression -> . ID
-    (71) expression -> . expression PLUS term
-    (72) expression -> . expression MINUS term
-    (73) expression -> . term
+    (72) expression -> . expression PLUS term
+    (73) expression -> . expression MINUS term
+    (74) expression -> . term
     (41) term -> . ID
-    (74) term -> . term TIMES factor
-    (75) term -> . term DIVIDE factor
-    (76) term -> . term MODULO factor
-    (77) term -> . factor
+    (75) term -> . term TIMES factor
+    (76) term -> . term DIVIDE factor
+    (77) term -> . term MODULO factor
+    (78) term -> . factor
     (42) factor -> . ID
-    (78) factor -> . NUMBER
-    (79) factor -> . LPAREN expression RPAREN
+    (79) factor -> . NUMBER
+    (80) factor -> . LPAREN expression RPAREN
 
     ID              shift and go to state 59
     NUMBER          shift and go to state 30
@@ -1233,17 +1237,17 @@ state 41
 
     (45) comparison -> expression GTHOREQUAL . expression
     (40) expression -> . ID
-    (71) expression -> . expression PLUS term
-    (72) expression -> . expression MINUS term
-    (73) expression -> . term
+    (72) expression -> . expression PLUS term
+    (73) expression -> . expression MINUS term
+    (74) expression -> . term
     (41) term -> . ID
-    (74) term -> . term TIMES factor
-    (75) term -> . term DIVIDE factor
-    (76) term -> . term MODULO factor
-    (77) term -> . factor
+    (75) term -> . term TIMES factor
+    (76) term -> . term DIVIDE factor
+    (77) term -> . term MODULO factor
+    (78) term -> . factor
     (42) factor -> . ID
-    (78) factor -> . NUMBER
-    (79) factor -> . LPAREN expression RPAREN
+    (79) factor -> . NUMBER
+    (80) factor -> . LPAREN expression RPAREN
 
     ID              shift and go to state 59
     NUMBER          shift and go to state 30
@@ -1257,17 +1261,17 @@ state 42
 
     (46) comparison -> expression LTHOREQUAL . expression
     (40) expression -> . ID
-    (71) expression -> . expression PLUS term
-    (72) expression -> . expression MINUS term
-    (73) expression -> . term
+    (72) expression -> . expression PLUS term
+    (73) expression -> . expression MINUS term
+    (74) expression -> . term
     (41) term -> . ID
-    (74) term -> . term TIMES factor
-    (75) term -> . term DIVIDE factor
-    (76) term -> . term MODULO factor
-    (77) term -> . factor
+    (75) term -> . term TIMES factor
+    (76) term -> . term DIVIDE factor
+    (77) term -> . term MODULO factor
+    (78) term -> . factor
     (42) factor -> . ID
-    (78) factor -> . NUMBER
-    (79) factor -> . LPAREN expression RPAREN
+    (79) factor -> . NUMBER
+    (80) factor -> . LPAREN expression RPAREN
 
     ID              shift and go to state 59
     NUMBER          shift and go to state 30
@@ -1281,17 +1285,17 @@ state 43
 
     (47) comparison -> expression EQUALEQUAL . expression
     (40) expression -> . ID
-    (71) expression -> . expression PLUS term
-    (72) expression -> . expression MINUS term
-    (73) expression -> . term
+    (72) expression -> . expression PLUS term
+    (73) expression -> . expression MINUS term
+    (74) expression -> . term
     (41) term -> . ID
-    (74) term -> . term TIMES factor
-    (75) term -> . term DIVIDE factor
-    (76) term -> . term MODULO factor
-    (77) term -> . factor
+    (75) term -> . term TIMES factor
+    (76) term -> . term DIVIDE factor
+    (77) term -> . term MODULO factor
+    (78) term -> . factor
     (42) factor -> . ID
-    (78) factor -> . NUMBER
-    (79) factor -> . LPAREN expression RPAREN
+    (79) factor -> . NUMBER
+    (80) factor -> . LPAREN expression RPAREN
 
     ID              shift and go to state 59
     NUMBER          shift and go to state 30
@@ -1305,17 +1309,17 @@ state 44
 
     (48) comparison -> expression NOTEQUAL . expression
     (40) expression -> . ID
-    (71) expression -> . expression PLUS term
-    (72) expression -> . expression MINUS term
-    (73) expression -> . term
+    (72) expression -> . expression PLUS term
+    (73) expression -> . expression MINUS term
+    (74) expression -> . term
     (41) term -> . ID
-    (74) term -> . term TIMES factor
-    (75) term -> . term DIVIDE factor
-    (76) term -> . term MODULO factor
-    (77) term -> . factor
+    (75) term -> . term TIMES factor
+    (76) term -> . term DIVIDE factor
+    (77) term -> . term MODULO factor
+    (78) term -> . factor
     (42) factor -> . ID
-    (78) factor -> . NUMBER
-    (79) factor -> . LPAREN expression RPAREN
+    (79) factor -> . NUMBER
+    (80) factor -> . LPAREN expression RPAREN
 
     ID              shift and go to state 59
     NUMBER          shift and go to state 30
@@ -1329,17 +1333,17 @@ state 45
 
     (49) compare_id_value -> ID GTH . expression
     (40) expression -> . ID
-    (71) expression -> . expression PLUS term
-    (72) expression -> . expression MINUS term
-    (73) expression -> . term
+    (72) expression -> . expression PLUS term
+    (73) expression -> . expression MINUS term
+    (74) expression -> . term
     (41) term -> . ID
-    (74) term -> . term TIMES factor
-    (75) term -> . term DIVIDE factor
-    (76) term -> . term MODULO factor
-    (77) term -> . factor
+    (75) term -> . term TIMES factor
+    (76) term -> . term DIVIDE factor
+    (77) term -> . term MODULO factor
+    (78) term -> . factor
     (42) factor -> . ID
-    (78) factor -> . NUMBER
-    (79) factor -> . LPAREN expression RPAREN
+    (79) factor -> . NUMBER
+    (80) factor -> . LPAREN expression RPAREN
 
     ID              shift and go to state 59
     NUMBER          shift and go to state 30
@@ -1353,17 +1357,17 @@ state 46
 
     (50) compare_id_value -> ID LTH . expression
     (40) expression -> . ID
-    (71) expression -> . expression PLUS term
-    (72) expression -> . expression MINUS term
-    (73) expression -> . term
+    (72) expression -> . expression PLUS term
+    (73) expression -> . expression MINUS term
+    (74) expression -> . term
     (41) term -> . ID
-    (74) term -> . term TIMES factor
-    (75) term -> . term DIVIDE factor
-    (76) term -> . term MODULO factor
-    (77) term -> . factor
+    (75) term -> . term TIMES factor
+    (76) term -> . term DIVIDE factor
+    (77) term -> . term MODULO factor
+    (78) term -> . factor
     (42) factor -> . ID
-    (78) factor -> . NUMBER
-    (79) factor -> . LPAREN expression RPAREN
+    (79) factor -> . NUMBER
+    (80) factor -> . LPAREN expression RPAREN
 
     ID              shift and go to state 59
     NUMBER          shift and go to state 30
@@ -1377,17 +1381,17 @@ state 47
 
     (51) compare_id_value -> ID GTHOREQUAL . expression
     (40) expression -> . ID
-    (71) expression -> . expression PLUS term
-    (72) expression -> . expression MINUS term
-    (73) expression -> . term
+    (72) expression -> . expression PLUS term
+    (73) expression -> . expression MINUS term
+    (74) expression -> . term
     (41) term -> . ID
-    (74) term -> . term TIMES factor
-    (75) term -> . term DIVIDE factor
-    (76) term -> . term MODULO factor
-    (77) term -> . factor
+    (75) term -> . term TIMES factor
+    (76) term -> . term DIVIDE factor
+    (77) term -> . term MODULO factor
+    (78) term -> . factor
     (42) factor -> . ID
-    (78) factor -> . NUMBER
-    (79) factor -> . LPAREN expression RPAREN
+    (79) factor -> . NUMBER
+    (80) factor -> . LPAREN expression RPAREN
 
     ID              shift and go to state 59
     NUMBER          shift and go to state 30
@@ -1401,17 +1405,17 @@ state 48
 
     (52) compare_id_value -> ID LTHOREQUAL . expression
     (40) expression -> . ID
-    (71) expression -> . expression PLUS term
-    (72) expression -> . expression MINUS term
-    (73) expression -> . term
+    (72) expression -> . expression PLUS term
+    (73) expression -> . expression MINUS term
+    (74) expression -> . term
     (41) term -> . ID
-    (74) term -> . term TIMES factor
-    (75) term -> . term DIVIDE factor
-    (76) term -> . term MODULO factor
-    (77) term -> . factor
+    (75) term -> . term TIMES factor
+    (76) term -> . term DIVIDE factor
+    (77) term -> . term MODULO factor
+    (78) term -> . factor
     (42) factor -> . ID
-    (78) factor -> . NUMBER
-    (79) factor -> . LPAREN expression RPAREN
+    (79) factor -> . NUMBER
+    (80) factor -> . LPAREN expression RPAREN
 
     ID              shift and go to state 59
     NUMBER          shift and go to state 30
@@ -1428,17 +1432,17 @@ state 49
     (56) bool_comparison -> ID EQUALEQUAL . TRUE
     (57) bool_comparison -> ID EQUALEQUAL . FALSE
     (40) expression -> . ID
-    (71) expression -> . expression PLUS term
-    (72) expression -> . expression MINUS term
-    (73) expression -> . term
+    (72) expression -> . expression PLUS term
+    (73) expression -> . expression MINUS term
+    (74) expression -> . term
     (41) term -> . ID
-    (74) term -> . term TIMES factor
-    (75) term -> . term DIVIDE factor
-    (76) term -> . term MODULO factor
-    (77) term -> . factor
+    (75) term -> . term TIMES factor
+    (76) term -> . term DIVIDE factor
+    (77) term -> . term MODULO factor
+    (78) term -> . factor
     (42) factor -> . ID
-    (78) factor -> . NUMBER
-    (79) factor -> . LPAREN expression RPAREN
+    (79) factor -> . NUMBER
+    (80) factor -> . LPAREN expression RPAREN
 
     ID              shift and go to state 83
     TRUE            shift and go to state 85
@@ -1457,17 +1461,17 @@ state 50
     (59) bool_comparison -> ID NOTEQUAL . TRUE
     (60) bool_comparison -> ID NOTEQUAL . FALSE
     (40) expression -> . ID
-    (71) expression -> . expression PLUS term
-    (72) expression -> . expression MINUS term
-    (73) expression -> . term
+    (72) expression -> . expression PLUS term
+    (73) expression -> . expression MINUS term
+    (74) expression -> . term
     (41) term -> . ID
-    (74) term -> . term TIMES factor
-    (75) term -> . term DIVIDE factor
-    (76) term -> . term MODULO factor
-    (77) term -> . factor
+    (75) term -> . term TIMES factor
+    (76) term -> . term DIVIDE factor
+    (77) term -> . term MODULO factor
+    (78) term -> . factor
     (42) factor -> . ID
-    (78) factor -> . NUMBER
-    (79) factor -> . LPAREN expression RPAREN
+    (79) factor -> . NUMBER
+    (80) factor -> . LPAREN expression RPAREN
 
     ID              shift and go to state 87
     TRUE            shift and go to state 89
@@ -1510,10 +1514,10 @@ state 53
 
 state 54
 
-    (74) term -> term TIMES . factor
+    (75) term -> term TIMES . factor
     (42) factor -> . ID
-    (78) factor -> . NUMBER
-    (79) factor -> . LPAREN expression RPAREN
+    (79) factor -> . NUMBER
+    (80) factor -> . LPAREN expression RPAREN
 
     ID              shift and go to state 99
     NUMBER          shift and go to state 30
@@ -1523,10 +1527,10 @@ state 54
 
 state 55
 
-    (75) term -> term DIVIDE . factor
+    (76) term -> term DIVIDE . factor
     (42) factor -> . ID
-    (78) factor -> . NUMBER
-    (79) factor -> . LPAREN expression RPAREN
+    (79) factor -> . NUMBER
+    (80) factor -> . LPAREN expression RPAREN
 
     ID              shift and go to state 99
     NUMBER          shift and go to state 30
@@ -1536,10 +1540,10 @@ state 55
 
 state 56
 
-    (76) term -> term MODULO . factor
+    (77) term -> term MODULO . factor
     (42) factor -> . ID
-    (78) factor -> . NUMBER
-    (79) factor -> . LPAREN expression RPAREN
+    (79) factor -> . NUMBER
+    (80) factor -> . LPAREN expression RPAREN
 
     ID              shift and go to state 99
     NUMBER          shift and go to state 30
@@ -1554,6 +1558,7 @@ state 57
     (63) if_statement -> IF LPAREN . bool_comparison RPAREN LBRACE statements RBRACE
     (64) if_statement -> IF LPAREN . comparison RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
     (65) if_statement -> IF LPAREN . bool_comparison RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
+    (66) if_statement -> IF LPAREN . compare_id_value RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
     (43) comparison -> . expression GTH expression
     (44) comparison -> . expression LTH expression
     (45) comparison -> . expression GTHOREQUAL expression
@@ -1573,17 +1578,17 @@ state 57
     (59) bool_comparison -> . ID NOTEQUAL TRUE
     (60) bool_comparison -> . ID NOTEQUAL FALSE
     (40) expression -> . ID
-    (71) expression -> . expression PLUS term
-    (72) expression -> . expression MINUS term
-    (73) expression -> . term
+    (72) expression -> . expression PLUS term
+    (73) expression -> . expression MINUS term
+    (74) expression -> . term
     (41) term -> . ID
-    (74) term -> . term TIMES factor
-    (75) term -> . term DIVIDE factor
-    (76) term -> . term MODULO factor
-    (77) term -> . factor
+    (75) term -> . term TIMES factor
+    (76) term -> . term DIVIDE factor
+    (77) term -> . term MODULO factor
+    (78) term -> . factor
     (42) factor -> . ID
-    (78) factor -> . NUMBER
-    (79) factor -> . LPAREN expression RPAREN
+    (79) factor -> . NUMBER
+    (80) factor -> . LPAREN expression RPAREN
 
     ID              shift and go to state 106
     NUMBER          shift and go to state 30
@@ -1598,9 +1603,9 @@ state 57
 
 state 58
 
-    (79) factor -> LPAREN expression . RPAREN
-    (71) expression -> expression . PLUS term
-    (72) expression -> expression . MINUS term
+    (80) factor -> LPAREN expression . RPAREN
+    (72) expression -> expression . PLUS term
+    (73) expression -> expression . MINUS term
 
     RPAREN          shift and go to state 107
     PLUS            shift and go to state 37
@@ -1757,9 +1762,9 @@ state 59
 
 state 60
 
-    (66) while_statement -> WHILE LPAREN . comparison RPAREN LBRACE statements RBRACE
-    (67) while_statement -> WHILE LPAREN . TRUE RPAREN LBRACE statements RBRACE
-    (68) while_statement -> WHILE LPAREN . FALSE RPAREN LBRACE statements RBRACE
+    (67) while_statement -> WHILE LPAREN . comparison RPAREN LBRACE statements RBRACE
+    (68) while_statement -> WHILE LPAREN . TRUE RPAREN LBRACE statements RBRACE
+    (69) while_statement -> WHILE LPAREN . FALSE RPAREN LBRACE statements RBRACE
     (43) comparison -> . expression GTH expression
     (44) comparison -> . expression LTH expression
     (45) comparison -> . expression GTHOREQUAL expression
@@ -1767,17 +1772,17 @@ state 60
     (47) comparison -> . expression EQUALEQUAL expression
     (48) comparison -> . expression NOTEQUAL expression
     (40) expression -> . ID
-    (71) expression -> . expression PLUS term
-    (72) expression -> . expression MINUS term
-    (73) expression -> . term
+    (72) expression -> . expression PLUS term
+    (73) expression -> . expression MINUS term
+    (74) expression -> . term
     (41) term -> . ID
-    (74) term -> . term TIMES factor
-    (75) term -> . term DIVIDE factor
-    (76) term -> . term MODULO factor
-    (77) term -> . factor
+    (75) term -> . term TIMES factor
+    (76) term -> . term DIVIDE factor
+    (77) term -> . term MODULO factor
+    (78) term -> . factor
     (42) factor -> . ID
-    (78) factor -> . NUMBER
-    (79) factor -> . LPAREN expression RPAREN
+    (79) factor -> . NUMBER
+    (80) factor -> . LPAREN expression RPAREN
 
     TRUE            shift and go to state 109
     FALSE           shift and go to state 110
@@ -1792,7 +1797,7 @@ state 60
 
 state 61
 
-    (69) for_statement -> FOR LPAREN . var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE
+    (70) for_statement -> FOR LPAREN . var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE
     (32) var_statement -> . CHAR ID EQUALS STRING SEMICOL
     (33) var_statement -> . FLOATTYPE ID EQUALS NUMBER SEMICOL
     (34) var_statement -> . INT ID EQUALS NUMBER SEMICOL
@@ -1860,17 +1865,17 @@ state 68
     (3) print_statement -> PRINT LPAREN . expression RPAREN SEMICOL
     (4) print_statement -> PRINT LPAREN . STRING RPAREN SEMICOL
     (40) expression -> . ID
-    (71) expression -> . expression PLUS term
-    (72) expression -> . expression MINUS term
-    (73) expression -> . term
+    (72) expression -> . expression PLUS term
+    (73) expression -> . expression MINUS term
+    (74) expression -> . term
     (41) term -> . ID
-    (74) term -> . term TIMES factor
-    (75) term -> . term DIVIDE factor
-    (76) term -> . term MODULO factor
-    (77) term -> . factor
+    (75) term -> . term TIMES factor
+    (76) term -> . term DIVIDE factor
+    (77) term -> . term MODULO factor
+    (78) term -> . factor
     (42) factor -> . ID
-    (78) factor -> . NUMBER
-    (79) factor -> . LPAREN expression RPAREN
+    (79) factor -> . NUMBER
+    (80) factor -> . LPAREN expression RPAREN
 
     STRING          shift and go to state 123
     ID              shift and go to state 59
@@ -1883,59 +1888,59 @@ state 68
 
 state 69
 
-    (70) break_statement -> BREAK SEMICOL .
+    (71) break_statement -> BREAK SEMICOL .
 
-    ID              reduce using rule 70 (break_statement -> BREAK SEMICOL .)
-    IF              reduce using rule 70 (break_statement -> BREAK SEMICOL .)
-    WHILE           reduce using rule 70 (break_statement -> BREAK SEMICOL .)
-    FOR             reduce using rule 70 (break_statement -> BREAK SEMICOL .)
-    VAR_TYPE        reduce using rule 70 (break_statement -> BREAK SEMICOL .)
-    INT             reduce using rule 70 (break_statement -> BREAK SEMICOL .)
-    CHAR            reduce using rule 70 (break_statement -> BREAK SEMICOL .)
-    FLOATTYPE       reduce using rule 70 (break_statement -> BREAK SEMICOL .)
-    UNION           reduce using rule 70 (break_statement -> BREAK SEMICOL .)
-    BOOL            reduce using rule 70 (break_statement -> BREAK SEMICOL .)
-    PRINT           reduce using rule 70 (break_statement -> BREAK SEMICOL .)
-    BREAK           reduce using rule 70 (break_statement -> BREAK SEMICOL .)
-    NUMBER          reduce using rule 70 (break_statement -> BREAK SEMICOL .)
-    LPAREN          reduce using rule 70 (break_statement -> BREAK SEMICOL .)
-    $end            reduce using rule 70 (break_statement -> BREAK SEMICOL .)
-    RBRACE          reduce using rule 70 (break_statement -> BREAK SEMICOL .)
+    ID              reduce using rule 71 (break_statement -> BREAK SEMICOL .)
+    IF              reduce using rule 71 (break_statement -> BREAK SEMICOL .)
+    WHILE           reduce using rule 71 (break_statement -> BREAK SEMICOL .)
+    FOR             reduce using rule 71 (break_statement -> BREAK SEMICOL .)
+    VAR_TYPE        reduce using rule 71 (break_statement -> BREAK SEMICOL .)
+    INT             reduce using rule 71 (break_statement -> BREAK SEMICOL .)
+    CHAR            reduce using rule 71 (break_statement -> BREAK SEMICOL .)
+    FLOATTYPE       reduce using rule 71 (break_statement -> BREAK SEMICOL .)
+    UNION           reduce using rule 71 (break_statement -> BREAK SEMICOL .)
+    BOOL            reduce using rule 71 (break_statement -> BREAK SEMICOL .)
+    PRINT           reduce using rule 71 (break_statement -> BREAK SEMICOL .)
+    BREAK           reduce using rule 71 (break_statement -> BREAK SEMICOL .)
+    NUMBER          reduce using rule 71 (break_statement -> BREAK SEMICOL .)
+    LPAREN          reduce using rule 71 (break_statement -> BREAK SEMICOL .)
+    $end            reduce using rule 71 (break_statement -> BREAK SEMICOL .)
+    RBRACE          reduce using rule 71 (break_statement -> BREAK SEMICOL .)
 
 
 state 70
 
-    (71) expression -> expression PLUS term .
-    (74) term -> term . TIMES factor
-    (75) term -> term . DIVIDE factor
-    (76) term -> term . MODULO factor
+    (72) expression -> expression PLUS term .
+    (75) term -> term . TIMES factor
+    (76) term -> term . DIVIDE factor
+    (77) term -> term . MODULO factor
 
-    SEMICOL         reduce using rule 71 (expression -> expression PLUS term .)
-    PLUS            reduce using rule 71 (expression -> expression PLUS term .)
-    MINUS           reduce using rule 71 (expression -> expression PLUS term .)
-    GTH             reduce using rule 71 (expression -> expression PLUS term .)
-    LTH             reduce using rule 71 (expression -> expression PLUS term .)
-    GTHOREQUAL      reduce using rule 71 (expression -> expression PLUS term .)
-    LTHOREQUAL      reduce using rule 71 (expression -> expression PLUS term .)
-    EQUALEQUAL      reduce using rule 71 (expression -> expression PLUS term .)
-    NOTEQUAL        reduce using rule 71 (expression -> expression PLUS term .)
-    RPAREN          reduce using rule 71 (expression -> expression PLUS term .)
-    ID              reduce using rule 71 (expression -> expression PLUS term .)
-    IF              reduce using rule 71 (expression -> expression PLUS term .)
-    WHILE           reduce using rule 71 (expression -> expression PLUS term .)
-    FOR             reduce using rule 71 (expression -> expression PLUS term .)
-    VAR_TYPE        reduce using rule 71 (expression -> expression PLUS term .)
-    INT             reduce using rule 71 (expression -> expression PLUS term .)
-    CHAR            reduce using rule 71 (expression -> expression PLUS term .)
-    FLOATTYPE       reduce using rule 71 (expression -> expression PLUS term .)
-    UNION           reduce using rule 71 (expression -> expression PLUS term .)
-    BOOL            reduce using rule 71 (expression -> expression PLUS term .)
-    PRINT           reduce using rule 71 (expression -> expression PLUS term .)
-    BREAK           reduce using rule 71 (expression -> expression PLUS term .)
-    NUMBER          reduce using rule 71 (expression -> expression PLUS term .)
-    LPAREN          reduce using rule 71 (expression -> expression PLUS term .)
-    $end            reduce using rule 71 (expression -> expression PLUS term .)
-    RBRACE          reduce using rule 71 (expression -> expression PLUS term .)
+    SEMICOL         reduce using rule 72 (expression -> expression PLUS term .)
+    PLUS            reduce using rule 72 (expression -> expression PLUS term .)
+    MINUS           reduce using rule 72 (expression -> expression PLUS term .)
+    GTH             reduce using rule 72 (expression -> expression PLUS term .)
+    LTH             reduce using rule 72 (expression -> expression PLUS term .)
+    GTHOREQUAL      reduce using rule 72 (expression -> expression PLUS term .)
+    LTHOREQUAL      reduce using rule 72 (expression -> expression PLUS term .)
+    EQUALEQUAL      reduce using rule 72 (expression -> expression PLUS term .)
+    NOTEQUAL        reduce using rule 72 (expression -> expression PLUS term .)
+    RPAREN          reduce using rule 72 (expression -> expression PLUS term .)
+    ID              reduce using rule 72 (expression -> expression PLUS term .)
+    IF              reduce using rule 72 (expression -> expression PLUS term .)
+    WHILE           reduce using rule 72 (expression -> expression PLUS term .)
+    FOR             reduce using rule 72 (expression -> expression PLUS term .)
+    VAR_TYPE        reduce using rule 72 (expression -> expression PLUS term .)
+    INT             reduce using rule 72 (expression -> expression PLUS term .)
+    CHAR            reduce using rule 72 (expression -> expression PLUS term .)
+    FLOATTYPE       reduce using rule 72 (expression -> expression PLUS term .)
+    UNION           reduce using rule 72 (expression -> expression PLUS term .)
+    BOOL            reduce using rule 72 (expression -> expression PLUS term .)
+    PRINT           reduce using rule 72 (expression -> expression PLUS term .)
+    BREAK           reduce using rule 72 (expression -> expression PLUS term .)
+    NUMBER          reduce using rule 72 (expression -> expression PLUS term .)
+    LPAREN          reduce using rule 72 (expression -> expression PLUS term .)
+    $end            reduce using rule 72 (expression -> expression PLUS term .)
+    RBRACE          reduce using rule 72 (expression -> expression PLUS term .)
     TIMES           shift and go to state 54
     DIVIDE          shift and go to state 55
     MODULO          shift and go to state 56
@@ -2038,37 +2043,37 @@ state 71
 
 state 72
 
-    (72) expression -> expression MINUS term .
-    (74) term -> term . TIMES factor
-    (75) term -> term . DIVIDE factor
-    (76) term -> term . MODULO factor
+    (73) expression -> expression MINUS term .
+    (75) term -> term . TIMES factor
+    (76) term -> term . DIVIDE factor
+    (77) term -> term . MODULO factor
 
-    SEMICOL         reduce using rule 72 (expression -> expression MINUS term .)
-    PLUS            reduce using rule 72 (expression -> expression MINUS term .)
-    MINUS           reduce using rule 72 (expression -> expression MINUS term .)
-    GTH             reduce using rule 72 (expression -> expression MINUS term .)
-    LTH             reduce using rule 72 (expression -> expression MINUS term .)
-    GTHOREQUAL      reduce using rule 72 (expression -> expression MINUS term .)
-    LTHOREQUAL      reduce using rule 72 (expression -> expression MINUS term .)
-    EQUALEQUAL      reduce using rule 72 (expression -> expression MINUS term .)
-    NOTEQUAL        reduce using rule 72 (expression -> expression MINUS term .)
-    RPAREN          reduce using rule 72 (expression -> expression MINUS term .)
-    ID              reduce using rule 72 (expression -> expression MINUS term .)
-    IF              reduce using rule 72 (expression -> expression MINUS term .)
-    WHILE           reduce using rule 72 (expression -> expression MINUS term .)
-    FOR             reduce using rule 72 (expression -> expression MINUS term .)
-    VAR_TYPE        reduce using rule 72 (expression -> expression MINUS term .)
-    INT             reduce using rule 72 (expression -> expression MINUS term .)
-    CHAR            reduce using rule 72 (expression -> expression MINUS term .)
-    FLOATTYPE       reduce using rule 72 (expression -> expression MINUS term .)
-    UNION           reduce using rule 72 (expression -> expression MINUS term .)
-    BOOL            reduce using rule 72 (expression -> expression MINUS term .)
-    PRINT           reduce using rule 72 (expression -> expression MINUS term .)
-    BREAK           reduce using rule 72 (expression -> expression MINUS term .)
-    NUMBER          reduce using rule 72 (expression -> expression MINUS term .)
-    LPAREN          reduce using rule 72 (expression -> expression MINUS term .)
-    $end            reduce using rule 72 (expression -> expression MINUS term .)
-    RBRACE          reduce using rule 72 (expression -> expression MINUS term .)
+    SEMICOL         reduce using rule 73 (expression -> expression MINUS term .)
+    PLUS            reduce using rule 73 (expression -> expression MINUS term .)
+    MINUS           reduce using rule 73 (expression -> expression MINUS term .)
+    GTH             reduce using rule 73 (expression -> expression MINUS term .)
+    LTH             reduce using rule 73 (expression -> expression MINUS term .)
+    GTHOREQUAL      reduce using rule 73 (expression -> expression MINUS term .)
+    LTHOREQUAL      reduce using rule 73 (expression -> expression MINUS term .)
+    EQUALEQUAL      reduce using rule 73 (expression -> expression MINUS term .)
+    NOTEQUAL        reduce using rule 73 (expression -> expression MINUS term .)
+    RPAREN          reduce using rule 73 (expression -> expression MINUS term .)
+    ID              reduce using rule 73 (expression -> expression MINUS term .)
+    IF              reduce using rule 73 (expression -> expression MINUS term .)
+    WHILE           reduce using rule 73 (expression -> expression MINUS term .)
+    FOR             reduce using rule 73 (expression -> expression MINUS term .)
+    VAR_TYPE        reduce using rule 73 (expression -> expression MINUS term .)
+    INT             reduce using rule 73 (expression -> expression MINUS term .)
+    CHAR            reduce using rule 73 (expression -> expression MINUS term .)
+    FLOATTYPE       reduce using rule 73 (expression -> expression MINUS term .)
+    UNION           reduce using rule 73 (expression -> expression MINUS term .)
+    BOOL            reduce using rule 73 (expression -> expression MINUS term .)
+    PRINT           reduce using rule 73 (expression -> expression MINUS term .)
+    BREAK           reduce using rule 73 (expression -> expression MINUS term .)
+    NUMBER          reduce using rule 73 (expression -> expression MINUS term .)
+    LPAREN          reduce using rule 73 (expression -> expression MINUS term .)
+    $end            reduce using rule 73 (expression -> expression MINUS term .)
+    RBRACE          reduce using rule 73 (expression -> expression MINUS term .)
     TIMES           shift and go to state 54
     DIVIDE          shift and go to state 55
     MODULO          shift and go to state 56
@@ -2077,8 +2082,8 @@ state 72
 state 73
 
     (43) comparison -> expression GTH expression .
-    (71) expression -> expression . PLUS term
-    (72) expression -> expression . MINUS term
+    (72) expression -> expression . PLUS term
+    (73) expression -> expression . MINUS term
 
     ID              reduce using rule 43 (comparison -> expression GTH expression .)
     IF              reduce using rule 43 (comparison -> expression GTH expression .)
@@ -2105,8 +2110,8 @@ state 73
 state 74
 
     (44) comparison -> expression LTH expression .
-    (71) expression -> expression . PLUS term
-    (72) expression -> expression . MINUS term
+    (72) expression -> expression . PLUS term
+    (73) expression -> expression . MINUS term
 
     ID              reduce using rule 44 (comparison -> expression LTH expression .)
     IF              reduce using rule 44 (comparison -> expression LTH expression .)
@@ -2133,8 +2138,8 @@ state 74
 state 75
 
     (45) comparison -> expression GTHOREQUAL expression .
-    (71) expression -> expression . PLUS term
-    (72) expression -> expression . MINUS term
+    (72) expression -> expression . PLUS term
+    (73) expression -> expression . MINUS term
 
     ID              reduce using rule 45 (comparison -> expression GTHOREQUAL expression .)
     IF              reduce using rule 45 (comparison -> expression GTHOREQUAL expression .)
@@ -2161,8 +2166,8 @@ state 75
 state 76
 
     (46) comparison -> expression LTHOREQUAL expression .
-    (71) expression -> expression . PLUS term
-    (72) expression -> expression . MINUS term
+    (72) expression -> expression . PLUS term
+    (73) expression -> expression . MINUS term
 
     ID              reduce using rule 46 (comparison -> expression LTHOREQUAL expression .)
     IF              reduce using rule 46 (comparison -> expression LTHOREQUAL expression .)
@@ -2189,8 +2194,8 @@ state 76
 state 77
 
     (47) comparison -> expression EQUALEQUAL expression .
-    (71) expression -> expression . PLUS term
-    (72) expression -> expression . MINUS term
+    (72) expression -> expression . PLUS term
+    (73) expression -> expression . MINUS term
 
     ID              reduce using rule 47 (comparison -> expression EQUALEQUAL expression .)
     IF              reduce using rule 47 (comparison -> expression EQUALEQUAL expression .)
@@ -2217,8 +2222,8 @@ state 77
 state 78
 
     (48) comparison -> expression NOTEQUAL expression .
-    (71) expression -> expression . PLUS term
-    (72) expression -> expression . MINUS term
+    (72) expression -> expression . PLUS term
+    (73) expression -> expression . MINUS term
 
     ID              reduce using rule 48 (comparison -> expression NOTEQUAL expression .)
     IF              reduce using rule 48 (comparison -> expression NOTEQUAL expression .)
@@ -2245,8 +2250,8 @@ state 78
 state 79
 
     (49) compare_id_value -> ID GTH expression .
-    (71) expression -> expression . PLUS term
-    (72) expression -> expression . MINUS term
+    (72) expression -> expression . PLUS term
+    (73) expression -> expression . MINUS term
 
     ID              reduce using rule 49 (compare_id_value -> ID GTH expression .)
     IF              reduce using rule 49 (compare_id_value -> ID GTH expression .)
@@ -2272,8 +2277,8 @@ state 79
 state 80
 
     (50) compare_id_value -> ID LTH expression .
-    (71) expression -> expression . PLUS term
-    (72) expression -> expression . MINUS term
+    (72) expression -> expression . PLUS term
+    (73) expression -> expression . MINUS term
 
     ID              reduce using rule 50 (compare_id_value -> ID LTH expression .)
     IF              reduce using rule 50 (compare_id_value -> ID LTH expression .)
@@ -2299,8 +2304,8 @@ state 80
 state 81
 
     (51) compare_id_value -> ID GTHOREQUAL expression .
-    (71) expression -> expression . PLUS term
-    (72) expression -> expression . MINUS term
+    (72) expression -> expression . PLUS term
+    (73) expression -> expression . MINUS term
 
     ID              reduce using rule 51 (compare_id_value -> ID GTHOREQUAL expression .)
     IF              reduce using rule 51 (compare_id_value -> ID GTHOREQUAL expression .)
@@ -2326,8 +2331,8 @@ state 81
 state 82
 
     (52) compare_id_value -> ID LTHOREQUAL expression .
-    (71) expression -> expression . PLUS term
-    (72) expression -> expression . MINUS term
+    (72) expression -> expression . PLUS term
+    (73) expression -> expression . MINUS term
 
     ID              reduce using rule 52 (compare_id_value -> ID LTHOREQUAL expression .)
     IF              reduce using rule 52 (compare_id_value -> ID LTHOREQUAL expression .)
@@ -2501,8 +2506,8 @@ state 83
 state 84
 
     (53) compare_id_value -> ID EQUALEQUAL expression .
-    (71) expression -> expression . PLUS term
-    (72) expression -> expression . MINUS term
+    (72) expression -> expression . PLUS term
+    (73) expression -> expression . MINUS term
 
     ID              reduce using rule 53 (compare_id_value -> ID EQUALEQUAL expression .)
     IF              reduce using rule 53 (compare_id_value -> ID EQUALEQUAL expression .)
@@ -2722,8 +2727,8 @@ state 87
 state 88
 
     (54) compare_id_value -> ID NOTEQUAL expression .
-    (71) expression -> expression . PLUS term
-    (72) expression -> expression . MINUS term
+    (72) expression -> expression . PLUS term
+    (73) expression -> expression . MINUS term
 
     ID              reduce using rule 54 (compare_id_value -> ID NOTEQUAL expression .)
     IF              reduce using rule 54 (compare_id_value -> ID NOTEQUAL expression .)
@@ -2843,37 +2848,37 @@ state 97
 
 state 98
 
-    (74) term -> term TIMES factor .
+    (75) term -> term TIMES factor .
 
-    TIMES           reduce using rule 74 (term -> term TIMES factor .)
-    DIVIDE          reduce using rule 74 (term -> term TIMES factor .)
-    MODULO          reduce using rule 74 (term -> term TIMES factor .)
-    SEMICOL         reduce using rule 74 (term -> term TIMES factor .)
-    PLUS            reduce using rule 74 (term -> term TIMES factor .)
-    MINUS           reduce using rule 74 (term -> term TIMES factor .)
-    GTH             reduce using rule 74 (term -> term TIMES factor .)
-    LTH             reduce using rule 74 (term -> term TIMES factor .)
-    GTHOREQUAL      reduce using rule 74 (term -> term TIMES factor .)
-    LTHOREQUAL      reduce using rule 74 (term -> term TIMES factor .)
-    EQUALEQUAL      reduce using rule 74 (term -> term TIMES factor .)
-    NOTEQUAL        reduce using rule 74 (term -> term TIMES factor .)
-    RPAREN          reduce using rule 74 (term -> term TIMES factor .)
-    ID              reduce using rule 74 (term -> term TIMES factor .)
-    IF              reduce using rule 74 (term -> term TIMES factor .)
-    WHILE           reduce using rule 74 (term -> term TIMES factor .)
-    FOR             reduce using rule 74 (term -> term TIMES factor .)
-    VAR_TYPE        reduce using rule 74 (term -> term TIMES factor .)
-    INT             reduce using rule 74 (term -> term TIMES factor .)
-    CHAR            reduce using rule 74 (term -> term TIMES factor .)
-    FLOATTYPE       reduce using rule 74 (term -> term TIMES factor .)
-    UNION           reduce using rule 74 (term -> term TIMES factor .)
-    BOOL            reduce using rule 74 (term -> term TIMES factor .)
-    PRINT           reduce using rule 74 (term -> term TIMES factor .)
-    BREAK           reduce using rule 74 (term -> term TIMES factor .)
-    NUMBER          reduce using rule 74 (term -> term TIMES factor .)
-    LPAREN          reduce using rule 74 (term -> term TIMES factor .)
-    $end            reduce using rule 74 (term -> term TIMES factor .)
-    RBRACE          reduce using rule 74 (term -> term TIMES factor .)
+    TIMES           reduce using rule 75 (term -> term TIMES factor .)
+    DIVIDE          reduce using rule 75 (term -> term TIMES factor .)
+    MODULO          reduce using rule 75 (term -> term TIMES factor .)
+    SEMICOL         reduce using rule 75 (term -> term TIMES factor .)
+    PLUS            reduce using rule 75 (term -> term TIMES factor .)
+    MINUS           reduce using rule 75 (term -> term TIMES factor .)
+    GTH             reduce using rule 75 (term -> term TIMES factor .)
+    LTH             reduce using rule 75 (term -> term TIMES factor .)
+    GTHOREQUAL      reduce using rule 75 (term -> term TIMES factor .)
+    LTHOREQUAL      reduce using rule 75 (term -> term TIMES factor .)
+    EQUALEQUAL      reduce using rule 75 (term -> term TIMES factor .)
+    NOTEQUAL        reduce using rule 75 (term -> term TIMES factor .)
+    RPAREN          reduce using rule 75 (term -> term TIMES factor .)
+    ID              reduce using rule 75 (term -> term TIMES factor .)
+    IF              reduce using rule 75 (term -> term TIMES factor .)
+    WHILE           reduce using rule 75 (term -> term TIMES factor .)
+    FOR             reduce using rule 75 (term -> term TIMES factor .)
+    VAR_TYPE        reduce using rule 75 (term -> term TIMES factor .)
+    INT             reduce using rule 75 (term -> term TIMES factor .)
+    CHAR            reduce using rule 75 (term -> term TIMES factor .)
+    FLOATTYPE       reduce using rule 75 (term -> term TIMES factor .)
+    UNION           reduce using rule 75 (term -> term TIMES factor .)
+    BOOL            reduce using rule 75 (term -> term TIMES factor .)
+    PRINT           reduce using rule 75 (term -> term TIMES factor .)
+    BREAK           reduce using rule 75 (term -> term TIMES factor .)
+    NUMBER          reduce using rule 75 (term -> term TIMES factor .)
+    LPAREN          reduce using rule 75 (term -> term TIMES factor .)
+    $end            reduce using rule 75 (term -> term TIMES factor .)
+    RBRACE          reduce using rule 75 (term -> term TIMES factor .)
 
 
 state 99
@@ -2913,72 +2918,72 @@ state 99
 
 state 100
 
-    (75) term -> term DIVIDE factor .
+    (76) term -> term DIVIDE factor .
 
-    TIMES           reduce using rule 75 (term -> term DIVIDE factor .)
-    DIVIDE          reduce using rule 75 (term -> term DIVIDE factor .)
-    MODULO          reduce using rule 75 (term -> term DIVIDE factor .)
-    SEMICOL         reduce using rule 75 (term -> term DIVIDE factor .)
-    PLUS            reduce using rule 75 (term -> term DIVIDE factor .)
-    MINUS           reduce using rule 75 (term -> term DIVIDE factor .)
-    GTH             reduce using rule 75 (term -> term DIVIDE factor .)
-    LTH             reduce using rule 75 (term -> term DIVIDE factor .)
-    GTHOREQUAL      reduce using rule 75 (term -> term DIVIDE factor .)
-    LTHOREQUAL      reduce using rule 75 (term -> term DIVIDE factor .)
-    EQUALEQUAL      reduce using rule 75 (term -> term DIVIDE factor .)
-    NOTEQUAL        reduce using rule 75 (term -> term DIVIDE factor .)
-    RPAREN          reduce using rule 75 (term -> term DIVIDE factor .)
-    ID              reduce using rule 75 (term -> term DIVIDE factor .)
-    IF              reduce using rule 75 (term -> term DIVIDE factor .)
-    WHILE           reduce using rule 75 (term -> term DIVIDE factor .)
-    FOR             reduce using rule 75 (term -> term DIVIDE factor .)
-    VAR_TYPE        reduce using rule 75 (term -> term DIVIDE factor .)
-    INT             reduce using rule 75 (term -> term DIVIDE factor .)
-    CHAR            reduce using rule 75 (term -> term DIVIDE factor .)
-    FLOATTYPE       reduce using rule 75 (term -> term DIVIDE factor .)
-    UNION           reduce using rule 75 (term -> term DIVIDE factor .)
-    BOOL            reduce using rule 75 (term -> term DIVIDE factor .)
-    PRINT           reduce using rule 75 (term -> term DIVIDE factor .)
-    BREAK           reduce using rule 75 (term -> term DIVIDE factor .)
-    NUMBER          reduce using rule 75 (term -> term DIVIDE factor .)
-    LPAREN          reduce using rule 75 (term -> term DIVIDE factor .)
-    $end            reduce using rule 75 (term -> term DIVIDE factor .)
-    RBRACE          reduce using rule 75 (term -> term DIVIDE factor .)
+    TIMES           reduce using rule 76 (term -> term DIVIDE factor .)
+    DIVIDE          reduce using rule 76 (term -> term DIVIDE factor .)
+    MODULO          reduce using rule 76 (term -> term DIVIDE factor .)
+    SEMICOL         reduce using rule 76 (term -> term DIVIDE factor .)
+    PLUS            reduce using rule 76 (term -> term DIVIDE factor .)
+    MINUS           reduce using rule 76 (term -> term DIVIDE factor .)
+    GTH             reduce using rule 76 (term -> term DIVIDE factor .)
+    LTH             reduce using rule 76 (term -> term DIVIDE factor .)
+    GTHOREQUAL      reduce using rule 76 (term -> term DIVIDE factor .)
+    LTHOREQUAL      reduce using rule 76 (term -> term DIVIDE factor .)
+    EQUALEQUAL      reduce using rule 76 (term -> term DIVIDE factor .)
+    NOTEQUAL        reduce using rule 76 (term -> term DIVIDE factor .)
+    RPAREN          reduce using rule 76 (term -> term DIVIDE factor .)
+    ID              reduce using rule 76 (term -> term DIVIDE factor .)
+    IF              reduce using rule 76 (term -> term DIVIDE factor .)
+    WHILE           reduce using rule 76 (term -> term DIVIDE factor .)
+    FOR             reduce using rule 76 (term -> term DIVIDE factor .)
+    VAR_TYPE        reduce using rule 76 (term -> term DIVIDE factor .)
+    INT             reduce using rule 76 (term -> term DIVIDE factor .)
+    CHAR            reduce using rule 76 (term -> term DIVIDE factor .)
+    FLOATTYPE       reduce using rule 76 (term -> term DIVIDE factor .)
+    UNION           reduce using rule 76 (term -> term DIVIDE factor .)
+    BOOL            reduce using rule 76 (term -> term DIVIDE factor .)
+    PRINT           reduce using rule 76 (term -> term DIVIDE factor .)
+    BREAK           reduce using rule 76 (term -> term DIVIDE factor .)
+    NUMBER          reduce using rule 76 (term -> term DIVIDE factor .)
+    LPAREN          reduce using rule 76 (term -> term DIVIDE factor .)
+    $end            reduce using rule 76 (term -> term DIVIDE factor .)
+    RBRACE          reduce using rule 76 (term -> term DIVIDE factor .)
 
 
 state 101
 
-    (76) term -> term MODULO factor .
+    (77) term -> term MODULO factor .
 
-    TIMES           reduce using rule 76 (term -> term MODULO factor .)
-    DIVIDE          reduce using rule 76 (term -> term MODULO factor .)
-    MODULO          reduce using rule 76 (term -> term MODULO factor .)
-    SEMICOL         reduce using rule 76 (term -> term MODULO factor .)
-    PLUS            reduce using rule 76 (term -> term MODULO factor .)
-    MINUS           reduce using rule 76 (term -> term MODULO factor .)
-    GTH             reduce using rule 76 (term -> term MODULO factor .)
-    LTH             reduce using rule 76 (term -> term MODULO factor .)
-    GTHOREQUAL      reduce using rule 76 (term -> term MODULO factor .)
-    LTHOREQUAL      reduce using rule 76 (term -> term MODULO factor .)
-    EQUALEQUAL      reduce using rule 76 (term -> term MODULO factor .)
-    NOTEQUAL        reduce using rule 76 (term -> term MODULO factor .)
-    RPAREN          reduce using rule 76 (term -> term MODULO factor .)
-    ID              reduce using rule 76 (term -> term MODULO factor .)
-    IF              reduce using rule 76 (term -> term MODULO factor .)
-    WHILE           reduce using rule 76 (term -> term MODULO factor .)
-    FOR             reduce using rule 76 (term -> term MODULO factor .)
-    VAR_TYPE        reduce using rule 76 (term -> term MODULO factor .)
-    INT             reduce using rule 76 (term -> term MODULO factor .)
-    CHAR            reduce using rule 76 (term -> term MODULO factor .)
-    FLOATTYPE       reduce using rule 76 (term -> term MODULO factor .)
-    UNION           reduce using rule 76 (term -> term MODULO factor .)
-    BOOL            reduce using rule 76 (term -> term MODULO factor .)
-    PRINT           reduce using rule 76 (term -> term MODULO factor .)
-    BREAK           reduce using rule 76 (term -> term MODULO factor .)
-    NUMBER          reduce using rule 76 (term -> term MODULO factor .)
-    LPAREN          reduce using rule 76 (term -> term MODULO factor .)
-    $end            reduce using rule 76 (term -> term MODULO factor .)
-    RBRACE          reduce using rule 76 (term -> term MODULO factor .)
+    TIMES           reduce using rule 77 (term -> term MODULO factor .)
+    DIVIDE          reduce using rule 77 (term -> term MODULO factor .)
+    MODULO          reduce using rule 77 (term -> term MODULO factor .)
+    SEMICOL         reduce using rule 77 (term -> term MODULO factor .)
+    PLUS            reduce using rule 77 (term -> term MODULO factor .)
+    MINUS           reduce using rule 77 (term -> term MODULO factor .)
+    GTH             reduce using rule 77 (term -> term MODULO factor .)
+    LTH             reduce using rule 77 (term -> term MODULO factor .)
+    GTHOREQUAL      reduce using rule 77 (term -> term MODULO factor .)
+    LTHOREQUAL      reduce using rule 77 (term -> term MODULO factor .)
+    EQUALEQUAL      reduce using rule 77 (term -> term MODULO factor .)
+    NOTEQUAL        reduce using rule 77 (term -> term MODULO factor .)
+    RPAREN          reduce using rule 77 (term -> term MODULO factor .)
+    ID              reduce using rule 77 (term -> term MODULO factor .)
+    IF              reduce using rule 77 (term -> term MODULO factor .)
+    WHILE           reduce using rule 77 (term -> term MODULO factor .)
+    FOR             reduce using rule 77 (term -> term MODULO factor .)
+    VAR_TYPE        reduce using rule 77 (term -> term MODULO factor .)
+    INT             reduce using rule 77 (term -> term MODULO factor .)
+    CHAR            reduce using rule 77 (term -> term MODULO factor .)
+    FLOATTYPE       reduce using rule 77 (term -> term MODULO factor .)
+    UNION           reduce using rule 77 (term -> term MODULO factor .)
+    BOOL            reduce using rule 77 (term -> term MODULO factor .)
+    PRINT           reduce using rule 77 (term -> term MODULO factor .)
+    BREAK           reduce using rule 77 (term -> term MODULO factor .)
+    NUMBER          reduce using rule 77 (term -> term MODULO factor .)
+    LPAREN          reduce using rule 77 (term -> term MODULO factor .)
+    $end            reduce using rule 77 (term -> term MODULO factor .)
+    RBRACE          reduce using rule 77 (term -> term MODULO factor .)
 
 
 state 102
@@ -2992,6 +2997,7 @@ state 102
 state 103
 
     (62) if_statement -> IF LPAREN compare_id_value . RPAREN LBRACE statements RBRACE
+    (66) if_statement -> IF LPAREN compare_id_value . RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
 
     RPAREN          shift and go to state 132
 
@@ -3012,8 +3018,8 @@ state 105
     (46) comparison -> expression . LTHOREQUAL expression
     (47) comparison -> expression . EQUALEQUAL expression
     (48) comparison -> expression . NOTEQUAL expression
-    (71) expression -> expression . PLUS term
-    (72) expression -> expression . MINUS term
+    (72) expression -> expression . PLUS term
+    (73) expression -> expression . MINUS term
 
     GTH             shift and go to state 39
     LTH             shift and go to state 40
@@ -3109,63 +3115,63 @@ state 106
 
 state 107
 
-    (79) factor -> LPAREN expression RPAREN .
+    (80) factor -> LPAREN expression RPAREN .
 
-    TIMES           reduce using rule 79 (factor -> LPAREN expression RPAREN .)
-    DIVIDE          reduce using rule 79 (factor -> LPAREN expression RPAREN .)
-    MODULO          reduce using rule 79 (factor -> LPAREN expression RPAREN .)
-    SEMICOL         reduce using rule 79 (factor -> LPAREN expression RPAREN .)
-    PLUS            reduce using rule 79 (factor -> LPAREN expression RPAREN .)
-    MINUS           reduce using rule 79 (factor -> LPAREN expression RPAREN .)
-    GTH             reduce using rule 79 (factor -> LPAREN expression RPAREN .)
-    LTH             reduce using rule 79 (factor -> LPAREN expression RPAREN .)
-    GTHOREQUAL      reduce using rule 79 (factor -> LPAREN expression RPAREN .)
-    LTHOREQUAL      reduce using rule 79 (factor -> LPAREN expression RPAREN .)
-    EQUALEQUAL      reduce using rule 79 (factor -> LPAREN expression RPAREN .)
-    NOTEQUAL        reduce using rule 79 (factor -> LPAREN expression RPAREN .)
-    RPAREN          reduce using rule 79 (factor -> LPAREN expression RPAREN .)
-    ID              reduce using rule 79 (factor -> LPAREN expression RPAREN .)
-    IF              reduce using rule 79 (factor -> LPAREN expression RPAREN .)
-    WHILE           reduce using rule 79 (factor -> LPAREN expression RPAREN .)
-    FOR             reduce using rule 79 (factor -> LPAREN expression RPAREN .)
-    VAR_TYPE        reduce using rule 79 (factor -> LPAREN expression RPAREN .)
-    INT             reduce using rule 79 (factor -> LPAREN expression RPAREN .)
-    CHAR            reduce using rule 79 (factor -> LPAREN expression RPAREN .)
-    FLOATTYPE       reduce using rule 79 (factor -> LPAREN expression RPAREN .)
-    UNION           reduce using rule 79 (factor -> LPAREN expression RPAREN .)
-    BOOL            reduce using rule 79 (factor -> LPAREN expression RPAREN .)
-    PRINT           reduce using rule 79 (factor -> LPAREN expression RPAREN .)
-    BREAK           reduce using rule 79 (factor -> LPAREN expression RPAREN .)
-    NUMBER          reduce using rule 79 (factor -> LPAREN expression RPAREN .)
-    LPAREN          reduce using rule 79 (factor -> LPAREN expression RPAREN .)
-    $end            reduce using rule 79 (factor -> LPAREN expression RPAREN .)
-    RBRACE          reduce using rule 79 (factor -> LPAREN expression RPAREN .)
+    TIMES           reduce using rule 80 (factor -> LPAREN expression RPAREN .)
+    DIVIDE          reduce using rule 80 (factor -> LPAREN expression RPAREN .)
+    MODULO          reduce using rule 80 (factor -> LPAREN expression RPAREN .)
+    SEMICOL         reduce using rule 80 (factor -> LPAREN expression RPAREN .)
+    PLUS            reduce using rule 80 (factor -> LPAREN expression RPAREN .)
+    MINUS           reduce using rule 80 (factor -> LPAREN expression RPAREN .)
+    GTH             reduce using rule 80 (factor -> LPAREN expression RPAREN .)
+    LTH             reduce using rule 80 (factor -> LPAREN expression RPAREN .)
+    GTHOREQUAL      reduce using rule 80 (factor -> LPAREN expression RPAREN .)
+    LTHOREQUAL      reduce using rule 80 (factor -> LPAREN expression RPAREN .)
+    EQUALEQUAL      reduce using rule 80 (factor -> LPAREN expression RPAREN .)
+    NOTEQUAL        reduce using rule 80 (factor -> LPAREN expression RPAREN .)
+    RPAREN          reduce using rule 80 (factor -> LPAREN expression RPAREN .)
+    ID              reduce using rule 80 (factor -> LPAREN expression RPAREN .)
+    IF              reduce using rule 80 (factor -> LPAREN expression RPAREN .)
+    WHILE           reduce using rule 80 (factor -> LPAREN expression RPAREN .)
+    FOR             reduce using rule 80 (factor -> LPAREN expression RPAREN .)
+    VAR_TYPE        reduce using rule 80 (factor -> LPAREN expression RPAREN .)
+    INT             reduce using rule 80 (factor -> LPAREN expression RPAREN .)
+    CHAR            reduce using rule 80 (factor -> LPAREN expression RPAREN .)
+    FLOATTYPE       reduce using rule 80 (factor -> LPAREN expression RPAREN .)
+    UNION           reduce using rule 80 (factor -> LPAREN expression RPAREN .)
+    BOOL            reduce using rule 80 (factor -> LPAREN expression RPAREN .)
+    PRINT           reduce using rule 80 (factor -> LPAREN expression RPAREN .)
+    BREAK           reduce using rule 80 (factor -> LPAREN expression RPAREN .)
+    NUMBER          reduce using rule 80 (factor -> LPAREN expression RPAREN .)
+    LPAREN          reduce using rule 80 (factor -> LPAREN expression RPAREN .)
+    $end            reduce using rule 80 (factor -> LPAREN expression RPAREN .)
+    RBRACE          reduce using rule 80 (factor -> LPAREN expression RPAREN .)
 
 
 state 108
 
-    (66) while_statement -> WHILE LPAREN comparison . RPAREN LBRACE statements RBRACE
+    (67) while_statement -> WHILE LPAREN comparison . RPAREN LBRACE statements RBRACE
 
     RPAREN          shift and go to state 134
 
 
 state 109
 
-    (67) while_statement -> WHILE LPAREN TRUE . RPAREN LBRACE statements RBRACE
+    (68) while_statement -> WHILE LPAREN TRUE . RPAREN LBRACE statements RBRACE
 
     RPAREN          shift and go to state 135
 
 
 state 110
 
-    (68) while_statement -> WHILE LPAREN FALSE . RPAREN LBRACE statements RBRACE
+    (69) while_statement -> WHILE LPAREN FALSE . RPAREN LBRACE statements RBRACE
 
     RPAREN          shift and go to state 136
 
 
 state 111
 
-    (69) for_statement -> FOR LPAREN var_statement . comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE
+    (70) for_statement -> FOR LPAREN var_statement . comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE
     (43) comparison -> . expression GTH expression
     (44) comparison -> . expression LTH expression
     (45) comparison -> . expression GTHOREQUAL expression
@@ -3173,17 +3179,17 @@ state 111
     (47) comparison -> . expression EQUALEQUAL expression
     (48) comparison -> . expression NOTEQUAL expression
     (40) expression -> . ID
-    (71) expression -> . expression PLUS term
-    (72) expression -> . expression MINUS term
-    (73) expression -> . term
+    (72) expression -> . expression PLUS term
+    (73) expression -> . expression MINUS term
+    (74) expression -> . term
     (41) term -> . ID
-    (74) term -> . term TIMES factor
-    (75) term -> . term DIVIDE factor
-    (76) term -> . term MODULO factor
-    (77) term -> . factor
+    (75) term -> . term TIMES factor
+    (76) term -> . term DIVIDE factor
+    (77) term -> . term MODULO factor
+    (78) term -> . factor
     (42) factor -> . ID
-    (78) factor -> . NUMBER
-    (79) factor -> . LPAREN expression RPAREN
+    (79) factor -> . NUMBER
+    (80) factor -> . LPAREN expression RPAREN
 
     ID              shift and go to state 59
     NUMBER          shift and go to state 30
@@ -3276,8 +3282,8 @@ state 121
 state 122
 
     (3) print_statement -> PRINT LPAREN expression . RPAREN SEMICOL
-    (71) expression -> expression . PLUS term
-    (72) expression -> expression . MINUS term
+    (72) expression -> expression . PLUS term
+    (73) expression -> expression . MINUS term
 
     RPAREN          shift and go to state 152
     PLUS            shift and go to state 37
@@ -3457,6 +3463,7 @@ state 131
 state 132
 
     (62) if_statement -> IF LPAREN compare_id_value RPAREN . LBRACE statements RBRACE
+    (66) if_statement -> IF LPAREN compare_id_value RPAREN . LBRACE statements RBRACE ELSE LBRACE statements RBRACE
 
     LBRACE          shift and go to state 155
 
@@ -3471,28 +3478,28 @@ state 133
 
 state 134
 
-    (66) while_statement -> WHILE LPAREN comparison RPAREN . LBRACE statements RBRACE
+    (67) while_statement -> WHILE LPAREN comparison RPAREN . LBRACE statements RBRACE
 
     LBRACE          shift and go to state 157
 
 
 state 135
 
-    (67) while_statement -> WHILE LPAREN TRUE RPAREN . LBRACE statements RBRACE
+    (68) while_statement -> WHILE LPAREN TRUE RPAREN . LBRACE statements RBRACE
 
     LBRACE          shift and go to state 158
 
 
 state 136
 
-    (68) while_statement -> WHILE LPAREN FALSE RPAREN . LBRACE statements RBRACE
+    (69) while_statement -> WHILE LPAREN FALSE RPAREN . LBRACE statements RBRACE
 
     LBRACE          shift and go to state 159
 
 
 state 137
 
-    (69) for_statement -> FOR LPAREN var_statement comparison . SEMICOL var_inc RPAREN LBRACE statements RBRACE
+    (70) for_statement -> FOR LPAREN var_statement comparison . SEMICOL var_inc RPAREN LBRACE statements RBRACE
 
     SEMICOL         shift and go to state 160
 
@@ -3634,18 +3641,19 @@ state 154
     (23) statement -> . print_statement
     (24) statement -> . break_statement
     (40) expression -> . ID
-    (71) expression -> . expression PLUS term
-    (72) expression -> . expression MINUS term
-    (73) expression -> . term
+    (72) expression -> . expression PLUS term
+    (73) expression -> . expression MINUS term
+    (74) expression -> . term
     (61) if_statement -> . IF LPAREN comparison RPAREN LBRACE statements RBRACE
     (62) if_statement -> . IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE
     (63) if_statement -> . IF LPAREN bool_comparison RPAREN LBRACE statements RBRACE
     (64) if_statement -> . IF LPAREN comparison RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
     (65) if_statement -> . IF LPAREN bool_comparison RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
-    (66) while_statement -> . WHILE LPAREN comparison RPAREN LBRACE statements RBRACE
-    (67) while_statement -> . WHILE LPAREN TRUE RPAREN LBRACE statements RBRACE
-    (68) while_statement -> . WHILE LPAREN FALSE RPAREN LBRACE statements RBRACE
-    (69) for_statement -> . FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE
+    (66) if_statement -> . IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
+    (67) while_statement -> . WHILE LPAREN comparison RPAREN LBRACE statements RBRACE
+    (68) while_statement -> . WHILE LPAREN TRUE RPAREN LBRACE statements RBRACE
+    (69) while_statement -> . WHILE LPAREN FALSE RPAREN LBRACE statements RBRACE
+    (70) for_statement -> . FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE
     (5) vartype_statement -> . VAR_TYPE LPAREN ID RPAREN SEMICOL
     (37) input_statement -> . INT ID EQUALS INPUT LPAREN INT RPAREN SEMICOL
     (38) input_statement -> . CHAR ID EQUALS INPUT LPAREN CHAR RPAREN SEMICOL
@@ -3685,15 +3693,15 @@ state 154
     (31) var_dec -> . ID MINUS MINUS SEMICOL
     (3) print_statement -> . PRINT LPAREN expression RPAREN SEMICOL
     (4) print_statement -> . PRINT LPAREN STRING RPAREN SEMICOL
-    (70) break_statement -> . BREAK SEMICOL
+    (71) break_statement -> . BREAK SEMICOL
     (41) term -> . ID
-    (74) term -> . term TIMES factor
-    (75) term -> . term DIVIDE factor
-    (76) term -> . term MODULO factor
-    (77) term -> . factor
+    (75) term -> . term TIMES factor
+    (76) term -> . term DIVIDE factor
+    (77) term -> . term MODULO factor
+    (78) term -> . factor
     (42) factor -> . ID
-    (78) factor -> . NUMBER
-    (79) factor -> . LPAREN expression RPAREN
+    (79) factor -> . NUMBER
+    (80) factor -> . LPAREN expression RPAREN
 
     ID              shift and go to state 19
     IF              shift and go to state 21
@@ -3734,6 +3742,7 @@ state 154
 state 155
 
     (62) if_statement -> IF LPAREN compare_id_value RPAREN LBRACE . statements RBRACE
+    (66) if_statement -> IF LPAREN compare_id_value RPAREN LBRACE . statements RBRACE ELSE LBRACE statements RBRACE
     (1) statements -> . statements statement
     (2) statements -> . statement
     (9) statement -> . expression SEMICOL
@@ -3753,18 +3762,19 @@ state 155
     (23) statement -> . print_statement
     (24) statement -> . break_statement
     (40) expression -> . ID
-    (71) expression -> . expression PLUS term
-    (72) expression -> . expression MINUS term
-    (73) expression -> . term
+    (72) expression -> . expression PLUS term
+    (73) expression -> . expression MINUS term
+    (74) expression -> . term
     (61) if_statement -> . IF LPAREN comparison RPAREN LBRACE statements RBRACE
     (62) if_statement -> . IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE
     (63) if_statement -> . IF LPAREN bool_comparison RPAREN LBRACE statements RBRACE
     (64) if_statement -> . IF LPAREN comparison RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
     (65) if_statement -> . IF LPAREN bool_comparison RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
-    (66) while_statement -> . WHILE LPAREN comparison RPAREN LBRACE statements RBRACE
-    (67) while_statement -> . WHILE LPAREN TRUE RPAREN LBRACE statements RBRACE
-    (68) while_statement -> . WHILE LPAREN FALSE RPAREN LBRACE statements RBRACE
-    (69) for_statement -> . FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE
+    (66) if_statement -> . IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
+    (67) while_statement -> . WHILE LPAREN comparison RPAREN LBRACE statements RBRACE
+    (68) while_statement -> . WHILE LPAREN TRUE RPAREN LBRACE statements RBRACE
+    (69) while_statement -> . WHILE LPAREN FALSE RPAREN LBRACE statements RBRACE
+    (70) for_statement -> . FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE
     (5) vartype_statement -> . VAR_TYPE LPAREN ID RPAREN SEMICOL
     (37) input_statement -> . INT ID EQUALS INPUT LPAREN INT RPAREN SEMICOL
     (38) input_statement -> . CHAR ID EQUALS INPUT LPAREN CHAR RPAREN SEMICOL
@@ -3804,15 +3814,15 @@ state 155
     (31) var_dec -> . ID MINUS MINUS SEMICOL
     (3) print_statement -> . PRINT LPAREN expression RPAREN SEMICOL
     (4) print_statement -> . PRINT LPAREN STRING RPAREN SEMICOL
-    (70) break_statement -> . BREAK SEMICOL
+    (71) break_statement -> . BREAK SEMICOL
     (41) term -> . ID
-    (74) term -> . term TIMES factor
-    (75) term -> . term DIVIDE factor
-    (76) term -> . term MODULO factor
-    (77) term -> . factor
+    (75) term -> . term TIMES factor
+    (76) term -> . term DIVIDE factor
+    (77) term -> . term MODULO factor
+    (78) term -> . factor
     (42) factor -> . ID
-    (78) factor -> . NUMBER
-    (79) factor -> . LPAREN expression RPAREN
+    (79) factor -> . NUMBER
+    (80) factor -> . LPAREN expression RPAREN
 
     ID              shift and go to state 19
     IF              shift and go to state 21
@@ -3873,18 +3883,19 @@ state 156
     (23) statement -> . print_statement
     (24) statement -> . break_statement
     (40) expression -> . ID
-    (71) expression -> . expression PLUS term
-    (72) expression -> . expression MINUS term
-    (73) expression -> . term
+    (72) expression -> . expression PLUS term
+    (73) expression -> . expression MINUS term
+    (74) expression -> . term
     (61) if_statement -> . IF LPAREN comparison RPAREN LBRACE statements RBRACE
     (62) if_statement -> . IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE
     (63) if_statement -> . IF LPAREN bool_comparison RPAREN LBRACE statements RBRACE
     (64) if_statement -> . IF LPAREN comparison RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
     (65) if_statement -> . IF LPAREN bool_comparison RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
-    (66) while_statement -> . WHILE LPAREN comparison RPAREN LBRACE statements RBRACE
-    (67) while_statement -> . WHILE LPAREN TRUE RPAREN LBRACE statements RBRACE
-    (68) while_statement -> . WHILE LPAREN FALSE RPAREN LBRACE statements RBRACE
-    (69) for_statement -> . FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE
+    (66) if_statement -> . IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
+    (67) while_statement -> . WHILE LPAREN comparison RPAREN LBRACE statements RBRACE
+    (68) while_statement -> . WHILE LPAREN TRUE RPAREN LBRACE statements RBRACE
+    (69) while_statement -> . WHILE LPAREN FALSE RPAREN LBRACE statements RBRACE
+    (70) for_statement -> . FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE
     (5) vartype_statement -> . VAR_TYPE LPAREN ID RPAREN SEMICOL
     (37) input_statement -> . INT ID EQUALS INPUT LPAREN INT RPAREN SEMICOL
     (38) input_statement -> . CHAR ID EQUALS INPUT LPAREN CHAR RPAREN SEMICOL
@@ -3924,15 +3935,15 @@ state 156
     (31) var_dec -> . ID MINUS MINUS SEMICOL
     (3) print_statement -> . PRINT LPAREN expression RPAREN SEMICOL
     (4) print_statement -> . PRINT LPAREN STRING RPAREN SEMICOL
-    (70) break_statement -> . BREAK SEMICOL
+    (71) break_statement -> . BREAK SEMICOL
     (41) term -> . ID
-    (74) term -> . term TIMES factor
-    (75) term -> . term DIVIDE factor
-    (76) term -> . term MODULO factor
-    (77) term -> . factor
+    (75) term -> . term TIMES factor
+    (76) term -> . term DIVIDE factor
+    (77) term -> . term MODULO factor
+    (78) term -> . factor
     (42) factor -> . ID
-    (78) factor -> . NUMBER
-    (79) factor -> . LPAREN expression RPAREN
+    (79) factor -> . NUMBER
+    (80) factor -> . LPAREN expression RPAREN
 
     ID              shift and go to state 19
     IF              shift and go to state 21
@@ -3972,7 +3983,7 @@ state 156
 
 state 157
 
-    (66) while_statement -> WHILE LPAREN comparison RPAREN LBRACE . statements RBRACE
+    (67) while_statement -> WHILE LPAREN comparison RPAREN LBRACE . statements RBRACE
     (1) statements -> . statements statement
     (2) statements -> . statement
     (9) statement -> . expression SEMICOL
@@ -3992,18 +4003,19 @@ state 157
     (23) statement -> . print_statement
     (24) statement -> . break_statement
     (40) expression -> . ID
-    (71) expression -> . expression PLUS term
-    (72) expression -> . expression MINUS term
-    (73) expression -> . term
+    (72) expression -> . expression PLUS term
+    (73) expression -> . expression MINUS term
+    (74) expression -> . term
     (61) if_statement -> . IF LPAREN comparison RPAREN LBRACE statements RBRACE
     (62) if_statement -> . IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE
     (63) if_statement -> . IF LPAREN bool_comparison RPAREN LBRACE statements RBRACE
     (64) if_statement -> . IF LPAREN comparison RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
     (65) if_statement -> . IF LPAREN bool_comparison RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
-    (66) while_statement -> . WHILE LPAREN comparison RPAREN LBRACE statements RBRACE
-    (67) while_statement -> . WHILE LPAREN TRUE RPAREN LBRACE statements RBRACE
-    (68) while_statement -> . WHILE LPAREN FALSE RPAREN LBRACE statements RBRACE
-    (69) for_statement -> . FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE
+    (66) if_statement -> . IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
+    (67) while_statement -> . WHILE LPAREN comparison RPAREN LBRACE statements RBRACE
+    (68) while_statement -> . WHILE LPAREN TRUE RPAREN LBRACE statements RBRACE
+    (69) while_statement -> . WHILE LPAREN FALSE RPAREN LBRACE statements RBRACE
+    (70) for_statement -> . FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE
     (5) vartype_statement -> . VAR_TYPE LPAREN ID RPAREN SEMICOL
     (37) input_statement -> . INT ID EQUALS INPUT LPAREN INT RPAREN SEMICOL
     (38) input_statement -> . CHAR ID EQUALS INPUT LPAREN CHAR RPAREN SEMICOL
@@ -4043,15 +4055,15 @@ state 157
     (31) var_dec -> . ID MINUS MINUS SEMICOL
     (3) print_statement -> . PRINT LPAREN expression RPAREN SEMICOL
     (4) print_statement -> . PRINT LPAREN STRING RPAREN SEMICOL
-    (70) break_statement -> . BREAK SEMICOL
+    (71) break_statement -> . BREAK SEMICOL
     (41) term -> . ID
-    (74) term -> . term TIMES factor
-    (75) term -> . term DIVIDE factor
-    (76) term -> . term MODULO factor
-    (77) term -> . factor
+    (75) term -> . term TIMES factor
+    (76) term -> . term DIVIDE factor
+    (77) term -> . term MODULO factor
+    (78) term -> . factor
     (42) factor -> . ID
-    (78) factor -> . NUMBER
-    (79) factor -> . LPAREN expression RPAREN
+    (79) factor -> . NUMBER
+    (80) factor -> . LPAREN expression RPAREN
 
     ID              shift and go to state 19
     IF              shift and go to state 21
@@ -4091,7 +4103,7 @@ state 157
 
 state 158
 
-    (67) while_statement -> WHILE LPAREN TRUE RPAREN LBRACE . statements RBRACE
+    (68) while_statement -> WHILE LPAREN TRUE RPAREN LBRACE . statements RBRACE
     (1) statements -> . statements statement
     (2) statements -> . statement
     (9) statement -> . expression SEMICOL
@@ -4111,18 +4123,19 @@ state 158
     (23) statement -> . print_statement
     (24) statement -> . break_statement
     (40) expression -> . ID
-    (71) expression -> . expression PLUS term
-    (72) expression -> . expression MINUS term
-    (73) expression -> . term
+    (72) expression -> . expression PLUS term
+    (73) expression -> . expression MINUS term
+    (74) expression -> . term
     (61) if_statement -> . IF LPAREN comparison RPAREN LBRACE statements RBRACE
     (62) if_statement -> . IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE
     (63) if_statement -> . IF LPAREN bool_comparison RPAREN LBRACE statements RBRACE
     (64) if_statement -> . IF LPAREN comparison RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
     (65) if_statement -> . IF LPAREN bool_comparison RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
-    (66) while_statement -> . WHILE LPAREN comparison RPAREN LBRACE statements RBRACE
-    (67) while_statement -> . WHILE LPAREN TRUE RPAREN LBRACE statements RBRACE
-    (68) while_statement -> . WHILE LPAREN FALSE RPAREN LBRACE statements RBRACE
-    (69) for_statement -> . FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE
+    (66) if_statement -> . IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
+    (67) while_statement -> . WHILE LPAREN comparison RPAREN LBRACE statements RBRACE
+    (68) while_statement -> . WHILE LPAREN TRUE RPAREN LBRACE statements RBRACE
+    (69) while_statement -> . WHILE LPAREN FALSE RPAREN LBRACE statements RBRACE
+    (70) for_statement -> . FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE
     (5) vartype_statement -> . VAR_TYPE LPAREN ID RPAREN SEMICOL
     (37) input_statement -> . INT ID EQUALS INPUT LPAREN INT RPAREN SEMICOL
     (38) input_statement -> . CHAR ID EQUALS INPUT LPAREN CHAR RPAREN SEMICOL
@@ -4162,15 +4175,15 @@ state 158
     (31) var_dec -> . ID MINUS MINUS SEMICOL
     (3) print_statement -> . PRINT LPAREN expression RPAREN SEMICOL
     (4) print_statement -> . PRINT LPAREN STRING RPAREN SEMICOL
-    (70) break_statement -> . BREAK SEMICOL
+    (71) break_statement -> . BREAK SEMICOL
     (41) term -> . ID
-    (74) term -> . term TIMES factor
-    (75) term -> . term DIVIDE factor
-    (76) term -> . term MODULO factor
-    (77) term -> . factor
+    (75) term -> . term TIMES factor
+    (76) term -> . term DIVIDE factor
+    (77) term -> . term MODULO factor
+    (78) term -> . factor
     (42) factor -> . ID
-    (78) factor -> . NUMBER
-    (79) factor -> . LPAREN expression RPAREN
+    (79) factor -> . NUMBER
+    (80) factor -> . LPAREN expression RPAREN
 
     ID              shift and go to state 19
     IF              shift and go to state 21
@@ -4210,7 +4223,7 @@ state 158
 
 state 159
 
-    (68) while_statement -> WHILE LPAREN FALSE RPAREN LBRACE . statements RBRACE
+    (69) while_statement -> WHILE LPAREN FALSE RPAREN LBRACE . statements RBRACE
     (1) statements -> . statements statement
     (2) statements -> . statement
     (9) statement -> . expression SEMICOL
@@ -4230,18 +4243,19 @@ state 159
     (23) statement -> . print_statement
     (24) statement -> . break_statement
     (40) expression -> . ID
-    (71) expression -> . expression PLUS term
-    (72) expression -> . expression MINUS term
-    (73) expression -> . term
+    (72) expression -> . expression PLUS term
+    (73) expression -> . expression MINUS term
+    (74) expression -> . term
     (61) if_statement -> . IF LPAREN comparison RPAREN LBRACE statements RBRACE
     (62) if_statement -> . IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE
     (63) if_statement -> . IF LPAREN bool_comparison RPAREN LBRACE statements RBRACE
     (64) if_statement -> . IF LPAREN comparison RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
     (65) if_statement -> . IF LPAREN bool_comparison RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
-    (66) while_statement -> . WHILE LPAREN comparison RPAREN LBRACE statements RBRACE
-    (67) while_statement -> . WHILE LPAREN TRUE RPAREN LBRACE statements RBRACE
-    (68) while_statement -> . WHILE LPAREN FALSE RPAREN LBRACE statements RBRACE
-    (69) for_statement -> . FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE
+    (66) if_statement -> . IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
+    (67) while_statement -> . WHILE LPAREN comparison RPAREN LBRACE statements RBRACE
+    (68) while_statement -> . WHILE LPAREN TRUE RPAREN LBRACE statements RBRACE
+    (69) while_statement -> . WHILE LPAREN FALSE RPAREN LBRACE statements RBRACE
+    (70) for_statement -> . FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE
     (5) vartype_statement -> . VAR_TYPE LPAREN ID RPAREN SEMICOL
     (37) input_statement -> . INT ID EQUALS INPUT LPAREN INT RPAREN SEMICOL
     (38) input_statement -> . CHAR ID EQUALS INPUT LPAREN CHAR RPAREN SEMICOL
@@ -4281,15 +4295,15 @@ state 159
     (31) var_dec -> . ID MINUS MINUS SEMICOL
     (3) print_statement -> . PRINT LPAREN expression RPAREN SEMICOL
     (4) print_statement -> . PRINT LPAREN STRING RPAREN SEMICOL
-    (70) break_statement -> . BREAK SEMICOL
+    (71) break_statement -> . BREAK SEMICOL
     (41) term -> . ID
-    (74) term -> . term TIMES factor
-    (75) term -> . term DIVIDE factor
-    (76) term -> . term MODULO factor
-    (77) term -> . factor
+    (75) term -> . term TIMES factor
+    (76) term -> . term DIVIDE factor
+    (77) term -> . term MODULO factor
+    (78) term -> . factor
     (42) factor -> . ID
-    (78) factor -> . NUMBER
-    (79) factor -> . LPAREN expression RPAREN
+    (79) factor -> . NUMBER
+    (80) factor -> . LPAREN expression RPAREN
 
     ID              shift and go to state 19
     IF              shift and go to state 21
@@ -4329,7 +4343,7 @@ state 159
 
 state 160
 
-    (69) for_statement -> FOR LPAREN var_statement comparison SEMICOL . var_inc RPAREN LBRACE statements RBRACE
+    (70) for_statement -> FOR LPAREN var_statement comparison SEMICOL . var_inc RPAREN LBRACE statements RBRACE
     (30) var_inc -> . ID PLUS PLUS SEMICOL
 
     ID              shift and go to state 185
@@ -4597,18 +4611,19 @@ state 178
     (23) statement -> . print_statement
     (24) statement -> . break_statement
     (40) expression -> . ID
-    (71) expression -> . expression PLUS term
-    (72) expression -> . expression MINUS term
-    (73) expression -> . term
+    (72) expression -> . expression PLUS term
+    (73) expression -> . expression MINUS term
+    (74) expression -> . term
     (61) if_statement -> . IF LPAREN comparison RPAREN LBRACE statements RBRACE
     (62) if_statement -> . IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE
     (63) if_statement -> . IF LPAREN bool_comparison RPAREN LBRACE statements RBRACE
     (64) if_statement -> . IF LPAREN comparison RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
     (65) if_statement -> . IF LPAREN bool_comparison RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
-    (66) while_statement -> . WHILE LPAREN comparison RPAREN LBRACE statements RBRACE
-    (67) while_statement -> . WHILE LPAREN TRUE RPAREN LBRACE statements RBRACE
-    (68) while_statement -> . WHILE LPAREN FALSE RPAREN LBRACE statements RBRACE
-    (69) for_statement -> . FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE
+    (66) if_statement -> . IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
+    (67) while_statement -> . WHILE LPAREN comparison RPAREN LBRACE statements RBRACE
+    (68) while_statement -> . WHILE LPAREN TRUE RPAREN LBRACE statements RBRACE
+    (69) while_statement -> . WHILE LPAREN FALSE RPAREN LBRACE statements RBRACE
+    (70) for_statement -> . FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE
     (5) vartype_statement -> . VAR_TYPE LPAREN ID RPAREN SEMICOL
     (37) input_statement -> . INT ID EQUALS INPUT LPAREN INT RPAREN SEMICOL
     (38) input_statement -> . CHAR ID EQUALS INPUT LPAREN CHAR RPAREN SEMICOL
@@ -4648,15 +4663,15 @@ state 178
     (31) var_dec -> . ID MINUS MINUS SEMICOL
     (3) print_statement -> . PRINT LPAREN expression RPAREN SEMICOL
     (4) print_statement -> . PRINT LPAREN STRING RPAREN SEMICOL
-    (70) break_statement -> . BREAK SEMICOL
+    (71) break_statement -> . BREAK SEMICOL
     (41) term -> . ID
-    (74) term -> . term TIMES factor
-    (75) term -> . term DIVIDE factor
-    (76) term -> . term MODULO factor
-    (77) term -> . factor
+    (75) term -> . term TIMES factor
+    (76) term -> . term DIVIDE factor
+    (77) term -> . term MODULO factor
+    (78) term -> . factor
     (42) factor -> . ID
-    (78) factor -> . NUMBER
-    (79) factor -> . LPAREN expression RPAREN
+    (79) factor -> . NUMBER
+    (80) factor -> . LPAREN expression RPAREN
 
     RBRACE          shift and go to state 192
     ID              shift and go to state 19
@@ -4697,6 +4712,7 @@ state 178
 state 179
 
     (62) if_statement -> IF LPAREN compare_id_value RPAREN LBRACE statements . RBRACE
+    (66) if_statement -> IF LPAREN compare_id_value RPAREN LBRACE statements . RBRACE ELSE LBRACE statements RBRACE
     (1) statements -> statements . statement
     (9) statement -> . expression SEMICOL
     (10) statement -> . if_statement
@@ -4715,18 +4731,19 @@ state 179
     (23) statement -> . print_statement
     (24) statement -> . break_statement
     (40) expression -> . ID
-    (71) expression -> . expression PLUS term
-    (72) expression -> . expression MINUS term
-    (73) expression -> . term
+    (72) expression -> . expression PLUS term
+    (73) expression -> . expression MINUS term
+    (74) expression -> . term
     (61) if_statement -> . IF LPAREN comparison RPAREN LBRACE statements RBRACE
     (62) if_statement -> . IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE
     (63) if_statement -> . IF LPAREN bool_comparison RPAREN LBRACE statements RBRACE
     (64) if_statement -> . IF LPAREN comparison RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
     (65) if_statement -> . IF LPAREN bool_comparison RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
-    (66) while_statement -> . WHILE LPAREN comparison RPAREN LBRACE statements RBRACE
-    (67) while_statement -> . WHILE LPAREN TRUE RPAREN LBRACE statements RBRACE
-    (68) while_statement -> . WHILE LPAREN FALSE RPAREN LBRACE statements RBRACE
-    (69) for_statement -> . FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE
+    (66) if_statement -> . IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
+    (67) while_statement -> . WHILE LPAREN comparison RPAREN LBRACE statements RBRACE
+    (68) while_statement -> . WHILE LPAREN TRUE RPAREN LBRACE statements RBRACE
+    (69) while_statement -> . WHILE LPAREN FALSE RPAREN LBRACE statements RBRACE
+    (70) for_statement -> . FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE
     (5) vartype_statement -> . VAR_TYPE LPAREN ID RPAREN SEMICOL
     (37) input_statement -> . INT ID EQUALS INPUT LPAREN INT RPAREN SEMICOL
     (38) input_statement -> . CHAR ID EQUALS INPUT LPAREN CHAR RPAREN SEMICOL
@@ -4766,15 +4783,15 @@ state 179
     (31) var_dec -> . ID MINUS MINUS SEMICOL
     (3) print_statement -> . PRINT LPAREN expression RPAREN SEMICOL
     (4) print_statement -> . PRINT LPAREN STRING RPAREN SEMICOL
-    (70) break_statement -> . BREAK SEMICOL
+    (71) break_statement -> . BREAK SEMICOL
     (41) term -> . ID
-    (74) term -> . term TIMES factor
-    (75) term -> . term DIVIDE factor
-    (76) term -> . term MODULO factor
-    (77) term -> . factor
+    (75) term -> . term TIMES factor
+    (76) term -> . term DIVIDE factor
+    (77) term -> . term MODULO factor
+    (78) term -> . factor
     (42) factor -> . ID
-    (78) factor -> . NUMBER
-    (79) factor -> . LPAREN expression RPAREN
+    (79) factor -> . NUMBER
+    (80) factor -> . LPAREN expression RPAREN
 
     RBRACE          shift and go to state 193
     ID              shift and go to state 19
@@ -4834,18 +4851,19 @@ state 180
     (23) statement -> . print_statement
     (24) statement -> . break_statement
     (40) expression -> . ID
-    (71) expression -> . expression PLUS term
-    (72) expression -> . expression MINUS term
-    (73) expression -> . term
+    (72) expression -> . expression PLUS term
+    (73) expression -> . expression MINUS term
+    (74) expression -> . term
     (61) if_statement -> . IF LPAREN comparison RPAREN LBRACE statements RBRACE
     (62) if_statement -> . IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE
     (63) if_statement -> . IF LPAREN bool_comparison RPAREN LBRACE statements RBRACE
     (64) if_statement -> . IF LPAREN comparison RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
     (65) if_statement -> . IF LPAREN bool_comparison RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
-    (66) while_statement -> . WHILE LPAREN comparison RPAREN LBRACE statements RBRACE
-    (67) while_statement -> . WHILE LPAREN TRUE RPAREN LBRACE statements RBRACE
-    (68) while_statement -> . WHILE LPAREN FALSE RPAREN LBRACE statements RBRACE
-    (69) for_statement -> . FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE
+    (66) if_statement -> . IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
+    (67) while_statement -> . WHILE LPAREN comparison RPAREN LBRACE statements RBRACE
+    (68) while_statement -> . WHILE LPAREN TRUE RPAREN LBRACE statements RBRACE
+    (69) while_statement -> . WHILE LPAREN FALSE RPAREN LBRACE statements RBRACE
+    (70) for_statement -> . FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE
     (5) vartype_statement -> . VAR_TYPE LPAREN ID RPAREN SEMICOL
     (37) input_statement -> . INT ID EQUALS INPUT LPAREN INT RPAREN SEMICOL
     (38) input_statement -> . CHAR ID EQUALS INPUT LPAREN CHAR RPAREN SEMICOL
@@ -4885,15 +4903,15 @@ state 180
     (31) var_dec -> . ID MINUS MINUS SEMICOL
     (3) print_statement -> . PRINT LPAREN expression RPAREN SEMICOL
     (4) print_statement -> . PRINT LPAREN STRING RPAREN SEMICOL
-    (70) break_statement -> . BREAK SEMICOL
+    (71) break_statement -> . BREAK SEMICOL
     (41) term -> . ID
-    (74) term -> . term TIMES factor
-    (75) term -> . term DIVIDE factor
-    (76) term -> . term MODULO factor
-    (77) term -> . factor
+    (75) term -> . term TIMES factor
+    (76) term -> . term DIVIDE factor
+    (77) term -> . term MODULO factor
+    (78) term -> . factor
     (42) factor -> . ID
-    (78) factor -> . NUMBER
-    (79) factor -> . LPAREN expression RPAREN
+    (79) factor -> . NUMBER
+    (80) factor -> . LPAREN expression RPAREN
 
     RBRACE          shift and go to state 194
     ID              shift and go to state 19
@@ -4933,7 +4951,7 @@ state 180
 
 state 181
 
-    (66) while_statement -> WHILE LPAREN comparison RPAREN LBRACE statements . RBRACE
+    (67) while_statement -> WHILE LPAREN comparison RPAREN LBRACE statements . RBRACE
     (1) statements -> statements . statement
     (9) statement -> . expression SEMICOL
     (10) statement -> . if_statement
@@ -4952,18 +4970,19 @@ state 181
     (23) statement -> . print_statement
     (24) statement -> . break_statement
     (40) expression -> . ID
-    (71) expression -> . expression PLUS term
-    (72) expression -> . expression MINUS term
-    (73) expression -> . term
+    (72) expression -> . expression PLUS term
+    (73) expression -> . expression MINUS term
+    (74) expression -> . term
     (61) if_statement -> . IF LPAREN comparison RPAREN LBRACE statements RBRACE
     (62) if_statement -> . IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE
     (63) if_statement -> . IF LPAREN bool_comparison RPAREN LBRACE statements RBRACE
     (64) if_statement -> . IF LPAREN comparison RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
     (65) if_statement -> . IF LPAREN bool_comparison RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
-    (66) while_statement -> . WHILE LPAREN comparison RPAREN LBRACE statements RBRACE
-    (67) while_statement -> . WHILE LPAREN TRUE RPAREN LBRACE statements RBRACE
-    (68) while_statement -> . WHILE LPAREN FALSE RPAREN LBRACE statements RBRACE
-    (69) for_statement -> . FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE
+    (66) if_statement -> . IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
+    (67) while_statement -> . WHILE LPAREN comparison RPAREN LBRACE statements RBRACE
+    (68) while_statement -> . WHILE LPAREN TRUE RPAREN LBRACE statements RBRACE
+    (69) while_statement -> . WHILE LPAREN FALSE RPAREN LBRACE statements RBRACE
+    (70) for_statement -> . FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE
     (5) vartype_statement -> . VAR_TYPE LPAREN ID RPAREN SEMICOL
     (37) input_statement -> . INT ID EQUALS INPUT LPAREN INT RPAREN SEMICOL
     (38) input_statement -> . CHAR ID EQUALS INPUT LPAREN CHAR RPAREN SEMICOL
@@ -5003,15 +5022,15 @@ state 181
     (31) var_dec -> . ID MINUS MINUS SEMICOL
     (3) print_statement -> . PRINT LPAREN expression RPAREN SEMICOL
     (4) print_statement -> . PRINT LPAREN STRING RPAREN SEMICOL
-    (70) break_statement -> . BREAK SEMICOL
+    (71) break_statement -> . BREAK SEMICOL
     (41) term -> . ID
-    (74) term -> . term TIMES factor
-    (75) term -> . term DIVIDE factor
-    (76) term -> . term MODULO factor
-    (77) term -> . factor
+    (75) term -> . term TIMES factor
+    (76) term -> . term DIVIDE factor
+    (77) term -> . term MODULO factor
+    (78) term -> . factor
     (42) factor -> . ID
-    (78) factor -> . NUMBER
-    (79) factor -> . LPAREN expression RPAREN
+    (79) factor -> . NUMBER
+    (80) factor -> . LPAREN expression RPAREN
 
     RBRACE          shift and go to state 195
     ID              shift and go to state 19
@@ -5051,7 +5070,7 @@ state 181
 
 state 182
 
-    (67) while_statement -> WHILE LPAREN TRUE RPAREN LBRACE statements . RBRACE
+    (68) while_statement -> WHILE LPAREN TRUE RPAREN LBRACE statements . RBRACE
     (1) statements -> statements . statement
     (9) statement -> . expression SEMICOL
     (10) statement -> . if_statement
@@ -5070,18 +5089,19 @@ state 182
     (23) statement -> . print_statement
     (24) statement -> . break_statement
     (40) expression -> . ID
-    (71) expression -> . expression PLUS term
-    (72) expression -> . expression MINUS term
-    (73) expression -> . term
+    (72) expression -> . expression PLUS term
+    (73) expression -> . expression MINUS term
+    (74) expression -> . term
     (61) if_statement -> . IF LPAREN comparison RPAREN LBRACE statements RBRACE
     (62) if_statement -> . IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE
     (63) if_statement -> . IF LPAREN bool_comparison RPAREN LBRACE statements RBRACE
     (64) if_statement -> . IF LPAREN comparison RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
     (65) if_statement -> . IF LPAREN bool_comparison RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
-    (66) while_statement -> . WHILE LPAREN comparison RPAREN LBRACE statements RBRACE
-    (67) while_statement -> . WHILE LPAREN TRUE RPAREN LBRACE statements RBRACE
-    (68) while_statement -> . WHILE LPAREN FALSE RPAREN LBRACE statements RBRACE
-    (69) for_statement -> . FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE
+    (66) if_statement -> . IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
+    (67) while_statement -> . WHILE LPAREN comparison RPAREN LBRACE statements RBRACE
+    (68) while_statement -> . WHILE LPAREN TRUE RPAREN LBRACE statements RBRACE
+    (69) while_statement -> . WHILE LPAREN FALSE RPAREN LBRACE statements RBRACE
+    (70) for_statement -> . FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE
     (5) vartype_statement -> . VAR_TYPE LPAREN ID RPAREN SEMICOL
     (37) input_statement -> . INT ID EQUALS INPUT LPAREN INT RPAREN SEMICOL
     (38) input_statement -> . CHAR ID EQUALS INPUT LPAREN CHAR RPAREN SEMICOL
@@ -5121,15 +5141,15 @@ state 182
     (31) var_dec -> . ID MINUS MINUS SEMICOL
     (3) print_statement -> . PRINT LPAREN expression RPAREN SEMICOL
     (4) print_statement -> . PRINT LPAREN STRING RPAREN SEMICOL
-    (70) break_statement -> . BREAK SEMICOL
+    (71) break_statement -> . BREAK SEMICOL
     (41) term -> . ID
-    (74) term -> . term TIMES factor
-    (75) term -> . term DIVIDE factor
-    (76) term -> . term MODULO factor
-    (77) term -> . factor
+    (75) term -> . term TIMES factor
+    (76) term -> . term DIVIDE factor
+    (77) term -> . term MODULO factor
+    (78) term -> . factor
     (42) factor -> . ID
-    (78) factor -> . NUMBER
-    (79) factor -> . LPAREN expression RPAREN
+    (79) factor -> . NUMBER
+    (80) factor -> . LPAREN expression RPAREN
 
     RBRACE          shift and go to state 196
     ID              shift and go to state 19
@@ -5169,7 +5189,7 @@ state 182
 
 state 183
 
-    (68) while_statement -> WHILE LPAREN FALSE RPAREN LBRACE statements . RBRACE
+    (69) while_statement -> WHILE LPAREN FALSE RPAREN LBRACE statements . RBRACE
     (1) statements -> statements . statement
     (9) statement -> . expression SEMICOL
     (10) statement -> . if_statement
@@ -5188,18 +5208,19 @@ state 183
     (23) statement -> . print_statement
     (24) statement -> . break_statement
     (40) expression -> . ID
-    (71) expression -> . expression PLUS term
-    (72) expression -> . expression MINUS term
-    (73) expression -> . term
+    (72) expression -> . expression PLUS term
+    (73) expression -> . expression MINUS term
+    (74) expression -> . term
     (61) if_statement -> . IF LPAREN comparison RPAREN LBRACE statements RBRACE
     (62) if_statement -> . IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE
     (63) if_statement -> . IF LPAREN bool_comparison RPAREN LBRACE statements RBRACE
     (64) if_statement -> . IF LPAREN comparison RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
     (65) if_statement -> . IF LPAREN bool_comparison RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
-    (66) while_statement -> . WHILE LPAREN comparison RPAREN LBRACE statements RBRACE
-    (67) while_statement -> . WHILE LPAREN TRUE RPAREN LBRACE statements RBRACE
-    (68) while_statement -> . WHILE LPAREN FALSE RPAREN LBRACE statements RBRACE
-    (69) for_statement -> . FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE
+    (66) if_statement -> . IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
+    (67) while_statement -> . WHILE LPAREN comparison RPAREN LBRACE statements RBRACE
+    (68) while_statement -> . WHILE LPAREN TRUE RPAREN LBRACE statements RBRACE
+    (69) while_statement -> . WHILE LPAREN FALSE RPAREN LBRACE statements RBRACE
+    (70) for_statement -> . FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE
     (5) vartype_statement -> . VAR_TYPE LPAREN ID RPAREN SEMICOL
     (37) input_statement -> . INT ID EQUALS INPUT LPAREN INT RPAREN SEMICOL
     (38) input_statement -> . CHAR ID EQUALS INPUT LPAREN CHAR RPAREN SEMICOL
@@ -5239,15 +5260,15 @@ state 183
     (31) var_dec -> . ID MINUS MINUS SEMICOL
     (3) print_statement -> . PRINT LPAREN expression RPAREN SEMICOL
     (4) print_statement -> . PRINT LPAREN STRING RPAREN SEMICOL
-    (70) break_statement -> . BREAK SEMICOL
+    (71) break_statement -> . BREAK SEMICOL
     (41) term -> . ID
-    (74) term -> . term TIMES factor
-    (75) term -> . term DIVIDE factor
-    (76) term -> . term MODULO factor
-    (77) term -> . factor
+    (75) term -> . term TIMES factor
+    (76) term -> . term DIVIDE factor
+    (77) term -> . term MODULO factor
+    (78) term -> . factor
     (42) factor -> . ID
-    (78) factor -> . NUMBER
-    (79) factor -> . LPAREN expression RPAREN
+    (79) factor -> . NUMBER
+    (80) factor -> . LPAREN expression RPAREN
 
     RBRACE          shift and go to state 197
     ID              shift and go to state 19
@@ -5287,7 +5308,7 @@ state 183
 
 state 184
 
-    (69) for_statement -> FOR LPAREN var_statement comparison SEMICOL var_inc . RPAREN LBRACE statements RBRACE
+    (70) for_statement -> FOR LPAREN var_statement comparison SEMICOL var_inc . RPAREN LBRACE statements RBRACE
 
     RPAREN          shift and go to state 198
 
@@ -5368,6 +5389,7 @@ state 192
 state 193
 
     (62) if_statement -> IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE .
+    (66) if_statement -> IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE . ELSE LBRACE statements RBRACE
 
     ID              reduce using rule 62 (if_statement -> IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE .)
     IF              reduce using rule 62 (if_statement -> IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE .)
@@ -5385,6 +5407,7 @@ state 193
     LPAREN          reduce using rule 62 (if_statement -> IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE .)
     $end            reduce using rule 62 (if_statement -> IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE .)
     RBRACE          reduce using rule 62 (if_statement -> IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE .)
+    ELSE            shift and go to state 206
 
 
 state 194
@@ -5408,101 +5431,101 @@ state 194
     LPAREN          reduce using rule 63 (if_statement -> IF LPAREN bool_comparison RPAREN LBRACE statements RBRACE .)
     $end            reduce using rule 63 (if_statement -> IF LPAREN bool_comparison RPAREN LBRACE statements RBRACE .)
     RBRACE          reduce using rule 63 (if_statement -> IF LPAREN bool_comparison RPAREN LBRACE statements RBRACE .)
-    ELSE            shift and go to state 206
+    ELSE            shift and go to state 207
 
 
 state 195
 
-    (66) while_statement -> WHILE LPAREN comparison RPAREN LBRACE statements RBRACE .
+    (67) while_statement -> WHILE LPAREN comparison RPAREN LBRACE statements RBRACE .
 
-    ID              reduce using rule 66 (while_statement -> WHILE LPAREN comparison RPAREN LBRACE statements RBRACE .)
-    IF              reduce using rule 66 (while_statement -> WHILE LPAREN comparison RPAREN LBRACE statements RBRACE .)
-    WHILE           reduce using rule 66 (while_statement -> WHILE LPAREN comparison RPAREN LBRACE statements RBRACE .)
-    FOR             reduce using rule 66 (while_statement -> WHILE LPAREN comparison RPAREN LBRACE statements RBRACE .)
-    VAR_TYPE        reduce using rule 66 (while_statement -> WHILE LPAREN comparison RPAREN LBRACE statements RBRACE .)
-    INT             reduce using rule 66 (while_statement -> WHILE LPAREN comparison RPAREN LBRACE statements RBRACE .)
-    CHAR            reduce using rule 66 (while_statement -> WHILE LPAREN comparison RPAREN LBRACE statements RBRACE .)
-    FLOATTYPE       reduce using rule 66 (while_statement -> WHILE LPAREN comparison RPAREN LBRACE statements RBRACE .)
-    UNION           reduce using rule 66 (while_statement -> WHILE LPAREN comparison RPAREN LBRACE statements RBRACE .)
-    BOOL            reduce using rule 66 (while_statement -> WHILE LPAREN comparison RPAREN LBRACE statements RBRACE .)
-    PRINT           reduce using rule 66 (while_statement -> WHILE LPAREN comparison RPAREN LBRACE statements RBRACE .)
-    BREAK           reduce using rule 66 (while_statement -> WHILE LPAREN comparison RPAREN LBRACE statements RBRACE .)
-    NUMBER          reduce using rule 66 (while_statement -> WHILE LPAREN comparison RPAREN LBRACE statements RBRACE .)
-    LPAREN          reduce using rule 66 (while_statement -> WHILE LPAREN comparison RPAREN LBRACE statements RBRACE .)
-    $end            reduce using rule 66 (while_statement -> WHILE LPAREN comparison RPAREN LBRACE statements RBRACE .)
-    RBRACE          reduce using rule 66 (while_statement -> WHILE LPAREN comparison RPAREN LBRACE statements RBRACE .)
+    ID              reduce using rule 67 (while_statement -> WHILE LPAREN comparison RPAREN LBRACE statements RBRACE .)
+    IF              reduce using rule 67 (while_statement -> WHILE LPAREN comparison RPAREN LBRACE statements RBRACE .)
+    WHILE           reduce using rule 67 (while_statement -> WHILE LPAREN comparison RPAREN LBRACE statements RBRACE .)
+    FOR             reduce using rule 67 (while_statement -> WHILE LPAREN comparison RPAREN LBRACE statements RBRACE .)
+    VAR_TYPE        reduce using rule 67 (while_statement -> WHILE LPAREN comparison RPAREN LBRACE statements RBRACE .)
+    INT             reduce using rule 67 (while_statement -> WHILE LPAREN comparison RPAREN LBRACE statements RBRACE .)
+    CHAR            reduce using rule 67 (while_statement -> WHILE LPAREN comparison RPAREN LBRACE statements RBRACE .)
+    FLOATTYPE       reduce using rule 67 (while_statement -> WHILE LPAREN comparison RPAREN LBRACE statements RBRACE .)
+    UNION           reduce using rule 67 (while_statement -> WHILE LPAREN comparison RPAREN LBRACE statements RBRACE .)
+    BOOL            reduce using rule 67 (while_statement -> WHILE LPAREN comparison RPAREN LBRACE statements RBRACE .)
+    PRINT           reduce using rule 67 (while_statement -> WHILE LPAREN comparison RPAREN LBRACE statements RBRACE .)
+    BREAK           reduce using rule 67 (while_statement -> WHILE LPAREN comparison RPAREN LBRACE statements RBRACE .)
+    NUMBER          reduce using rule 67 (while_statement -> WHILE LPAREN comparison RPAREN LBRACE statements RBRACE .)
+    LPAREN          reduce using rule 67 (while_statement -> WHILE LPAREN comparison RPAREN LBRACE statements RBRACE .)
+    $end            reduce using rule 67 (while_statement -> WHILE LPAREN comparison RPAREN LBRACE statements RBRACE .)
+    RBRACE          reduce using rule 67 (while_statement -> WHILE LPAREN comparison RPAREN LBRACE statements RBRACE .)
 
 
 state 196
 
-    (67) while_statement -> WHILE LPAREN TRUE RPAREN LBRACE statements RBRACE .
+    (68) while_statement -> WHILE LPAREN TRUE RPAREN LBRACE statements RBRACE .
 
-    ID              reduce using rule 67 (while_statement -> WHILE LPAREN TRUE RPAREN LBRACE statements RBRACE .)
-    IF              reduce using rule 67 (while_statement -> WHILE LPAREN TRUE RPAREN LBRACE statements RBRACE .)
-    WHILE           reduce using rule 67 (while_statement -> WHILE LPAREN TRUE RPAREN LBRACE statements RBRACE .)
-    FOR             reduce using rule 67 (while_statement -> WHILE LPAREN TRUE RPAREN LBRACE statements RBRACE .)
-    VAR_TYPE        reduce using rule 67 (while_statement -> WHILE LPAREN TRUE RPAREN LBRACE statements RBRACE .)
-    INT             reduce using rule 67 (while_statement -> WHILE LPAREN TRUE RPAREN LBRACE statements RBRACE .)
-    CHAR            reduce using rule 67 (while_statement -> WHILE LPAREN TRUE RPAREN LBRACE statements RBRACE .)
-    FLOATTYPE       reduce using rule 67 (while_statement -> WHILE LPAREN TRUE RPAREN LBRACE statements RBRACE .)
-    UNION           reduce using rule 67 (while_statement -> WHILE LPAREN TRUE RPAREN LBRACE statements RBRACE .)
-    BOOL            reduce using rule 67 (while_statement -> WHILE LPAREN TRUE RPAREN LBRACE statements RBRACE .)
-    PRINT           reduce using rule 67 (while_statement -> WHILE LPAREN TRUE RPAREN LBRACE statements RBRACE .)
-    BREAK           reduce using rule 67 (while_statement -> WHILE LPAREN TRUE RPAREN LBRACE statements RBRACE .)
-    NUMBER          reduce using rule 67 (while_statement -> WHILE LPAREN TRUE RPAREN LBRACE statements RBRACE .)
-    LPAREN          reduce using rule 67 (while_statement -> WHILE LPAREN TRUE RPAREN LBRACE statements RBRACE .)
-    $end            reduce using rule 67 (while_statement -> WHILE LPAREN TRUE RPAREN LBRACE statements RBRACE .)
-    RBRACE          reduce using rule 67 (while_statement -> WHILE LPAREN TRUE RPAREN LBRACE statements RBRACE .)
+    ID              reduce using rule 68 (while_statement -> WHILE LPAREN TRUE RPAREN LBRACE statements RBRACE .)
+    IF              reduce using rule 68 (while_statement -> WHILE LPAREN TRUE RPAREN LBRACE statements RBRACE .)
+    WHILE           reduce using rule 68 (while_statement -> WHILE LPAREN TRUE RPAREN LBRACE statements RBRACE .)
+    FOR             reduce using rule 68 (while_statement -> WHILE LPAREN TRUE RPAREN LBRACE statements RBRACE .)
+    VAR_TYPE        reduce using rule 68 (while_statement -> WHILE LPAREN TRUE RPAREN LBRACE statements RBRACE .)
+    INT             reduce using rule 68 (while_statement -> WHILE LPAREN TRUE RPAREN LBRACE statements RBRACE .)
+    CHAR            reduce using rule 68 (while_statement -> WHILE LPAREN TRUE RPAREN LBRACE statements RBRACE .)
+    FLOATTYPE       reduce using rule 68 (while_statement -> WHILE LPAREN TRUE RPAREN LBRACE statements RBRACE .)
+    UNION           reduce using rule 68 (while_statement -> WHILE LPAREN TRUE RPAREN LBRACE statements RBRACE .)
+    BOOL            reduce using rule 68 (while_statement -> WHILE LPAREN TRUE RPAREN LBRACE statements RBRACE .)
+    PRINT           reduce using rule 68 (while_statement -> WHILE LPAREN TRUE RPAREN LBRACE statements RBRACE .)
+    BREAK           reduce using rule 68 (while_statement -> WHILE LPAREN TRUE RPAREN LBRACE statements RBRACE .)
+    NUMBER          reduce using rule 68 (while_statement -> WHILE LPAREN TRUE RPAREN LBRACE statements RBRACE .)
+    LPAREN          reduce using rule 68 (while_statement -> WHILE LPAREN TRUE RPAREN LBRACE statements RBRACE .)
+    $end            reduce using rule 68 (while_statement -> WHILE LPAREN TRUE RPAREN LBRACE statements RBRACE .)
+    RBRACE          reduce using rule 68 (while_statement -> WHILE LPAREN TRUE RPAREN LBRACE statements RBRACE .)
 
 
 state 197
 
-    (68) while_statement -> WHILE LPAREN FALSE RPAREN LBRACE statements RBRACE .
+    (69) while_statement -> WHILE LPAREN FALSE RPAREN LBRACE statements RBRACE .
 
-    ID              reduce using rule 68 (while_statement -> WHILE LPAREN FALSE RPAREN LBRACE statements RBRACE .)
-    IF              reduce using rule 68 (while_statement -> WHILE LPAREN FALSE RPAREN LBRACE statements RBRACE .)
-    WHILE           reduce using rule 68 (while_statement -> WHILE LPAREN FALSE RPAREN LBRACE statements RBRACE .)
-    FOR             reduce using rule 68 (while_statement -> WHILE LPAREN FALSE RPAREN LBRACE statements RBRACE .)
-    VAR_TYPE        reduce using rule 68 (while_statement -> WHILE LPAREN FALSE RPAREN LBRACE statements RBRACE .)
-    INT             reduce using rule 68 (while_statement -> WHILE LPAREN FALSE RPAREN LBRACE statements RBRACE .)
-    CHAR            reduce using rule 68 (while_statement -> WHILE LPAREN FALSE RPAREN LBRACE statements RBRACE .)
-    FLOATTYPE       reduce using rule 68 (while_statement -> WHILE LPAREN FALSE RPAREN LBRACE statements RBRACE .)
-    UNION           reduce using rule 68 (while_statement -> WHILE LPAREN FALSE RPAREN LBRACE statements RBRACE .)
-    BOOL            reduce using rule 68 (while_statement -> WHILE LPAREN FALSE RPAREN LBRACE statements RBRACE .)
-    PRINT           reduce using rule 68 (while_statement -> WHILE LPAREN FALSE RPAREN LBRACE statements RBRACE .)
-    BREAK           reduce using rule 68 (while_statement -> WHILE LPAREN FALSE RPAREN LBRACE statements RBRACE .)
-    NUMBER          reduce using rule 68 (while_statement -> WHILE LPAREN FALSE RPAREN LBRACE statements RBRACE .)
-    LPAREN          reduce using rule 68 (while_statement -> WHILE LPAREN FALSE RPAREN LBRACE statements RBRACE .)
-    $end            reduce using rule 68 (while_statement -> WHILE LPAREN FALSE RPAREN LBRACE statements RBRACE .)
-    RBRACE          reduce using rule 68 (while_statement -> WHILE LPAREN FALSE RPAREN LBRACE statements RBRACE .)
+    ID              reduce using rule 69 (while_statement -> WHILE LPAREN FALSE RPAREN LBRACE statements RBRACE .)
+    IF              reduce using rule 69 (while_statement -> WHILE LPAREN FALSE RPAREN LBRACE statements RBRACE .)
+    WHILE           reduce using rule 69 (while_statement -> WHILE LPAREN FALSE RPAREN LBRACE statements RBRACE .)
+    FOR             reduce using rule 69 (while_statement -> WHILE LPAREN FALSE RPAREN LBRACE statements RBRACE .)
+    VAR_TYPE        reduce using rule 69 (while_statement -> WHILE LPAREN FALSE RPAREN LBRACE statements RBRACE .)
+    INT             reduce using rule 69 (while_statement -> WHILE LPAREN FALSE RPAREN LBRACE statements RBRACE .)
+    CHAR            reduce using rule 69 (while_statement -> WHILE LPAREN FALSE RPAREN LBRACE statements RBRACE .)
+    FLOATTYPE       reduce using rule 69 (while_statement -> WHILE LPAREN FALSE RPAREN LBRACE statements RBRACE .)
+    UNION           reduce using rule 69 (while_statement -> WHILE LPAREN FALSE RPAREN LBRACE statements RBRACE .)
+    BOOL            reduce using rule 69 (while_statement -> WHILE LPAREN FALSE RPAREN LBRACE statements RBRACE .)
+    PRINT           reduce using rule 69 (while_statement -> WHILE LPAREN FALSE RPAREN LBRACE statements RBRACE .)
+    BREAK           reduce using rule 69 (while_statement -> WHILE LPAREN FALSE RPAREN LBRACE statements RBRACE .)
+    NUMBER          reduce using rule 69 (while_statement -> WHILE LPAREN FALSE RPAREN LBRACE statements RBRACE .)
+    LPAREN          reduce using rule 69 (while_statement -> WHILE LPAREN FALSE RPAREN LBRACE statements RBRACE .)
+    $end            reduce using rule 69 (while_statement -> WHILE LPAREN FALSE RPAREN LBRACE statements RBRACE .)
+    RBRACE          reduce using rule 69 (while_statement -> WHILE LPAREN FALSE RPAREN LBRACE statements RBRACE .)
 
 
 state 198
 
-    (69) for_statement -> FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN . LBRACE statements RBRACE
+    (70) for_statement -> FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN . LBRACE statements RBRACE
 
-    LBRACE          shift and go to state 207
+    LBRACE          shift and go to state 208
 
 
 state 199
 
     (37) input_statement -> INT ID EQUALS INPUT LPAREN INT RPAREN . SEMICOL
 
-    SEMICOL         shift and go to state 208
+    SEMICOL         shift and go to state 209
 
 
 state 200
 
     (38) input_statement -> CHAR ID EQUALS INPUT LPAREN CHAR RPAREN . SEMICOL
 
-    SEMICOL         shift and go to state 209
+    SEMICOL         shift and go to state 210
 
 
 state 201
 
     (39) input_statement -> FLOATTYPE ID EQUALS INPUT LPAREN FLOATTYPE RPAREN . SEMICOL
 
-    SEMICOL         shift and go to state 210
+    SEMICOL         shift and go to state 211
 
 
 state 202
@@ -5575,19 +5598,26 @@ state 205
 
     (64) if_statement -> IF LPAREN comparison RPAREN LBRACE statements RBRACE ELSE . LBRACE statements RBRACE
 
-    LBRACE          shift and go to state 211
+    LBRACE          shift and go to state 212
 
 
 state 206
 
-    (65) if_statement -> IF LPAREN bool_comparison RPAREN LBRACE statements RBRACE ELSE . LBRACE statements RBRACE
+    (66) if_statement -> IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE ELSE . LBRACE statements RBRACE
 
-    LBRACE          shift and go to state 212
+    LBRACE          shift and go to state 213
 
 
 state 207
 
-    (69) for_statement -> FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE . statements RBRACE
+    (65) if_statement -> IF LPAREN bool_comparison RPAREN LBRACE statements RBRACE ELSE . LBRACE statements RBRACE
+
+    LBRACE          shift and go to state 214
+
+
+state 208
+
+    (70) for_statement -> FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE . statements RBRACE
     (1) statements -> . statements statement
     (2) statements -> . statement
     (9) statement -> . expression SEMICOL
@@ -5607,18 +5637,19 @@ state 207
     (23) statement -> . print_statement
     (24) statement -> . break_statement
     (40) expression -> . ID
-    (71) expression -> . expression PLUS term
-    (72) expression -> . expression MINUS term
-    (73) expression -> . term
+    (72) expression -> . expression PLUS term
+    (73) expression -> . expression MINUS term
+    (74) expression -> . term
     (61) if_statement -> . IF LPAREN comparison RPAREN LBRACE statements RBRACE
     (62) if_statement -> . IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE
     (63) if_statement -> . IF LPAREN bool_comparison RPAREN LBRACE statements RBRACE
     (64) if_statement -> . IF LPAREN comparison RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
     (65) if_statement -> . IF LPAREN bool_comparison RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
-    (66) while_statement -> . WHILE LPAREN comparison RPAREN LBRACE statements RBRACE
-    (67) while_statement -> . WHILE LPAREN TRUE RPAREN LBRACE statements RBRACE
-    (68) while_statement -> . WHILE LPAREN FALSE RPAREN LBRACE statements RBRACE
-    (69) for_statement -> . FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE
+    (66) if_statement -> . IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
+    (67) while_statement -> . WHILE LPAREN comparison RPAREN LBRACE statements RBRACE
+    (68) while_statement -> . WHILE LPAREN TRUE RPAREN LBRACE statements RBRACE
+    (69) while_statement -> . WHILE LPAREN FALSE RPAREN LBRACE statements RBRACE
+    (70) for_statement -> . FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE
     (5) vartype_statement -> . VAR_TYPE LPAREN ID RPAREN SEMICOL
     (37) input_statement -> . INT ID EQUALS INPUT LPAREN INT RPAREN SEMICOL
     (38) input_statement -> . CHAR ID EQUALS INPUT LPAREN CHAR RPAREN SEMICOL
@@ -5658,15 +5689,15 @@ state 207
     (31) var_dec -> . ID MINUS MINUS SEMICOL
     (3) print_statement -> . PRINT LPAREN expression RPAREN SEMICOL
     (4) print_statement -> . PRINT LPAREN STRING RPAREN SEMICOL
-    (70) break_statement -> . BREAK SEMICOL
+    (71) break_statement -> . BREAK SEMICOL
     (41) term -> . ID
-    (74) term -> . term TIMES factor
-    (75) term -> . term DIVIDE factor
-    (76) term -> . term MODULO factor
-    (77) term -> . factor
+    (75) term -> . term TIMES factor
+    (76) term -> . term DIVIDE factor
+    (77) term -> . term MODULO factor
+    (78) term -> . factor
     (42) factor -> . ID
-    (78) factor -> . NUMBER
-    (79) factor -> . LPAREN expression RPAREN
+    (79) factor -> . NUMBER
+    (80) factor -> . LPAREN expression RPAREN
 
     ID              shift and go to state 19
     IF              shift and go to state 21
@@ -5686,7 +5717,7 @@ state 207
     var_statement                  shift and go to state 13
     comparison                     shift and go to state 10
     var_inc                        shift and go to state 15
-    statements                     shift and go to state 213
+    statements                     shift and go to state 215
     statement                      shift and go to state 2
     expression                     shift and go to state 3
     if_statement                   shift and go to state 4
@@ -5704,7 +5735,7 @@ state 207
     term                           shift and go to state 20
     factor                         shift and go to state 34
 
-state 208
+state 209
 
     (37) input_statement -> INT ID EQUALS INPUT LPAREN INT RPAREN SEMICOL .
 
@@ -5726,7 +5757,7 @@ state 208
     RBRACE          reduce using rule 37 (input_statement -> INT ID EQUALS INPUT LPAREN INT RPAREN SEMICOL .)
 
 
-state 209
+state 210
 
     (38) input_statement -> CHAR ID EQUALS INPUT LPAREN CHAR RPAREN SEMICOL .
 
@@ -5748,7 +5779,7 @@ state 209
     RBRACE          reduce using rule 38 (input_statement -> CHAR ID EQUALS INPUT LPAREN CHAR RPAREN SEMICOL .)
 
 
-state 210
+state 211
 
     (39) input_statement -> FLOATTYPE ID EQUALS INPUT LPAREN FLOATTYPE RPAREN SEMICOL .
 
@@ -5770,7 +5801,7 @@ state 210
     RBRACE          reduce using rule 39 (input_statement -> FLOATTYPE ID EQUALS INPUT LPAREN FLOATTYPE RPAREN SEMICOL .)
 
 
-state 211
+state 212
 
     (64) if_statement -> IF LPAREN comparison RPAREN LBRACE statements RBRACE ELSE LBRACE . statements RBRACE
     (1) statements -> . statements statement
@@ -5792,18 +5823,19 @@ state 211
     (23) statement -> . print_statement
     (24) statement -> . break_statement
     (40) expression -> . ID
-    (71) expression -> . expression PLUS term
-    (72) expression -> . expression MINUS term
-    (73) expression -> . term
+    (72) expression -> . expression PLUS term
+    (73) expression -> . expression MINUS term
+    (74) expression -> . term
     (61) if_statement -> . IF LPAREN comparison RPAREN LBRACE statements RBRACE
     (62) if_statement -> . IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE
     (63) if_statement -> . IF LPAREN bool_comparison RPAREN LBRACE statements RBRACE
     (64) if_statement -> . IF LPAREN comparison RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
     (65) if_statement -> . IF LPAREN bool_comparison RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
-    (66) while_statement -> . WHILE LPAREN comparison RPAREN LBRACE statements RBRACE
-    (67) while_statement -> . WHILE LPAREN TRUE RPAREN LBRACE statements RBRACE
-    (68) while_statement -> . WHILE LPAREN FALSE RPAREN LBRACE statements RBRACE
-    (69) for_statement -> . FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE
+    (66) if_statement -> . IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
+    (67) while_statement -> . WHILE LPAREN comparison RPAREN LBRACE statements RBRACE
+    (68) while_statement -> . WHILE LPAREN TRUE RPAREN LBRACE statements RBRACE
+    (69) while_statement -> . WHILE LPAREN FALSE RPAREN LBRACE statements RBRACE
+    (70) for_statement -> . FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE
     (5) vartype_statement -> . VAR_TYPE LPAREN ID RPAREN SEMICOL
     (37) input_statement -> . INT ID EQUALS INPUT LPAREN INT RPAREN SEMICOL
     (38) input_statement -> . CHAR ID EQUALS INPUT LPAREN CHAR RPAREN SEMICOL
@@ -5843,15 +5875,15 @@ state 211
     (31) var_dec -> . ID MINUS MINUS SEMICOL
     (3) print_statement -> . PRINT LPAREN expression RPAREN SEMICOL
     (4) print_statement -> . PRINT LPAREN STRING RPAREN SEMICOL
-    (70) break_statement -> . BREAK SEMICOL
+    (71) break_statement -> . BREAK SEMICOL
     (41) term -> . ID
-    (74) term -> . term TIMES factor
-    (75) term -> . term DIVIDE factor
-    (76) term -> . term MODULO factor
-    (77) term -> . factor
+    (75) term -> . term TIMES factor
+    (76) term -> . term DIVIDE factor
+    (77) term -> . term MODULO factor
+    (78) term -> . factor
     (42) factor -> . ID
-    (78) factor -> . NUMBER
-    (79) factor -> . LPAREN expression RPAREN
+    (79) factor -> . NUMBER
+    (80) factor -> . LPAREN expression RPAREN
 
     ID              shift and go to state 19
     IF              shift and go to state 21
@@ -5869,7 +5901,7 @@ state 211
     LPAREN          shift and go to state 22
 
     comparison                     shift and go to state 10
-    statements                     shift and go to state 214
+    statements                     shift and go to state 216
     statement                      shift and go to state 2
     expression                     shift and go to state 3
     if_statement                   shift and go to state 4
@@ -5889,7 +5921,127 @@ state 211
     term                           shift and go to state 20
     factor                         shift and go to state 34
 
-state 212
+state 213
+
+    (66) if_statement -> IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE ELSE LBRACE . statements RBRACE
+    (1) statements -> . statements statement
+    (2) statements -> . statement
+    (9) statement -> . expression SEMICOL
+    (10) statement -> . if_statement
+    (11) statement -> . while_statement
+    (12) statement -> . for_statement
+    (13) statement -> . vartype_statement
+    (14) statement -> . input_statement
+    (15) statement -> . union_statement
+    (16) statement -> . comparison
+    (17) statement -> . compare_id_value
+    (18) statement -> . bool_comparison
+    (19) statement -> . var_statement
+    (20) statement -> . var_assign
+    (21) statement -> . var_inc
+    (22) statement -> . var_dec
+    (23) statement -> . print_statement
+    (24) statement -> . break_statement
+    (40) expression -> . ID
+    (72) expression -> . expression PLUS term
+    (73) expression -> . expression MINUS term
+    (74) expression -> . term
+    (61) if_statement -> . IF LPAREN comparison RPAREN LBRACE statements RBRACE
+    (62) if_statement -> . IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE
+    (63) if_statement -> . IF LPAREN bool_comparison RPAREN LBRACE statements RBRACE
+    (64) if_statement -> . IF LPAREN comparison RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
+    (65) if_statement -> . IF LPAREN bool_comparison RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
+    (66) if_statement -> . IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
+    (67) while_statement -> . WHILE LPAREN comparison RPAREN LBRACE statements RBRACE
+    (68) while_statement -> . WHILE LPAREN TRUE RPAREN LBRACE statements RBRACE
+    (69) while_statement -> . WHILE LPAREN FALSE RPAREN LBRACE statements RBRACE
+    (70) for_statement -> . FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE
+    (5) vartype_statement -> . VAR_TYPE LPAREN ID RPAREN SEMICOL
+    (37) input_statement -> . INT ID EQUALS INPUT LPAREN INT RPAREN SEMICOL
+    (38) input_statement -> . CHAR ID EQUALS INPUT LPAREN CHAR RPAREN SEMICOL
+    (39) input_statement -> . FLOATTYPE ID EQUALS INPUT LPAREN FLOATTYPE RPAREN SEMICOL
+    (6) union_statement -> . UNION LPAREN STRING COMMA STRING RPAREN SEMICOL
+    (7) union_statement -> . UNION LPAREN STRING COMMA ID RPAREN SEMICOL
+    (8) union_statement -> . UNION LPAREN ID COMMA STRING RPAREN SEMICOL
+    (43) comparison -> . expression GTH expression
+    (44) comparison -> . expression LTH expression
+    (45) comparison -> . expression GTHOREQUAL expression
+    (46) comparison -> . expression LTHOREQUAL expression
+    (47) comparison -> . expression EQUALEQUAL expression
+    (48) comparison -> . expression NOTEQUAL expression
+    (49) compare_id_value -> . ID GTH expression
+    (50) compare_id_value -> . ID LTH expression
+    (51) compare_id_value -> . ID GTHOREQUAL expression
+    (52) compare_id_value -> . ID LTHOREQUAL expression
+    (53) compare_id_value -> . ID EQUALEQUAL expression
+    (54) compare_id_value -> . ID NOTEQUAL expression
+    (55) bool_comparison -> . ID EQUALEQUAL ID
+    (56) bool_comparison -> . ID EQUALEQUAL TRUE
+    (57) bool_comparison -> . ID EQUALEQUAL FALSE
+    (58) bool_comparison -> . ID NOTEQUAL ID
+    (59) bool_comparison -> . ID NOTEQUAL TRUE
+    (60) bool_comparison -> . ID NOTEQUAL FALSE
+    (32) var_statement -> . CHAR ID EQUALS STRING SEMICOL
+    (33) var_statement -> . FLOATTYPE ID EQUALS NUMBER SEMICOL
+    (34) var_statement -> . INT ID EQUALS NUMBER SEMICOL
+    (35) var_statement -> . BOOL ID EQUALS TRUE SEMICOL
+    (36) var_statement -> . BOOL ID EQUALS FALSE SEMICOL
+    (25) var_assign -> . ID EQUALS ID SEMICOL
+    (26) var_assign -> . ID EQUALS STRING SEMICOL
+    (27) var_assign -> . ID EQUALS NUMBER SEMICOL
+    (28) var_assign -> . ID EQUALS TRUE SEMICOL
+    (29) var_assign -> . ID EQUALS FALSE SEMICOL
+    (30) var_inc -> . ID PLUS PLUS SEMICOL
+    (31) var_dec -> . ID MINUS MINUS SEMICOL
+    (3) print_statement -> . PRINT LPAREN expression RPAREN SEMICOL
+    (4) print_statement -> . PRINT LPAREN STRING RPAREN SEMICOL
+    (71) break_statement -> . BREAK SEMICOL
+    (41) term -> . ID
+    (75) term -> . term TIMES factor
+    (76) term -> . term DIVIDE factor
+    (77) term -> . term MODULO factor
+    (78) term -> . factor
+    (42) factor -> . ID
+    (79) factor -> . NUMBER
+    (80) factor -> . LPAREN expression RPAREN
+
+    ID              shift and go to state 19
+    IF              shift and go to state 21
+    WHILE           shift and go to state 23
+    FOR             shift and go to state 24
+    VAR_TYPE        shift and go to state 25
+    INT             shift and go to state 26
+    CHAR            shift and go to state 27
+    FLOATTYPE       shift and go to state 28
+    UNION           shift and go to state 29
+    BOOL            shift and go to state 31
+    PRINT           shift and go to state 32
+    BREAK           shift and go to state 33
+    NUMBER          shift and go to state 30
+    LPAREN          shift and go to state 22
+
+    compare_id_value               shift and go to state 11
+    statements                     shift and go to state 217
+    statement                      shift and go to state 2
+    expression                     shift and go to state 3
+    if_statement                   shift and go to state 4
+    while_statement                shift and go to state 5
+    for_statement                  shift and go to state 6
+    vartype_statement              shift and go to state 7
+    input_statement                shift and go to state 8
+    union_statement                shift and go to state 9
+    comparison                     shift and go to state 10
+    bool_comparison                shift and go to state 12
+    var_statement                  shift and go to state 13
+    var_assign                     shift and go to state 14
+    var_inc                        shift and go to state 15
+    var_dec                        shift and go to state 16
+    print_statement                shift and go to state 17
+    break_statement                shift and go to state 18
+    term                           shift and go to state 20
+    factor                         shift and go to state 34
+
+state 214
 
     (65) if_statement -> IF LPAREN bool_comparison RPAREN LBRACE statements RBRACE ELSE LBRACE . statements RBRACE
     (1) statements -> . statements statement
@@ -5911,18 +6063,19 @@ state 212
     (23) statement -> . print_statement
     (24) statement -> . break_statement
     (40) expression -> . ID
-    (71) expression -> . expression PLUS term
-    (72) expression -> . expression MINUS term
-    (73) expression -> . term
+    (72) expression -> . expression PLUS term
+    (73) expression -> . expression MINUS term
+    (74) expression -> . term
     (61) if_statement -> . IF LPAREN comparison RPAREN LBRACE statements RBRACE
     (62) if_statement -> . IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE
     (63) if_statement -> . IF LPAREN bool_comparison RPAREN LBRACE statements RBRACE
     (64) if_statement -> . IF LPAREN comparison RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
     (65) if_statement -> . IF LPAREN bool_comparison RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
-    (66) while_statement -> . WHILE LPAREN comparison RPAREN LBRACE statements RBRACE
-    (67) while_statement -> . WHILE LPAREN TRUE RPAREN LBRACE statements RBRACE
-    (68) while_statement -> . WHILE LPAREN FALSE RPAREN LBRACE statements RBRACE
-    (69) for_statement -> . FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE
+    (66) if_statement -> . IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
+    (67) while_statement -> . WHILE LPAREN comparison RPAREN LBRACE statements RBRACE
+    (68) while_statement -> . WHILE LPAREN TRUE RPAREN LBRACE statements RBRACE
+    (69) while_statement -> . WHILE LPAREN FALSE RPAREN LBRACE statements RBRACE
+    (70) for_statement -> . FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE
     (5) vartype_statement -> . VAR_TYPE LPAREN ID RPAREN SEMICOL
     (37) input_statement -> . INT ID EQUALS INPUT LPAREN INT RPAREN SEMICOL
     (38) input_statement -> . CHAR ID EQUALS INPUT LPAREN CHAR RPAREN SEMICOL
@@ -5962,15 +6115,15 @@ state 212
     (31) var_dec -> . ID MINUS MINUS SEMICOL
     (3) print_statement -> . PRINT LPAREN expression RPAREN SEMICOL
     (4) print_statement -> . PRINT LPAREN STRING RPAREN SEMICOL
-    (70) break_statement -> . BREAK SEMICOL
+    (71) break_statement -> . BREAK SEMICOL
     (41) term -> . ID
-    (74) term -> . term TIMES factor
-    (75) term -> . term DIVIDE factor
-    (76) term -> . term MODULO factor
-    (77) term -> . factor
+    (75) term -> . term TIMES factor
+    (76) term -> . term DIVIDE factor
+    (77) term -> . term MODULO factor
+    (78) term -> . factor
     (42) factor -> . ID
-    (78) factor -> . NUMBER
-    (79) factor -> . LPAREN expression RPAREN
+    (79) factor -> . NUMBER
+    (80) factor -> . LPAREN expression RPAREN
 
     ID              shift and go to state 19
     IF              shift and go to state 21
@@ -5988,7 +6141,7 @@ state 212
     LPAREN          shift and go to state 22
 
     bool_comparison                shift and go to state 12
-    statements                     shift and go to state 215
+    statements                     shift and go to state 218
     statement                      shift and go to state 2
     expression                     shift and go to state 3
     if_statement                   shift and go to state 4
@@ -6008,9 +6161,9 @@ state 212
     term                           shift and go to state 20
     factor                         shift and go to state 34
 
-state 213
+state 215
 
-    (69) for_statement -> FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements . RBRACE
+    (70) for_statement -> FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements . RBRACE
     (1) statements -> statements . statement
     (9) statement -> . expression SEMICOL
     (10) statement -> . if_statement
@@ -6029,18 +6182,19 @@ state 213
     (23) statement -> . print_statement
     (24) statement -> . break_statement
     (40) expression -> . ID
-    (71) expression -> . expression PLUS term
-    (72) expression -> . expression MINUS term
-    (73) expression -> . term
+    (72) expression -> . expression PLUS term
+    (73) expression -> . expression MINUS term
+    (74) expression -> . term
     (61) if_statement -> . IF LPAREN comparison RPAREN LBRACE statements RBRACE
     (62) if_statement -> . IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE
     (63) if_statement -> . IF LPAREN bool_comparison RPAREN LBRACE statements RBRACE
     (64) if_statement -> . IF LPAREN comparison RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
     (65) if_statement -> . IF LPAREN bool_comparison RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
-    (66) while_statement -> . WHILE LPAREN comparison RPAREN LBRACE statements RBRACE
-    (67) while_statement -> . WHILE LPAREN TRUE RPAREN LBRACE statements RBRACE
-    (68) while_statement -> . WHILE LPAREN FALSE RPAREN LBRACE statements RBRACE
-    (69) for_statement -> . FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE
+    (66) if_statement -> . IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
+    (67) while_statement -> . WHILE LPAREN comparison RPAREN LBRACE statements RBRACE
+    (68) while_statement -> . WHILE LPAREN TRUE RPAREN LBRACE statements RBRACE
+    (69) while_statement -> . WHILE LPAREN FALSE RPAREN LBRACE statements RBRACE
+    (70) for_statement -> . FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE
     (5) vartype_statement -> . VAR_TYPE LPAREN ID RPAREN SEMICOL
     (37) input_statement -> . INT ID EQUALS INPUT LPAREN INT RPAREN SEMICOL
     (38) input_statement -> . CHAR ID EQUALS INPUT LPAREN CHAR RPAREN SEMICOL
@@ -6080,17 +6234,17 @@ state 213
     (31) var_dec -> . ID MINUS MINUS SEMICOL
     (3) print_statement -> . PRINT LPAREN expression RPAREN SEMICOL
     (4) print_statement -> . PRINT LPAREN STRING RPAREN SEMICOL
-    (70) break_statement -> . BREAK SEMICOL
+    (71) break_statement -> . BREAK SEMICOL
     (41) term -> . ID
-    (74) term -> . term TIMES factor
-    (75) term -> . term DIVIDE factor
-    (76) term -> . term MODULO factor
-    (77) term -> . factor
+    (75) term -> . term TIMES factor
+    (76) term -> . term DIVIDE factor
+    (77) term -> . term MODULO factor
+    (78) term -> . factor
     (42) factor -> . ID
-    (78) factor -> . NUMBER
-    (79) factor -> . LPAREN expression RPAREN
+    (79) factor -> . NUMBER
+    (80) factor -> . LPAREN expression RPAREN
 
-    RBRACE          shift and go to state 216
+    RBRACE          shift and go to state 219
     ID              shift and go to state 19
     IF              shift and go to state 21
     WHILE           shift and go to state 23
@@ -6126,7 +6280,7 @@ state 213
     term                           shift and go to state 20
     factor                         shift and go to state 34
 
-state 214
+state 216
 
     (64) if_statement -> IF LPAREN comparison RPAREN LBRACE statements RBRACE ELSE LBRACE statements . RBRACE
     (1) statements -> statements . statement
@@ -6147,18 +6301,19 @@ state 214
     (23) statement -> . print_statement
     (24) statement -> . break_statement
     (40) expression -> . ID
-    (71) expression -> . expression PLUS term
-    (72) expression -> . expression MINUS term
-    (73) expression -> . term
+    (72) expression -> . expression PLUS term
+    (73) expression -> . expression MINUS term
+    (74) expression -> . term
     (61) if_statement -> . IF LPAREN comparison RPAREN LBRACE statements RBRACE
     (62) if_statement -> . IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE
     (63) if_statement -> . IF LPAREN bool_comparison RPAREN LBRACE statements RBRACE
     (64) if_statement -> . IF LPAREN comparison RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
     (65) if_statement -> . IF LPAREN bool_comparison RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
-    (66) while_statement -> . WHILE LPAREN comparison RPAREN LBRACE statements RBRACE
-    (67) while_statement -> . WHILE LPAREN TRUE RPAREN LBRACE statements RBRACE
-    (68) while_statement -> . WHILE LPAREN FALSE RPAREN LBRACE statements RBRACE
-    (69) for_statement -> . FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE
+    (66) if_statement -> . IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
+    (67) while_statement -> . WHILE LPAREN comparison RPAREN LBRACE statements RBRACE
+    (68) while_statement -> . WHILE LPAREN TRUE RPAREN LBRACE statements RBRACE
+    (69) while_statement -> . WHILE LPAREN FALSE RPAREN LBRACE statements RBRACE
+    (70) for_statement -> . FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE
     (5) vartype_statement -> . VAR_TYPE LPAREN ID RPAREN SEMICOL
     (37) input_statement -> . INT ID EQUALS INPUT LPAREN INT RPAREN SEMICOL
     (38) input_statement -> . CHAR ID EQUALS INPUT LPAREN CHAR RPAREN SEMICOL
@@ -6198,17 +6353,17 @@ state 214
     (31) var_dec -> . ID MINUS MINUS SEMICOL
     (3) print_statement -> . PRINT LPAREN expression RPAREN SEMICOL
     (4) print_statement -> . PRINT LPAREN STRING RPAREN SEMICOL
-    (70) break_statement -> . BREAK SEMICOL
+    (71) break_statement -> . BREAK SEMICOL
     (41) term -> . ID
-    (74) term -> . term TIMES factor
-    (75) term -> . term DIVIDE factor
-    (76) term -> . term MODULO factor
-    (77) term -> . factor
+    (75) term -> . term TIMES factor
+    (76) term -> . term DIVIDE factor
+    (77) term -> . term MODULO factor
+    (78) term -> . factor
     (42) factor -> . ID
-    (78) factor -> . NUMBER
-    (79) factor -> . LPAREN expression RPAREN
+    (79) factor -> . NUMBER
+    (80) factor -> . LPAREN expression RPAREN
 
-    RBRACE          shift and go to state 217
+    RBRACE          shift and go to state 220
     ID              shift and go to state 19
     IF              shift and go to state 21
     WHILE           shift and go to state 23
@@ -6244,7 +6399,126 @@ state 214
     term                           shift and go to state 20
     factor                         shift and go to state 34
 
-state 215
+state 217
+
+    (66) if_statement -> IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE ELSE LBRACE statements . RBRACE
+    (1) statements -> statements . statement
+    (9) statement -> . expression SEMICOL
+    (10) statement -> . if_statement
+    (11) statement -> . while_statement
+    (12) statement -> . for_statement
+    (13) statement -> . vartype_statement
+    (14) statement -> . input_statement
+    (15) statement -> . union_statement
+    (16) statement -> . comparison
+    (17) statement -> . compare_id_value
+    (18) statement -> . bool_comparison
+    (19) statement -> . var_statement
+    (20) statement -> . var_assign
+    (21) statement -> . var_inc
+    (22) statement -> . var_dec
+    (23) statement -> . print_statement
+    (24) statement -> . break_statement
+    (40) expression -> . ID
+    (72) expression -> . expression PLUS term
+    (73) expression -> . expression MINUS term
+    (74) expression -> . term
+    (61) if_statement -> . IF LPAREN comparison RPAREN LBRACE statements RBRACE
+    (62) if_statement -> . IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE
+    (63) if_statement -> . IF LPAREN bool_comparison RPAREN LBRACE statements RBRACE
+    (64) if_statement -> . IF LPAREN comparison RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
+    (65) if_statement -> . IF LPAREN bool_comparison RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
+    (66) if_statement -> . IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
+    (67) while_statement -> . WHILE LPAREN comparison RPAREN LBRACE statements RBRACE
+    (68) while_statement -> . WHILE LPAREN TRUE RPAREN LBRACE statements RBRACE
+    (69) while_statement -> . WHILE LPAREN FALSE RPAREN LBRACE statements RBRACE
+    (70) for_statement -> . FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE
+    (5) vartype_statement -> . VAR_TYPE LPAREN ID RPAREN SEMICOL
+    (37) input_statement -> . INT ID EQUALS INPUT LPAREN INT RPAREN SEMICOL
+    (38) input_statement -> . CHAR ID EQUALS INPUT LPAREN CHAR RPAREN SEMICOL
+    (39) input_statement -> . FLOATTYPE ID EQUALS INPUT LPAREN FLOATTYPE RPAREN SEMICOL
+    (6) union_statement -> . UNION LPAREN STRING COMMA STRING RPAREN SEMICOL
+    (7) union_statement -> . UNION LPAREN STRING COMMA ID RPAREN SEMICOL
+    (8) union_statement -> . UNION LPAREN ID COMMA STRING RPAREN SEMICOL
+    (43) comparison -> . expression GTH expression
+    (44) comparison -> . expression LTH expression
+    (45) comparison -> . expression GTHOREQUAL expression
+    (46) comparison -> . expression LTHOREQUAL expression
+    (47) comparison -> . expression EQUALEQUAL expression
+    (48) comparison -> . expression NOTEQUAL expression
+    (49) compare_id_value -> . ID GTH expression
+    (50) compare_id_value -> . ID LTH expression
+    (51) compare_id_value -> . ID GTHOREQUAL expression
+    (52) compare_id_value -> . ID LTHOREQUAL expression
+    (53) compare_id_value -> . ID EQUALEQUAL expression
+    (54) compare_id_value -> . ID NOTEQUAL expression
+    (55) bool_comparison -> . ID EQUALEQUAL ID
+    (56) bool_comparison -> . ID EQUALEQUAL TRUE
+    (57) bool_comparison -> . ID EQUALEQUAL FALSE
+    (58) bool_comparison -> . ID NOTEQUAL ID
+    (59) bool_comparison -> . ID NOTEQUAL TRUE
+    (60) bool_comparison -> . ID NOTEQUAL FALSE
+    (32) var_statement -> . CHAR ID EQUALS STRING SEMICOL
+    (33) var_statement -> . FLOATTYPE ID EQUALS NUMBER SEMICOL
+    (34) var_statement -> . INT ID EQUALS NUMBER SEMICOL
+    (35) var_statement -> . BOOL ID EQUALS TRUE SEMICOL
+    (36) var_statement -> . BOOL ID EQUALS FALSE SEMICOL
+    (25) var_assign -> . ID EQUALS ID SEMICOL
+    (26) var_assign -> . ID EQUALS STRING SEMICOL
+    (27) var_assign -> . ID EQUALS NUMBER SEMICOL
+    (28) var_assign -> . ID EQUALS TRUE SEMICOL
+    (29) var_assign -> . ID EQUALS FALSE SEMICOL
+    (30) var_inc -> . ID PLUS PLUS SEMICOL
+    (31) var_dec -> . ID MINUS MINUS SEMICOL
+    (3) print_statement -> . PRINT LPAREN expression RPAREN SEMICOL
+    (4) print_statement -> . PRINT LPAREN STRING RPAREN SEMICOL
+    (71) break_statement -> . BREAK SEMICOL
+    (41) term -> . ID
+    (75) term -> . term TIMES factor
+    (76) term -> . term DIVIDE factor
+    (77) term -> . term MODULO factor
+    (78) term -> . factor
+    (42) factor -> . ID
+    (79) factor -> . NUMBER
+    (80) factor -> . LPAREN expression RPAREN
+
+    RBRACE          shift and go to state 221
+    ID              shift and go to state 19
+    IF              shift and go to state 21
+    WHILE           shift and go to state 23
+    FOR             shift and go to state 24
+    VAR_TYPE        shift and go to state 25
+    INT             shift and go to state 26
+    CHAR            shift and go to state 27
+    FLOATTYPE       shift and go to state 28
+    UNION           shift and go to state 29
+    BOOL            shift and go to state 31
+    PRINT           shift and go to state 32
+    BREAK           shift and go to state 33
+    NUMBER          shift and go to state 30
+    LPAREN          shift and go to state 22
+
+    compare_id_value               shift and go to state 11
+    statement                      shift and go to state 35
+    expression                     shift and go to state 3
+    if_statement                   shift and go to state 4
+    while_statement                shift and go to state 5
+    for_statement                  shift and go to state 6
+    vartype_statement              shift and go to state 7
+    input_statement                shift and go to state 8
+    union_statement                shift and go to state 9
+    comparison                     shift and go to state 10
+    bool_comparison                shift and go to state 12
+    var_statement                  shift and go to state 13
+    var_assign                     shift and go to state 14
+    var_inc                        shift and go to state 15
+    var_dec                        shift and go to state 16
+    print_statement                shift and go to state 17
+    break_statement                shift and go to state 18
+    term                           shift and go to state 20
+    factor                         shift and go to state 34
+
+state 218
 
     (65) if_statement -> IF LPAREN bool_comparison RPAREN LBRACE statements RBRACE ELSE LBRACE statements . RBRACE
     (1) statements -> statements . statement
@@ -6265,18 +6539,19 @@ state 215
     (23) statement -> . print_statement
     (24) statement -> . break_statement
     (40) expression -> . ID
-    (71) expression -> . expression PLUS term
-    (72) expression -> . expression MINUS term
-    (73) expression -> . term
+    (72) expression -> . expression PLUS term
+    (73) expression -> . expression MINUS term
+    (74) expression -> . term
     (61) if_statement -> . IF LPAREN comparison RPAREN LBRACE statements RBRACE
     (62) if_statement -> . IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE
     (63) if_statement -> . IF LPAREN bool_comparison RPAREN LBRACE statements RBRACE
     (64) if_statement -> . IF LPAREN comparison RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
     (65) if_statement -> . IF LPAREN bool_comparison RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
-    (66) while_statement -> . WHILE LPAREN comparison RPAREN LBRACE statements RBRACE
-    (67) while_statement -> . WHILE LPAREN TRUE RPAREN LBRACE statements RBRACE
-    (68) while_statement -> . WHILE LPAREN FALSE RPAREN LBRACE statements RBRACE
-    (69) for_statement -> . FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE
+    (66) if_statement -> . IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
+    (67) while_statement -> . WHILE LPAREN comparison RPAREN LBRACE statements RBRACE
+    (68) while_statement -> . WHILE LPAREN TRUE RPAREN LBRACE statements RBRACE
+    (69) while_statement -> . WHILE LPAREN FALSE RPAREN LBRACE statements RBRACE
+    (70) for_statement -> . FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE
     (5) vartype_statement -> . VAR_TYPE LPAREN ID RPAREN SEMICOL
     (37) input_statement -> . INT ID EQUALS INPUT LPAREN INT RPAREN SEMICOL
     (38) input_statement -> . CHAR ID EQUALS INPUT LPAREN CHAR RPAREN SEMICOL
@@ -6316,17 +6591,17 @@ state 215
     (31) var_dec -> . ID MINUS MINUS SEMICOL
     (3) print_statement -> . PRINT LPAREN expression RPAREN SEMICOL
     (4) print_statement -> . PRINT LPAREN STRING RPAREN SEMICOL
-    (70) break_statement -> . BREAK SEMICOL
+    (71) break_statement -> . BREAK SEMICOL
     (41) term -> . ID
-    (74) term -> . term TIMES factor
-    (75) term -> . term DIVIDE factor
-    (76) term -> . term MODULO factor
-    (77) term -> . factor
+    (75) term -> . term TIMES factor
+    (76) term -> . term DIVIDE factor
+    (77) term -> . term MODULO factor
+    (78) term -> . factor
     (42) factor -> . ID
-    (78) factor -> . NUMBER
-    (79) factor -> . LPAREN expression RPAREN
+    (79) factor -> . NUMBER
+    (80) factor -> . LPAREN expression RPAREN
 
-    RBRACE          shift and go to state 218
+    RBRACE          shift and go to state 222
     ID              shift and go to state 19
     IF              shift and go to state 21
     WHILE           shift and go to state 23
@@ -6362,29 +6637,29 @@ state 215
     term                           shift and go to state 20
     factor                         shift and go to state 34
 
-state 216
+state 219
 
-    (69) for_statement -> FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE .
+    (70) for_statement -> FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE .
 
-    ID              reduce using rule 69 (for_statement -> FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE .)
-    IF              reduce using rule 69 (for_statement -> FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE .)
-    WHILE           reduce using rule 69 (for_statement -> FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE .)
-    FOR             reduce using rule 69 (for_statement -> FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE .)
-    VAR_TYPE        reduce using rule 69 (for_statement -> FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE .)
-    INT             reduce using rule 69 (for_statement -> FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE .)
-    CHAR            reduce using rule 69 (for_statement -> FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE .)
-    FLOATTYPE       reduce using rule 69 (for_statement -> FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE .)
-    UNION           reduce using rule 69 (for_statement -> FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE .)
-    BOOL            reduce using rule 69 (for_statement -> FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE .)
-    PRINT           reduce using rule 69 (for_statement -> FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE .)
-    BREAK           reduce using rule 69 (for_statement -> FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE .)
-    NUMBER          reduce using rule 69 (for_statement -> FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE .)
-    LPAREN          reduce using rule 69 (for_statement -> FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE .)
-    $end            reduce using rule 69 (for_statement -> FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE .)
-    RBRACE          reduce using rule 69 (for_statement -> FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE .)
+    ID              reduce using rule 70 (for_statement -> FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE .)
+    IF              reduce using rule 70 (for_statement -> FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE .)
+    WHILE           reduce using rule 70 (for_statement -> FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE .)
+    FOR             reduce using rule 70 (for_statement -> FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE .)
+    VAR_TYPE        reduce using rule 70 (for_statement -> FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE .)
+    INT             reduce using rule 70 (for_statement -> FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE .)
+    CHAR            reduce using rule 70 (for_statement -> FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE .)
+    FLOATTYPE       reduce using rule 70 (for_statement -> FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE .)
+    UNION           reduce using rule 70 (for_statement -> FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE .)
+    BOOL            reduce using rule 70 (for_statement -> FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE .)
+    PRINT           reduce using rule 70 (for_statement -> FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE .)
+    BREAK           reduce using rule 70 (for_statement -> FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE .)
+    NUMBER          reduce using rule 70 (for_statement -> FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE .)
+    LPAREN          reduce using rule 70 (for_statement -> FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE .)
+    $end            reduce using rule 70 (for_statement -> FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE .)
+    RBRACE          reduce using rule 70 (for_statement -> FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE .)
 
 
-state 217
+state 220
 
     (64) if_statement -> IF LPAREN comparison RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE .
 
@@ -6406,7 +6681,29 @@ state 217
     RBRACE          reduce using rule 64 (if_statement -> IF LPAREN comparison RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE .)
 
 
-state 218
+state 221
+
+    (66) if_statement -> IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE .
+
+    ID              reduce using rule 66 (if_statement -> IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE .)
+    IF              reduce using rule 66 (if_statement -> IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE .)
+    WHILE           reduce using rule 66 (if_statement -> IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE .)
+    FOR             reduce using rule 66 (if_statement -> IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE .)
+    VAR_TYPE        reduce using rule 66 (if_statement -> IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE .)
+    INT             reduce using rule 66 (if_statement -> IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE .)
+    CHAR            reduce using rule 66 (if_statement -> IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE .)
+    FLOATTYPE       reduce using rule 66 (if_statement -> IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE .)
+    UNION           reduce using rule 66 (if_statement -> IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE .)
+    BOOL            reduce using rule 66 (if_statement -> IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE .)
+    PRINT           reduce using rule 66 (if_statement -> IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE .)
+    BREAK           reduce using rule 66 (if_statement -> IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE .)
+    NUMBER          reduce using rule 66 (if_statement -> IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE .)
+    LPAREN          reduce using rule 66 (if_statement -> IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE .)
+    $end            reduce using rule 66 (if_statement -> IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE .)
+    RBRACE          reduce using rule 66 (if_statement -> IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE .)
+
+
+state 222
 
     (65) if_statement -> IF LPAREN bool_comparison RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE .
 
