@@ -3,6 +3,9 @@ from tkinter import *
 from tkinter import filedialog
 from tkinter import ttk
 
+
+
+
 #My tools
 import Lexer
 import Parser
@@ -12,7 +15,7 @@ bg_lines = "#232323"
 bg_text = "#121212"
 textcolor = "lightgreen"
 active_color = "lightgreen"
-h = 40
+h = 33
 w = 150
 
 
@@ -78,7 +81,7 @@ def update_variables():
 
 #IDE Implementation
 root = Tk("Text Editor")
-root.state('zoomed')
+#root.state('zoomed')
 root.title("IDE b darija: Untitled")
 root.configure(bg='#333333')
 
@@ -115,6 +118,8 @@ menubar.add_command(label="Sjjl", command=save_as)
 menubar.add_command(label="Lexer", command=run_code)  
 menubar.add_command(label="Khddm", command=run_parser)  
 root.config(menu=menubar)  
+
+
 #Loop
 root.mainloop()
 

@@ -148,6 +148,22 @@ def p_statement_union_three(p):
     else:
         print(errors[2][1])
         pass
+
+#Size of a string
+def p_string_size_statement(p):
+    '''
+    sizeof_statement : SIZEOF LPAREN STRING RPAREN SEMICOL
+    '''
+    p[0] = len(p[3]) - 2
+
+def p_id_size_statement(p):
+    '''
+    sizeof_statement : SIZEOF LPAREN ID RPAREN SEMICOL
+    '''
+    found = variable_exists(p[3])
+    if found is not None:
+        if found.get_type() == 'harf':
+            p[0] = len(found.get_value()) - 2
 #Conditions
 def p_statement_expr(p):
     '''statement : expression SEMICOL
@@ -166,7 +182,7 @@ def p_statement_expr(p):
                  | var_dec
                  | print_statement
                  | break_statement
-                 
+                 | sizeof_statement
                  '''
     #print(p[1])
     if isinstance(p[1], list):
@@ -334,7 +350,8 @@ def p_input_statement(p):
     if done == True:
         a = variable(p[2], p[1], value)
         variables[a.get_name()] = a
-        p[0] = a.get_value()
+        #p[0] = a.get_value()
+        pass
     
 def p_variable_expression(p):
     '''
@@ -516,7 +533,6 @@ def p_IF(p):
                      | IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE
                      | IF LPAREN bool_comparison RPAREN LBRACE statements RBRACE
     '''
-    global parser
     if p[3] == True:
         for pp in p[6]:
             if pp != 'hbes':
@@ -536,9 +552,21 @@ def p_IF_ELSE(p):
                      | IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
     '''
     if p[3] == True:
-        p[0] = p[6]
+        for pp in p[6]:
+            if pp != 'hbes':
+                print(pp)
+        if 'hbes' in p[6]:
+            p[0] = 'hbes'
+        else:
+            p[0] = None
     else:
-        p[0] = p[10]
+        for pp in p[10]:
+            if pp != 'hbes':
+                print(pp)
+        if 'hbes' in p[10]:
+            p[0] = 'hbes'
+        else:
+            p[0] = None
 
 
 #WHILE STATEMENTS
@@ -549,6 +577,7 @@ def p_WHILE(p):
                         | WHILE LPAREN FALSE RPAREN LBRACE statements RBRACE
     '''
     pass
+
 #FOR STATEMENT
 def p_FOR(p):
     '''

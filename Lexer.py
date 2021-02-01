@@ -14,14 +14,13 @@ reserved = {
     'marka'       : 'VAR_TYPE',
     'harf'        : 'CHAR', 
     'reje3'       : 'RETURN', # 3
-    'jme3lia'     : 'UNION', # 4
-    'kemel'       : 'CONTINUE', # 5
+    'jme3lia'     : 'UNION', 
+    'kemel'       : 'CONTINUE',     
     'fkoula'      : 'FOR',
     'lkhwalkhawi' : 'VOID', # 6
     'ila'         : 'IF',
-    'jamed'       : 'CONSTANT', # 7
     'ma7ed'       : 'WHILE',
-    'qyas'        : 'SIZEOF', # 8
+    'qyas'        : 'SIZEOF',
     'achari'      : 'FLOATTYPE',
     'manti9i'     : 'BOOL',
     'vri'         : 'TRUE',
