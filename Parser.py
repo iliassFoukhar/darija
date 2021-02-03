@@ -8,7 +8,7 @@ is_running = True
 errors = (
     (0, "Kayn shi moshkil fl input"),
     (1, "l motaghayyir dyalk rah "),
-    (2, "variable makaynash"),
+    (2, "motaghayir makaynsh"),
     (3, "variable dyalk mashi mn nfs nou3 alkhawa"),
     (4, "machi 3adad rkkez al khawa"),
     (5, "had ma7ed dyalk 3merha tsala"),
@@ -167,6 +167,7 @@ def p_id_size_statement(p):
 #Conditions
 def p_statement_expr(p):
     '''statement : expression SEMICOL
+                 | if_statement_elif
                  | if_statement
                  | while_statement
                  | for_statement
@@ -183,6 +184,8 @@ def p_statement_expr(p):
                  | print_statement
                  | break_statement
                  | sizeof_statement
+                 | and_statement
+                 | or_statement
                  '''
     #print(p[1])
     if isinstance(p[1], list):
@@ -193,6 +196,60 @@ def p_statement_expr(p):
     else:
         p[0] = p[1]
 
+#Logical operations
+def p_statement_and(p):
+    '''
+    and_statement : comparison AND comparison
+                  | comparison AND TRUE
+                  | comparison AND FALSE
+                  | TRUE AND comparison
+                  | FALSE AND comparison
+                  | TRUE AND TRUE
+                  | TRUE AND FALSE
+                  | FALSE AND TRUE
+                  | FALSE AND FALSE
+                  | compare_id_value AND compare_id_value
+                  | compare_id_value AND TRUE
+                  | compare_id_value AND FALSE
+                  | compare_id_value AND comparison
+                  | comparison AND compare_id_value
+                  | TRUE AND compare_id_value
+                  | FALSE AND compare_id_value
+
+    '''
+    if p[1] == True and p[3] == True:
+        p[0] = True
+    elif p[1] == True and p[3] == False:
+        p[0] = False
+    elif p[1] == False and p[3] == False:
+        p[0] = False
+    elif p[1] == False and p[3] == True:
+        p[0] = False
+
+def p_statement_or(p):
+    '''
+    or_statement  : comparison OR comparison
+                  | comparison OR TRUE
+                  | comparison OR FALSE
+                  | TRUE OR comparison
+                  | FALSE OR comparison
+                  | TRUE OR TRUE
+                  | TRUE OR FALSE
+                  | FALSE OR TRUE
+                  | FALSE OR FALSE
+                  | compare_id_value OR compare_id_value
+                  | compare_id_value OR TRUE
+                  | compare_id_value OR FALSE
+                  | compare_id_value OR comparison
+                  | comparison OR compare_id_value
+                  | TRUE OR compare_id_value
+                  | FALSE OR compare_id_value
+
+    '''
+    if p[1] == True or p[3] == True:
+        p[0] = True
+    else:
+        p[0] = False
 
 #Change value of a variable
 def p_statement_assign_var_id(p):
@@ -309,7 +366,7 @@ def p_statement_var(p):
     my_var = variable(p[2], p[1], p[4])
     variables[my_var.get_name()] = my_var
     # ERROR Gestion
-    p[0] = my_var.get_value()
+    #p[0] = my_var.get_value()
     
 
 # INPUT From user
@@ -526,12 +583,15 @@ def p_bool_comparison(p):
             
     else:
         p[0] = 'kayn shi moshkil'
+
 #IF STATEMENTS
 def p_IF(p):
     '''
         if_statement : IF LPAREN comparison RPAREN LBRACE statements RBRACE
                      | IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE
                      | IF LPAREN bool_comparison RPAREN LBRACE statements RBRACE
+                     | IF LPAREN and_statement RPAREN LBRACE statements RBRACE
+                     | IF LPAREN or_statement RPAREN LBRACE statements RBRACE
     '''
     if p[3] == True:
         for pp in p[6]:
@@ -543,13 +603,11 @@ def p_IF(p):
             p[0] = None
     else:
         p[0] = None
-        
 
-def p_IF_ELSE(p):
+
+def p_if_else_if(p):
     '''
-        if_statement : IF LPAREN comparison RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
-                     | IF LPAREN bool_comparison RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
-                     | IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
+    if_statement_elif : IF RPAREN comparison LPAREN LBRACE statements RBRACE ELSE if_statement
     '''
     if p[3] == True:
         for pp in p[6]:
@@ -560,13 +618,30 @@ def p_IF_ELSE(p):
         else:
             p[0] = None
     else:
-        for pp in p[10]:
-            if pp != 'hbes':
-                print(pp)
-        if 'hbes' in p[10]:
-            p[0] = 'hbes'
-        else:
-            p[0] = None
+        p[0] = p[9]
+
+# def p_IF_ELSE(p):
+#     '''
+#         if_statement : IF LPAREN comparison RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
+#                      | IF LPAREN bool_comparison RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
+#                      | IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
+#     '''
+#     if p[3] == True:
+#         for pp in p[6]:
+#             if pp != 'hbes':
+#                 print(pp)
+#         if 'hbes' in p[6]:
+#             p[0] = 'hbes'
+#         else:
+#             p[0] = None
+#     else:
+#         for pp in p[10]:
+#             if pp != 'hbes':
+#                 print(pp)
+#         if 'hbes' in p[10]:
+#             p[0] = 'hbes'
+#         else:
+#             p[0] = None
 
 
 #WHILE STATEMENTS
@@ -712,7 +787,12 @@ def build_parser(source):
 
         if result != None:
             for r in result:
-                if r is not None:
+                if r is not None and r != True and r != False:
                     print(r)
+                elif r is not None and r == True:
+                    print('vri')
+                elif r is not None and r == False:
+                    print('ffo')
+    print("--------------------------------------------------------------------------------")
 
 

@@ -3,21 +3,21 @@ from tkinter import *
 from tkinter import filedialog
 from tkinter import ttk
 
-
-
-
 #My tools
 import Lexer
 import Parser
 
 #Variables
-bg_lines = "#232323"
-bg_text = "#121212"
-textcolor = "lightgreen"
-active_color = "lightgreen"
+root_bg = ('#333333', '#DDDDDD')
+bg_lines = ("#232323", "#FEFEFE")
+bg_text = ("#121212", "#EDEDED")
+textcolor = ("lightgreen", "black")
+active_color = ("lightgreen", "black")
+insert_color = ('#EEEEEE', '#111111')
+variables_bg = ('#343434', '#DCDCDC')
 h = 33
 w = 150
-
+color = 0
 
 #Functions
 def save_as():
@@ -79,26 +79,44 @@ def update_variables():
     variables.insert(END, data)
     variables.configure(state='disabled')
 
+def empty_variables():
+    Parser.variables.clear()
+    update_variables()
+
+def change_colors():
+    global variables, text, lines, color
+    if color == 0:
+        color = 1
+    else:
+        color = 0
+    variables.configure(bg=variables_bg[color])
+    variables.configure(fg=textcolor[color])
+    text.configure(bg=bg_text[color])
+    text.configure(fg=textcolor[color])
+    text.configure(insertbackground=insert_color[color])
+    lines.configure(bg=bg_lines[color])
+    lines.configure(fg=textcolor[color])
+
 #IDE Implementation
 root = Tk("Text Editor")
 #root.state('zoomed')
 root.title("IDE b darija: Untitled")
-root.configure(bg='#333333')
+root.configure(bg=root_bg[color])
 
 
 #Line numbers
-lines = Text(root, background=bg_lines, foreground=textcolor, pady=5, padx=5, width=5, height=h, insertbackground="#232323")
+lines = Text(root, background=bg_lines[color], foreground=textcolor[color], pady=5, padx=5, width=5, height=h, insertbackground=insert_color[color])
 lines.grid(row=0, column=0, sticky=(N, W, E, S))
 insert_line_numbers()
 lines.configure(state='disabled')
 
 
 #Text widget
-text = Text(root, background=bg_text, foreground=textcolor, pady=5, padx=5, width=w, height=h, insertbackground="#eee")
+text = Text(root, background=bg_text[color], foreground=textcolor[color], pady=5, padx=5, width=w, height=h, insertbackground=insert_color[color])
 text.grid( row=0, column=1, sticky=(N, W, E, S))
 
 #Variables used
-variables = Text(root, background="#343434", foreground=textcolor, height=h, pady=5, padx=15)
+variables = Text(root, background=variables_bg[color], foreground=textcolor[color], height=h, pady=5, padx=15)
 variables.grid(row=0, column=3, sticky=(N, W, E, S))
 variables_title = "Motaghayriat dyalk"
 variables.insert(END,variables_title)
@@ -112,25 +130,16 @@ lines['yscrollcommand'] = rolly.set
 rolly.grid(row=0, column=2, sticky=(N, W, E, S))
 
 #Menu
-menubar = Menu(root, activebackground=active_color) 
-menubar.add_command(label="Fte7", command=open_file)  
-menubar.add_command(label="Sjjl", command=save_as)  
-menubar.add_command(label="Lexer", command=run_code)  
-menubar.add_command(label="Khddm", command=run_parser)  
+menubar = Menu(root, activebackground=active_color[color]) 
+menubar.add_command(label=" Fte7 ", command=open_file)  
+menubar.add_command(label=" Sjjl  ", command=save_as)  
+menubar.add_command(label=" Khwi Motaghayirat ", command=empty_variables)
+menubar.add_command(label=" Bddel Lwanat ", command=change_colors)
+menubar.add_command(label=" Lexer  ", command=run_code)  
+menubar.add_command(label=" Khddm  ", command=run_parser)
 root.config(menu=menubar)  
 
 
 #Loop
 root.mainloop()
 
-
-
-#Buttons
-#saveButton = Button(root, text="Save", command=save_as,padx=15, pady=3,background=textcolor)
-#saveButton.grid(column=0, row=1) 
-
-# openButton = Button(root, text="Open", command=open_file,padx=15, pady=3, background="#666", foreground="skyblue")
-# openButton.grid(column=1, row=1, rowspan=1)
-
-# runButton = Button(root, text="Run", command=run_code,padx=15, pady=3, background=textcolor)
-# runButton.grid(column=2, row=1)

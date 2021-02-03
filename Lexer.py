@@ -24,7 +24,9 @@ reserved = {
     'achari'      : 'FLOATTYPE',
     'manti9i'     : 'BOOL',
     'vri'         : 'TRUE',
-    'ffo'         : 'FALSE'    
+    'ffo'         : 'FALSE',
+    'o'           : 'AND',
+    'aw'          : 'OR'
 }
 
 
