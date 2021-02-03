@@ -1,7 +1,7 @@
 import ply.yacc as yacc
 from Lexer import tokens
 
-#variables = []
+functions = {}
 variables = {}
 is_running = True
 
@@ -47,6 +47,56 @@ class variable:
     def set_value(self, value):
         self.dictionary["value"] = value
 
+
+class function:
+    
+    def __init__(self, name, parameters, statements):
+        #Basics
+        self.function_name = name
+        self.statements = statements
+        #parameters
+        if parameters == None:
+            self.parameters = None
+        else:
+            self.parameters = {}
+            list_parameters = parameters.split(",")
+            for par in list_parameters:
+                value = par.split("=")[1]
+                typee = par.split(" ")[0]
+                if typee == "sahih":
+                    value = int(value)
+                elif typee == "achari":
+                    value = float(value)
+                elif typee == "manti9i":
+                    if value == "vri":
+                        value = True
+                    else:
+                        value = False
+                namee  = par.split(" ")[1]
+                parameter = variable(namee, typee, value)
+                self.parameters[namee] = parameter
+    
+    def __str__(self):
+        return f'{self.function_name}()'
+    
+    def parse(self):
+        global parser, variables
+        for k in self.parameters:
+            variables[k] = self.parameters[k]
+ 
+        result = parser.parse(self.statements)
+        if result != None:
+            for r in result:
+                if r is not None and r != True and r != False:
+                    print(r)
+                elif r is not None and r == True:
+                    print('vri')
+                elif r is not None and r == False:
+                    print('ffo')
+        for k in self.parameters:
+            del variables[k]
+
+#CHECKERS
 def variable_exists(v):
     global variables
     value = None
@@ -55,6 +105,14 @@ def variable_exists(v):
     else:
         value = None
     return value
+
+def function_exists(f):
+    global functions
+    if f in functions.keys():
+        return functions[f]
+    else:
+        return None
+
 
 def p_statements_multiple(p):
     '''
@@ -620,28 +678,28 @@ def p_if_else_if(p):
     else:
         p[0] = p[9]
 
-# def p_IF_ELSE(p):
-#     '''
-#         if_statement : IF LPAREN comparison RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
-#                      | IF LPAREN bool_comparison RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
-#                      | IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
-#     '''
-#     if p[3] == True:
-#         for pp in p[6]:
-#             if pp != 'hbes':
-#                 print(pp)
-#         if 'hbes' in p[6]:
-#             p[0] = 'hbes'
-#         else:
-#             p[0] = None
-#     else:
-#         for pp in p[10]:
-#             if pp != 'hbes':
-#                 print(pp)
-#         if 'hbes' in p[10]:
-#             p[0] = 'hbes'
-#         else:
-#             p[0] = None
+def p_IF_ELSE(p):
+    '''
+        if_statement : IF LPAREN comparison RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
+                     | IF LPAREN bool_comparison RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
+                     | IF LPAREN compare_id_value RPAREN LBRACE statements RBRACE ELSE LBRACE statements RBRACE
+    '''
+    if p[3] == True:
+        for pp in p[6]:
+            if pp != 'hbes':
+                print(pp)
+        if 'hbes' in p[6]:
+            p[0] = 'hbes'
+        else:
+            p[0] = None
+    else:
+        for pp in p[10]:
+            if pp != 'hbes':
+                print(pp)
+        if 'hbes' in p[10]:
+            p[0] = 'hbes'
+        else:
+            p[0] = None
 
 
 #WHILE STATEMENTS
@@ -719,7 +777,7 @@ def p_error(p):
 parser = yacc.yacc()
 
 def build_parser(source):
-    global is_running
+    global is_running, functions
     #while is_running:
         # try:
         #     #s = input('calc > ')
@@ -782,17 +840,35 @@ def build_parser(source):
                         is_looping = False
                         break
             parser.parse(inc)
-    else:
-        result = parser.parse(s)
+    elif "dalla" in s:
+        # dalla zghnghn(sahih a = 2, sahih b = 3){tasks}
+        parameters = s.split("(")[1].split(")")[0]
+        tasks = s.split("{")[1].split("}")[0]
+        func_name = s.split("(")[0].split(" ")[1]
+        functionn = function(func_name, parameters, tasks)
+        functions[func_name] = functionn
 
-        if result != None:
-            for r in result:
-                if r is not None and r != True and r != False:
-                    print(r)
-                elif r is not None and r == True:
-                    print('vri')
-                elif r is not None and r == False:
-                    print('ffo')
+    else:
+        func_name = s.split("(")[0]
+        if func_name in functions and ");" in s and "(" in s:
+            functions[func_name].parse()
+        else:
+            result = parser.parse(s)
+
+            if result != None:
+                for r in result:
+                    if r is not None and r != True and r != False:
+                        print(r)
+                    elif r is not None and r == True:
+                        print('vri')
+                    elif r is not None and r == False:
+                        print('ffo')
     print("--------------------------------------------------------------------------------")
 
-
+source = "dalla zghanghan(sahih a = 2){tbe3(\"salam\"); sahih s = dkhl(sahih); tbe3(s);}"
+build_parser(source)
+source = "zghanghan();"
+build_parser(source)
+#print(functions["zghanghan"].statements)
+#print(functions["zghanghan"].parameters["a"].get_value())
+#functions["zghanghan"].parse()

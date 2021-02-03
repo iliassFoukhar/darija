@@ -17,7 +17,7 @@ reserved = {
     'jme3lia'     : 'UNION', 
     'kemel'       : 'CONTINUE',     
     'fkoula'      : 'FOR',
-    'lkhwalkhawi' : 'VOID', # 6
+    'dalla'       : 'FUNCTION', # 6
     'ila'         : 'IF',
     'ma7ed'       : 'WHILE',
     'qyas'        : 'SIZEOF',
