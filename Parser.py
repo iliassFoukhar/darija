@@ -12,7 +12,8 @@ errors = (
     (3, "variable dyalk mashi mn nfs nou3 alkhawa"),
     (4, "machi 3adad rkkez al khawa"),
     (5, "had ma7ed dyalk 3merha tsala"),
-    (6, "Ta malk baghi dkhl shi f shi ?")
+    (6, "Ta malk baghi dkhl shi f shi ?"),
+    (7, "Ghltti fl i3dadat d dalla a batal")
 )
 
 class variable:
@@ -57,8 +58,10 @@ class function:
         #parameters
         if parameters == None:
             self.parameters = None
+            self.count = 0
         else:
             self.parameters = {}
+            self.array = []
             list_parameters = parameters.split(",")
             for par in list_parameters:
                 value = par.split("=")[1]
@@ -72,18 +75,22 @@ class function:
                         value = True
                     else:
                         value = False
+                self.count = len(list_parameters)
                 namee  = par.split(" ")[1]
                 parameter = variable(namee, typee, value)
                 self.parameters[namee] = parameter
+                self.array.append(namee)
     
     def __str__(self):
         return f'{self.function_name}()'
     
-    def parse(self):
+    def parse(self, listy):
         global parser, variables
+        for k in range(len(self.array)):
+            variables[self.array[k]].set_value(listy[k])
         for k in self.parameters:
             variables[k] = self.parameters[k]
- 
+        
         result = parser.parse(self.statements)
         if result != None:
             for r in result:
@@ -788,7 +795,7 @@ def build_parser(source):
     if not s: 
     #    continue
         return
-    #WHILE 
+    #WHILE STATEMENT
     if "ma7ed" in s:
         #statements = s.split("{")[1].split("}")[0]
         prestatements = s.split("{")
@@ -821,7 +828,7 @@ def build_parser(source):
                         is_looping = False
                         break
             
-    
+    #FOR STATEMENT
     elif "fkoula" in s:
         var       = s.split("(")[1].split(")")[0].split(";")[0] + ";"
         condition = s.split("(")[1].split(")")[0].split(";")[1]
@@ -840,8 +847,8 @@ def build_parser(source):
                         is_looping = False
                         break
             parser.parse(inc)
+    #FUNCTION DECLARATIONS
     elif "dalla" in s:
-        # dalla zghnghn(sahih a = 2, sahih b = 3){tasks}
         parameters = s.split("(")[1].split(")")[0]
         tasks = s.split("{")[1].split("}")[0]
         func_name = s.split("(")[0].split(" ")[1]
@@ -849,9 +856,31 @@ def build_parser(source):
         functions[func_name] = functionn
 
     else:
-        func_name = s.split("(")[0]
-        if func_name in functions and ");" in s and "(" in s:
-            functions[func_name].parse()
+        #FUNCTION CALL
+        func_name = s.split("(")[0].split(" ")[1]
+        dirr = s.split("(")[0].split(" ")[0]
+        if func_name in functions and ");" in s and "(" in s and dirr == "dir":
+            pars = s.split("(")[1].split[")"][0]
+            if len(pars) == functions[func_name].count:
+                listy = []
+                if ',' in pars:
+                    pars = pars.split(",")
+                for par in pars:
+                    if '"' == par[0] and '"' == par[-1]:
+                        listy.append(par)
+                    elif par == 'vri':
+                        listy.append(True)
+                    elif par == 'ffo':
+                        listy.append(False)
+                    elif '.' in par:
+                        listy.append(float(par))
+                    else:
+                        listy.append(int(par))
+                functions[func_name].parse(listy)
+            else:
+                print(errors[7][1])
+        
+        #ANYTHING ELSE
         else:
             result = parser.parse(s)
 
