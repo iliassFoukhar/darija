@@ -1,6 +1,17 @@
-tbe3("3tini l flous li baghi t7wl");
-achari a = dkhl(achari);
+dalla drhm(achari taman = 5){
+	tbe3("bdrhm 3ndna:");
+	tbe3(taman);
+	tbe3("briyal 3ndna:");
+	tbe3(taman * 20);
+	tbe3("bl franc 3ndna:");
+	tbe3(taman * 100);
+}
 
-tbe3("3tini
-sahih khtiyar = dkhl(sahih);
+tbe3("Sh7al dl flous bghiti t7wwel  ?");
 
+
+achari flous = dkhl(achari);
+
+
+
+dir drhm(flous);

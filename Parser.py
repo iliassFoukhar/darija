@@ -837,6 +837,7 @@ parser = yacc.yacc()
 
 def build_parser(source):
     global is_running, functions
+    # print(f"source: {source}", end=" ")
     # while is_running:
     # try:
     #     #s = input('calc > ')
@@ -906,8 +907,8 @@ def build_parser(source):
         func_name = s.split("(")[0].split(" ")[1]
         functionn = function(func_name, parameters, tasks)
         functions[func_name] = functionn
-
-    else:
+        
+    elif "dir" in s:
         # FUNCTION CALL
         func_name = s.split("(")[0].split(" ")[1]
         dirr = s.split("(")[0].split(" ")[0]
@@ -915,10 +916,18 @@ def build_parser(source):
             pars = s.split("(")[1].split(")")[0]
             if ',' in pars:
                 pars = pars.split(",")
+            else:
+                pars = [pars]
             if len(pars) == functions[func_name].count:
                 listy = []
 
                 for par in pars:
+                    if isinstance(par, str):
+                        found = variable_exists(par)
+                        if found != None:
+                            valuee = found.get_value()
+                            listy.append(valuee)
+                            continue
                     if '"' == par[0] and '"' == par[-1]:
                         listy.append(par)
                     elif par == 'vri':
@@ -934,18 +943,18 @@ def build_parser(source):
             else:
                 print(errors[7][1])
 
-        # ANYTHING ELSE
-        else:
-            result = parser.parse(s)
+    # ANYTHING ELSE
+    else:
+        result = parser.parse(s)
 
-            if result != None:
-                for r in result:
-                    if r is not None and r != True and r != False:
-                        print(r)
-                    elif r is not None and r == True:
-                        print('vri')
-                    elif r is not None and r == False:
-                        print('ffo')
+        if result != None:
+            for r in result:
+                if r is not None and r != True and r != False:
+                    print(r)
+                elif r is not None and r == True:
+                    print('vri')
+                elif r is not None and r == False:
+                    print('ffo')
     print("--------------------------------------------------------------------------------")
 
 # source = "dalla zghanghan(sahih a = 2, achari b = 3, manti9i c = vri){tbe3(a * b);}"
@@ -955,11 +964,9 @@ def build_parser(source):
 
 
 def blockify(source):
-    source = source.replace("\n", " ")
     blocks = []
     start = []
     end = []
-    
     #Getting the curly braces indexes
     for i in range(len(source)):
         s = source[i]
@@ -976,14 +983,21 @@ def blockify(source):
     elif len(start) < len(end):
         print("wa galik 7el tl9a matsd. Sditi b } wnta ma7allhash al khawa")
     #Getting the initial blocks
+    elif len(start) == 0 and len(end) == 0:
+        blocks.append(source)
+        return blocks
     else:
-        ss = source[0:start[0]]
-        blocks.append(ss)
+        if len(source) !=0:
+            ss = source[0:start[0]]
+            blocks.append(ss)
         for i in range(len(start)):
             ss = source[start[i]:end[i]+1]
             blocks.append(ss)
             if i != len(start) - 1:
                 ss = source[end[i] + 1:start[i-1]]
+                blocks.append(ss)
+            elif i == len(start) - 1:
+                ss = source[end[i] + 1: len(source)]
                 blocks.append(ss)
     #Getting the real blocks
     if len(blocks) == 1:
@@ -1037,14 +1051,14 @@ def blockify(source):
             else:
                 new_new_blocks.append(block)
                 continue
-    return new_new_blocks
+        return new_new_blocks
 
 
-source = "sahih x = 55; tbe3(\"Salam l3alam\"); dalla zghanghan(sahih a = 2, achari b = 3, manti9i c = vri){tbe3(a * b);} sahih y = 33; dir zghanghan(3,6,ffo); ma7ed(x > 50){x--;} dir zghanghan(1,3,ffo);"
-ss = blockify(source)
-# print(ss)
-for s in ss:
-    build_parser(s)
-# print(functions["zghanghan"].statements)
-# print(functions["zghanghan"].parameters["a"].get_value())
-# functions["zghanghan"].parse()
+def run_the_code(source):
+    listy = blockify(source)
+    # print(listy)
+    for l in listy:
+        if l != '' and l != " " and l != "  " and l != "\n" and l != "\n\n" and l != "\n\n\n":
+            build_parser(l)
+
+    

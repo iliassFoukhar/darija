@@ -13,11 +13,11 @@ reserved = {
     'oula'        : 'ELSE',
     'marka'       : 'VAR_TYPE',
     'harf'        : 'CHAR', 
-    'reje3'       : 'RETURN', # 3
+    'reje3'       : 'RETURN', 
     'jme3lia'     : 'UNION', 
     'kemel'       : 'CONTINUE',     
     'fkoula'      : 'FOR',
-    'dalla'       : 'FUNCTION', # 6
+    'dalla'       : 'FUNCTION',
     'ila'         : 'IF',
     'ma7ed'       : 'WHILE',
     'qyas'        : 'SIZEOF',

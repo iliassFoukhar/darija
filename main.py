@@ -45,9 +45,9 @@ def run_code():
 
 def run_parser():
     global text
+    source_code = ""
     source_code = text.get("1.0", "end")
-    if "ma7ed" not in source_code and "fkoula" not in source_code:
-        Parser.build_parser(source_code)
+    ll = Parser.run_the_code(source_code)
     update_variables()
 
 
