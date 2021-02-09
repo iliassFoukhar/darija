@@ -149,7 +149,9 @@ def p_statement_print(p):
     print_statement : PRINT LPAREN expression RPAREN SEMICOL
                     | PRINT LPAREN STRING RPAREN SEMICOL  
     '''
-    p[0] = [p[3]]
+    #p[0] = [p[3]]
+    print(p[3])
+    p[0] = None
 
 
 def p_statement_vartype(p):
@@ -908,8 +910,9 @@ def build_parser(source):
         functionn = function(func_name, parameters, tasks)
         functions[func_name] = functionn
         
-    elif "dir" in s:
+    elif "dir" in s and "ila" not in s:
         # FUNCTION CALL
+        print(s)
         func_name = s.split("(")[0].split(" ")[1]
         dirr = s.split("(")[0].split(" ")[0]
         if func_name in functions and ");" in s and "(" in s and dirr == "dir":
@@ -942,7 +945,50 @@ def build_parser(source):
                 functions[func_name].parse(listy)
             else:
                 print(errors[7][1])
+    
+    # elif "dir" in s and "ila" in s:
+    #     ilaindex = s.index("ila")
+    #     dirindex = s.index("dir")
+    #      # FUNCTION CALL
+    #     #print(s)
+    #     func_name = s[dirindex+4:-1].split("(")[0]
+    #     dirr = s[dirindex: dirindex + 3]
 
+    #     if func_name in functions and ");" in s and "(" in s and dirr == "dir":
+    #         #pars = s.split("(")[1].split(")")[0]
+    #         pars = s.split(dirr)[1].split("(")[1].split(")")[0]
+    #         print(pars)
+    #         print(len(pars))
+    #         if ',' in pars:
+    #             pars = pars.split(",")
+    #         else:
+    #             pars = [pars]
+    #         if len(pars) == functions[func_name].count:
+    #             listy = []
+
+    #             for par in pars:
+    #                 if isinstance(par, str):
+    #                     print(functions)
+    #                     found = variable_exists(par)
+                        
+    #                     if found != None:
+    #                         valuee = found.get_value()
+    #                         listy.append(valuee)
+    #                         continue
+    #                 elif '"' == par[0] and '"' == par[-1]:
+    #                     listy.append(par)
+    #                 elif par == 'vri':
+    #                     listy.append(True)
+    #                 elif par == 'ffo':
+    #                     listy.append(False)
+    #                 elif '.' in par:
+    #                     listy.append(float(par))
+    #                 else:
+    #                     listy.append(int(par))
+
+    #             functions[func_name].parse(listy)
+    #         else:
+    #             print(errors[7][1])
     # ANYTHING ELSE
     else:
         result = parser.parse(s)
@@ -955,110 +1001,201 @@ def build_parser(source):
                     print('vri')
                 elif r is not None and r == False:
                     print('ffo')
-    print("--------------------------------------------------------------------------------")
+    
 
-# source = "dalla zghanghan(sahih a = 2, achari b = 3, manti9i c = vri){tbe3(a * b);}"
-# build_parser(source)
-# source = "dir zghanghan(5,4.4,ffo);"
-# build_parser(source)
+# def blockify(source):
+#     blocks = []
+#     start = []
+#     end = []
+#     #Getting the curly braces indexes
+#     for i in range(len(source)):
+#         s = source[i]
+#         if s != "{" and s != "}":
+#             continue
+#         elif s == "{":
+#             start.append(i)
+#         elif s == "}":
+#             end.append(i)
+    
+#     #Errors management
+#     if len(start) > len(end):
+#         print("7liti { wmasditihash")
+#     elif len(start) < len(end):
+#         print("wa galik 7el tl9a matsd. Sditi b } wnta ma7allhash al khawa")
+#     #Getting the initial blocks
+#     elif len(start) == 0 and len(end) == 0:
+#         blocks.append(source)
+#         return blocks
+#     else:
+#         if len(source) !=0:
+#             ss = source[0:start[0]]
+#             blocks.append(ss)
+#         for i in range(len(start)):
+#             ss = source[start[i]:end[i]+1]
+#             blocks.append(ss)
+#             if i != len(start) - 1:
+#                 ss = source[end[i] + 1:start[i-1]]
+#                 blocks.append(ss)
+#             elif i == len(start) - 1:
+#                 ss = source[end[i] + 1: len(source)]
+#                 blocks.append(ss)
+#     #Getting the real blocks
+#     if len(blocks) == 1:
+#         return blocks
+#     elif len(blocks) == 0:
+#         print("Kayn shi moshkil mam3rofsh mnash")
+#     else:
+#         new_blocks = []
+#         sub = ""
+#         for i in range(len(blocks)):
+#             block = blocks[i]
+#             if block == '' or block == ' ' or block == '  ':
+#                 continue
+#             if block[0] == '{' and block[-1] == '}':
+#                 continue
+#             if "ma7ed" in block:
+#                 sub = block[block.index("ma7ed"):len(block)] + blocks[i + 1]
+#                 subtwo = block[0:block.index("ma7ed")]
+#                 new_blocks.append(subtwo)
+#                 new_blocks.append(sub)
+#             elif "fkoula" in block:
+#                 sub = block[block.index("fkoula"):len(block)] + blocks[i + 1]
+#                 subtwo = block[0:block.index("fkoula")]
+#                 new_blocks.append(subtwo)
+#                 new_blocks.append(sub)
+#             elif "ila" in block:
+#                 sub = block[block.index("ila"):len(block)] + blocks[i + 1]
+#                 subtwo = block[0:block.index("ila")]
+#                 new_blocks.append(subtwo)
+#                 new_blocks.append(sub)
+#             elif "dalla" in block:
+#                 sub = block[block.index("dalla"): len(block)] + blocks[i+1]
+#                 subtwo = block[0:block.index("dalla")]
+#                 new_blocks.append(subtwo)
+#                 new_blocks.append(sub)
+                
+#             elif "dir" in block:
+#                 sub = block[block.index("dir"): len(block)]
+#                 subtwo = block[0:block.index("dir")]
+#                 new_blocks.append(subtwo)
+#                 new_blocks.append(sub)
+            
+#             else:
+#                 new_blocks.append(block)
+        
+#         new_new_blocks = []    
+#         for block in new_blocks:
+#             if "dir" in block and "ila" not in block:
+#                 sub = block[block.index("dir"): len(block)]
+#                 subtwo = block[0:block.index("dir")]
+#                 new_new_blocks.append(subtwo)
+#                 new_new_blocks.append(sub)
+#             else:
+#                 new_new_blocks.append(block)
+#                 continue
+#         return new_new_blocks
 
+# import re
+# def indices(source, substring):
+#     matches = re.finditer(substring, source)
+#     matches_positions = [match.start() for match in matches]
+#     return matches_positions
 
+import re
 def blockify(source):
     blocks = []
-    start = []
-    end = []
-    #Getting the curly braces indexes
-    for i in range(len(source)):
-        s = source[i]
-        if s != "{" and s != "}":
-            continue
-        elif s == "{":
-            start.append(i)
-        elif s == "}":
-            end.append(i)
+    b = ["ila", "ma7ed", "fkoula", "dalla"]
+    s = ["tbe3", "dkhl", "dir", "sahih", "achari", "manti9i", "marka", "harf", "jme3lia", "qyas"]
     
-    #Errors management
-    if len(start) > len(end):
-        print("7liti { wmasditihash")
-    elif len(start) < len(end):
-        print("wa galik 7el tl9a matsd. Sditi b } wnta ma7allhash al khawa")
-    #Getting the initial blocks
-    elif len(start) == 0 and len(end) == 0:
-        blocks.append(source)
-        return blocks
-    else:
-        if len(source) !=0:
-            ss = source[0:start[0]]
-            blocks.append(ss)
-        for i in range(len(start)):
-            ss = source[start[i]:end[i]+1]
-            blocks.append(ss)
-            if i != len(start) - 1:
-                ss = source[end[i] + 1:start[i-1]]
-                blocks.append(ss)
-            elif i == len(start) - 1:
-                ss = source[end[i] + 1: len(source)]
-                blocks.append(ss)
-    #Getting the real blocks
-    if len(blocks) == 1:
-        return blocks
-    elif len(blocks) == 0:
-        print("Kayn shi moshkil mam3rofsh mnash")
-    else:
-        new_blocks = []
-        sub = ""
-        for i in range(len(blocks)):
-            block = blocks[i]
-            if block[0] == '{' and block[-1] == '}':
-                continue
-            if "ma7ed" in block:
-                sub = block[block.index("ma7ed"):len(block)] + blocks[i + 1]
-                subtwo = block[0:block.index("ma7ed")]
-                new_blocks.append(subtwo)
-                new_blocks.append(sub)
-            elif "fkoula" in block:
-                sub = block[block.index("fkoula"):len(block)] + blocks[i + 1]
-                subtwo = block[0:block.index("fkoula")]
-                new_blocks.append(subtwo)
-                new_blocks.append(sub)
-            elif "ila" in block:
-                sub = block[block.index("ila"):len(block)] + blocks[i + 1]
-                subtwo = block[0:block.index("ila")]
-                new_blocks.append(subtwo)
-                new_blocks.append(sub)
-            elif "dalla" in block:
-                sub = block[block.index("dalla"): len(block)] + blocks[i+1]
-                subtwo = block[0:block.index("dalla")]
-                new_blocks.append(subtwo)
-                new_blocks.append(sub)
-                
-            elif "dir" in block:
-                sub = block[block.index("dir"): len(block)]
-                subtwo = block[0:block.index("dir")]
-                new_blocks.append(subtwo)
-                new_blocks.append(sub)
+    i = 0
+    j = 0
+    #for i in range(len(source)):
+    while i < len(source):
+        block = ""
+        j = i + 1
+        #for j in range(i+1, len(source)):
+        while j < len(source):
+            # Blocks Of Nested Statements
+            if source[i:j+1] in b:
+                print(source[i:j+1])
+                o = 0
+                e = 0
+                for k in range(j+1, len(source)):
+                    if source[k] == '{':
+                        o += 1
+                    elif source[k] == '}':
+                        e += 1
+                    if e == o and o != 0:
+                        block = source[i: k+1]
+                        blocks.append(block)
+                        i = k + 1
+                        j = k + 1
+                        break
+
+            #Ordinary statements
+            elif source[i:j+1] in s:
+                print(source[i: j+1])
+                for k in range(j+1, len(source)):
+                    if source[k] == ";":
+                        block = source[i:k+1]
+                        blocks.append(block)
+                        i = k+1
+                        j = k+1
             
-            else:
-                new_blocks.append(block)
-        
-        new_new_blocks = []    
-        for block in new_blocks:
-            if "dir" in block:
-                sub = block[block.index("dir"): len(block)]
-                subtwo = block[0:block.index("dir")]
-                new_new_blocks.append(subtwo)
-                new_new_blocks.append(sub)
-            else:
-                new_new_blocks.append(block)
-                continue
-        return new_new_blocks
+            j += 1
+        i += 1
+    return blocks
+
 
 
 def run_the_code(source):
     listy = blockify(source)
     # print(listy)
     for l in listy:
-        if l != '' and l != " " and l != "  " and l != "\n" and l != "\n\n" and l != "\n\n\n":
-            build_parser(l)
+        print(l)
+        print("------------------------------------------")
+    # for l in listy:
+    #     if l != '' and l != " " and l != "  " and l != "\n" and l != "\n\n" and l != "\n\n\n":
+    #         build_parser(l)
+    print("--------------------------------------------------------------------------------")
 
-    
+
+sourcy = '''
+    # Dallat
+dalla drhm(achari taman = 5){
+	tbe3("briyal 3ndna:");
+	tbe3(taman * 20);
+	tbe3("bl franc 3ndna:");
+	tbe3(taman * 100);
+}
+
+dalla riyal(achari taman = 5){
+	tbe3("bdrhm 3ndna:");
+	tbe3(taman / 20);
+	tbe3("bl franc 3ndna:");
+	tbe3(taman * 5);
+}
+
+dalla franc(achari taman = 5){
+	tbe3("bdrhm 3ndna:");
+	tbe3(taman / 100);
+	tbe3("briyal 3ndna:");
+	tbe3(taman / 5);
+}
+
+# Dkholat
+tbe3("Sh7al dl flous bghiti t7wwel  ?");
+#achari flous = dkhl(achari);
+tbe3("la kant bdrhm khtar 0 la kant briyal khtar 1 la kant b franc khtar 2");
+#sahih khtiyar = dkhl(sahih);
+
+achari flous = 32.0;
+sahih khtiyar = 1;
+
+# Lkhrja
+
+ila(khtiyar == 0){ dir drhm(flous);}
+ila(khtiyar == 1){ dir riyal(flous);}
+ila(khtiyar == 2){ dir drhm(flous);}
+'''
+run_the_code(sourcy)

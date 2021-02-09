@@ -1,17 +1,32 @@
+# Dallat
 dalla drhm(achari taman = 5){
-	tbe3("bdrhm 3ndna:");
-	tbe3(taman);
 	tbe3("briyal 3ndna:");
 	tbe3(taman * 20);
 	tbe3("bl franc 3ndna:");
 	tbe3(taman * 100);
 }
 
+dalla riyal(achari taman = 5){
+	tbe3("bdrhm 3ndna:");
+	tbe3(taman / 20);
+	tbe3("bl franc 3ndna:");
+	tbe3(taman * 5);
+}
+
+dalla franc(achari taman = 5){
+	tbe3("bdrhm 3ndna:");
+	tbe3(taman / 100);
+	tbe3("briyal 3ndna:");
+	tbe3(taman / 5);
+}
+
+# Dkholat
 tbe3("Sh7al dl flous bghiti t7wwel  ?");
-
-
 achari flous = dkhl(achari);
+tbe3("la kant bdrhm khtar 0 la kant briyal khtar 1 la kant b franc khtar 2");
+sahih khtiar = dkhl(sahih);
 
-
-
-dir drhm(flous);
+# Lkhrja
+ila(khtiyar == 0){ dir drhm(flous);}
+ila(khtiyar == 1){ dir riyal(flous);}
+ila(khtiyar == 2){ dir drhm(flous);}
