@@ -45,6 +45,7 @@ def run_code():
 
 def run_parser():
     global text
+    empty_variables()
     source_code = ""
     source_code = text.get("1.0", "end")
     Parser.run_the_code(source_code) #ll=

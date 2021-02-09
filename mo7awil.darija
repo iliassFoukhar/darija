@@ -24,9 +24,8 @@ dalla franc(achari taman = 5){
 tbe3("Sh7al dl flous bghiti t7wwel  ?");
 achari flous = dkhl(achari);
 tbe3("la kant bdrhm khtar 0 la kant briyal khtar 1 la kant b franc khtar 2");
-sahih khtiar = dkhl(sahih);
-
-# Lkhrja
+sahih khtiyar = dkhl(sahih);
+# Khrojat
 ila(khtiyar == 0){ dir drhm(flous);}
 ila(khtiyar == 1){ dir riyal(flous);}
 ila(khtiyar == 2){ dir drhm(flous);}

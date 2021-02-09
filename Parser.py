@@ -150,7 +150,11 @@ def p_statement_print(p):
                     | PRINT LPAREN STRING RPAREN SEMICOL  
     '''
     #p[0] = [p[3]]
-    print(p[3])
+    if isinstance(p[3], str) == True:
+        if p[3][0] == '"' and p[3][-1] == '"':
+            print(p[3][1:-1])
+    else:
+        print(p[3])
     p[0] = None
 
 
@@ -262,6 +266,7 @@ def p_statement_expr(p):
                  | union_statement
                  | comparison
                  | compare_id_value
+                 | compare_id_id
                  | bool_comparison
                  | var_statement
                  | var_assign
@@ -374,36 +379,38 @@ def p_statement_assign_var(p):
                | ID EQUALS NUMBER SEMICOL
                | ID EQUALS TRUE SEMICOL
                | ID EQUALS FALSE SEMICOL
+               | ID EQUALS expression SEMICOL
     '''
     found = variable_exists(p[1])
     if found is not None:
         if found.get_type() == "sahih":
             if isinstance(p[3], int):
                 found.set_value(p[3])
-                p[0] = found.get_value()
+                #p[0] = found.get_value()
             else:
-                p[0] = "l motaghayyir dyalk rah {0}".format(found.get_type())
+                print("l motaghayyir dyalk rah {0}".format(found.get_type()))
         elif found.get_type() == "achari":
             if isinstance(p[3], float):
                 found.set_value(p[3])
             else:
-                p[0] = "l motaghayyir dyalk rah {0}".format(found.get_type())
+                print("l motaghayyir dyalk rah {0}".format(found.get_type()))
         elif found.get_type() == "harf":
             if isinstance(p[3], str):
                 found.set_value(p[3])
             else:
-                p[0] = "l motaghayyir dyalk rah {0}".format(found.get_type())
+                print("l motaghayyir dyalk rah {0}".format(found.get_type()))
         elif found.get_type() == "manti9i":
             if p[3] == 'vri':
                 found.set_value(True)
-                p[0] = True
+                # p[0] = True
             elif p[3] == 'ffo':
                 found.set_value(False)
-                p[0] = False
+                # p[0] = False
             else:
-                p[0] = "l motaghayyir dyalk rah {0}".format(found.get_type())
+                print("l motaghayyir dyalk rah {0}".format(found.get_type()))
     else:
-        p[0] = "{0} makaynash a lkhawa".format(p[1])
+        print("{0} makaynash a lkhawa".format(p[1]))
+    p[0] = None
 
 # Increment and decrement variables
 
@@ -419,12 +426,14 @@ def p_increment_var(p):
     else:
         if found.get_type() == "sahih":
             found.set_value(found.get_value() + 1)
-            p[0] = found.get_value()
+            #p[0] = found.get_value()
+            p[0] = None
         elif found.get_type() == "achari":
             found.set_value(found.get_value() + 1.0)
-            p[0] = found.get_value()
+            #p[0] = found.get_value()
+            p[0] = None
         else:
-            p[0] = f'{p[1]} {errors[4][1]}'
+            print(f'{p[1]} {errors[4][1]}')
 
 
 def p_decrement_var(p):
@@ -520,8 +529,6 @@ def p_variable_expression(p):
         p[0] = found.get_value()
 
 # Comparisons
-
-
 def p_expression_comparison(p):
     '''
     comparison : expression GTH expression
@@ -567,7 +574,32 @@ def p_expression_comparison(p):
         else:
             p[0] = False
 
-
+def p_compare_id_id(p):
+    '''
+        compare_id_id : ID GTH ID
+                      | ID LTH ID
+                      | ID GTHOREQUAL ID
+                      | ID LTHOREQUAL ID
+                      | ID EQUALEQUAL ID
+                      | ID NOTEQUAL ID
+    '''
+    found_one = variable_exists(p[1])
+    found_two = variable_exists(p[3])
+    print("hh")
+    if found_one is not None and found_two is not None:
+        if p[2] == ">":
+            p[0] = found_one.get_value() > found_two.get_value()
+        elif p[2] == "<":
+            p[0] = found_one.get_value() < found_two.get_value()
+        elif p[2] == ">=":
+            p[0] = found_one.get_value() >= found_two.get_value()
+        elif p[2] == "<=":
+            p[0] = found_one.get_value() <= found_two.get_value()
+        elif p[2] == "==":
+            p[0] = found_one.get_value() == found_two.get_value()
+        elif p[2] == "!=":
+            p[0] = found_one.get_value() != found_two.get_value()
+        
 def p_compare_id_value(p):
     '''
         compare_id_value : ID GTH expression
@@ -904,23 +936,35 @@ def build_parser(source):
             parser.parse(inc)
     # FUNCTION DECLARATIONS
     elif "dalla" in s:
-        parameters = s.split("(")[1].split(")")[0]
-        tasks = s.split("{")[1].split("}")[0]
-        func_name = s.split("(")[0].split(" ")[1]
+        parameters = s[s.index("(") + 1: s.index(")")]
+        tasks = s[s.index("{") + 1: s.index("}")]
+        func_name = s[s.index("dalla") + 6: s.index("(")]
         functionn = function(func_name, parameters, tasks)
         functions[func_name] = functionn
-        
+    
+    elif "dir" in s and "ila" in s:
+        condition = s[s.index("(") + 1: s.index(")")]
+        statement = s[s.index("{") + 1: s.index("}")]
+
+        if parser.parse(condition) == [True]:
+            build_parser(statement)
+        else:
+            pass
+
+
     elif "dir" in s and "ila" not in s:
-        # FUNCTION CALL
-        print(s)
-        func_name = s.split("(")[0].split(" ")[1]
-        dirr = s.split("(")[0].split(" ")[0]
-        if func_name in functions and ");" in s and "(" in s and dirr == "dir":
+        # FUNCTION CALL        
+        func_name = s[s.index("dir") + 4: s.index("(")]
+        dirr = s[s.index("dir"): s.index("dir") + 3]
+
+        
+        if func_name in functions and ")" in s and ";" in s and "(" in s and dirr == "dir":
             pars = s.split("(")[1].split(")")[0]
             if ',' in pars:
                 pars = pars.split(",")
             else:
                 pars = [pars]
+
             if len(pars) == functions[func_name].count:
                 listy = []
 
@@ -946,49 +990,7 @@ def build_parser(source):
             else:
                 print(errors[7][1])
     
-    # elif "dir" in s and "ila" in s:
-    #     ilaindex = s.index("ila")
-    #     dirindex = s.index("dir")
-    #      # FUNCTION CALL
-    #     #print(s)
-    #     func_name = s[dirindex+4:-1].split("(")[0]
-    #     dirr = s[dirindex: dirindex + 3]
 
-    #     if func_name in functions and ");" in s and "(" in s and dirr == "dir":
-    #         #pars = s.split("(")[1].split(")")[0]
-    #         pars = s.split(dirr)[1].split("(")[1].split(")")[0]
-    #         print(pars)
-    #         print(len(pars))
-    #         if ',' in pars:
-    #             pars = pars.split(",")
-    #         else:
-    #             pars = [pars]
-    #         if len(pars) == functions[func_name].count:
-    #             listy = []
-
-    #             for par in pars:
-    #                 if isinstance(par, str):
-    #                     print(functions)
-    #                     found = variable_exists(par)
-                        
-    #                     if found != None:
-    #                         valuee = found.get_value()
-    #                         listy.append(valuee)
-    #                         continue
-    #                 elif '"' == par[0] and '"' == par[-1]:
-    #                     listy.append(par)
-    #                 elif par == 'vri':
-    #                     listy.append(True)
-    #                 elif par == 'ffo':
-    #                     listy.append(False)
-    #                 elif '.' in par:
-    #                     listy.append(float(par))
-    #                 else:
-    #                     listy.append(int(par))
-
-    #             functions[func_name].parse(listy)
-    #         else:
-    #             print(errors[7][1])
     # ANYTHING ELSE
     else:
         result = parser.parse(s)
@@ -1003,105 +1005,6 @@ def build_parser(source):
                     print('ffo')
     
 
-# def blockify(source):
-#     blocks = []
-#     start = []
-#     end = []
-#     #Getting the curly braces indexes
-#     for i in range(len(source)):
-#         s = source[i]
-#         if s != "{" and s != "}":
-#             continue
-#         elif s == "{":
-#             start.append(i)
-#         elif s == "}":
-#             end.append(i)
-    
-#     #Errors management
-#     if len(start) > len(end):
-#         print("7liti { wmasditihash")
-#     elif len(start) < len(end):
-#         print("wa galik 7el tl9a matsd. Sditi b } wnta ma7allhash al khawa")
-#     #Getting the initial blocks
-#     elif len(start) == 0 and len(end) == 0:
-#         blocks.append(source)
-#         return blocks
-#     else:
-#         if len(source) !=0:
-#             ss = source[0:start[0]]
-#             blocks.append(ss)
-#         for i in range(len(start)):
-#             ss = source[start[i]:end[i]+1]
-#             blocks.append(ss)
-#             if i != len(start) - 1:
-#                 ss = source[end[i] + 1:start[i-1]]
-#                 blocks.append(ss)
-#             elif i == len(start) - 1:
-#                 ss = source[end[i] + 1: len(source)]
-#                 blocks.append(ss)
-#     #Getting the real blocks
-#     if len(blocks) == 1:
-#         return blocks
-#     elif len(blocks) == 0:
-#         print("Kayn shi moshkil mam3rofsh mnash")
-#     else:
-#         new_blocks = []
-#         sub = ""
-#         for i in range(len(blocks)):
-#             block = blocks[i]
-#             if block == '' or block == ' ' or block == '  ':
-#                 continue
-#             if block[0] == '{' and block[-1] == '}':
-#                 continue
-#             if "ma7ed" in block:
-#                 sub = block[block.index("ma7ed"):len(block)] + blocks[i + 1]
-#                 subtwo = block[0:block.index("ma7ed")]
-#                 new_blocks.append(subtwo)
-#                 new_blocks.append(sub)
-#             elif "fkoula" in block:
-#                 sub = block[block.index("fkoula"):len(block)] + blocks[i + 1]
-#                 subtwo = block[0:block.index("fkoula")]
-#                 new_blocks.append(subtwo)
-#                 new_blocks.append(sub)
-#             elif "ila" in block:
-#                 sub = block[block.index("ila"):len(block)] + blocks[i + 1]
-#                 subtwo = block[0:block.index("ila")]
-#                 new_blocks.append(subtwo)
-#                 new_blocks.append(sub)
-#             elif "dalla" in block:
-#                 sub = block[block.index("dalla"): len(block)] + blocks[i+1]
-#                 subtwo = block[0:block.index("dalla")]
-#                 new_blocks.append(subtwo)
-#                 new_blocks.append(sub)
-                
-#             elif "dir" in block:
-#                 sub = block[block.index("dir"): len(block)]
-#                 subtwo = block[0:block.index("dir")]
-#                 new_blocks.append(subtwo)
-#                 new_blocks.append(sub)
-            
-#             else:
-#                 new_blocks.append(block)
-        
-#         new_new_blocks = []    
-#         for block in new_blocks:
-#             if "dir" in block and "ila" not in block:
-#                 sub = block[block.index("dir"): len(block)]
-#                 subtwo = block[0:block.index("dir")]
-#                 new_new_blocks.append(subtwo)
-#                 new_new_blocks.append(sub)
-#             else:
-#                 new_new_blocks.append(block)
-#                 continue
-#         return new_new_blocks
-
-# import re
-# def indices(source, substring):
-#     matches = re.finditer(substring, source)
-#     matches_positions = [match.start() for match in matches]
-#     return matches_positions
-
-import re
 def blockify(source):
     blocks = []
     b = [ "dalla ","ila ", "ma7ed ", "fkoula "]
@@ -1147,53 +1050,54 @@ def blockify(source):
 
 def run_the_code(source):
     listy = blockify(source)
-    # print(listy)
     for l in listy:
-        print(l)
-        print("----------------")
-    # for l in listy:
-    #     if l != '' and l != " " and l != "  " and l != "\n" and l != "\n\n" and l != "\n\n\n":
-    #         build_parser(l)
+        if l != '' and l != " " and l != "  " and l != "\n" and l != "\n\n" and l != "\n\n\n":
+            build_parser(l)
+
     print("--------------------------------------------------------------------------------")
 
 
-sourcy = '''
-    # Dallat
-dalla drhm(achari taman = 5){
-	tbe3("briyal 3ndna:");
-	tbe3(taman * 20);
-	tbe3("bl franc 3ndna:");
-	tbe3(taman * 100);
-}
+# sourcy = '''
+#     # Dallat
+# dalla drhm(achari taman = 5){
+# 	tbe3("briyal 3ndna:");
+# 	tbe3(taman * 20);
+# 	tbe3("bl franc 3ndna:");
+# 	tbe3(taman * 100);
+# }
 
-dalla riyal(achari taman = 5){
-	tbe3("bdrhm 3ndna:");
-	tbe3(taman / 20);
-	tbe3("bl franc 3ndna:");
-	tbe3(taman * 5);
-}
+# dalla riyal(achari taman = 5){
+# 	tbe3("bdrhm 3ndna:");
+# 	tbe3(taman / 20);
+# 	tbe3("bl franc 3ndna:");
+# 	tbe3(taman * 5);
+# }
 
-dalla franc(achari taman = 5){
-	tbe3("bdrhm 3ndna:");
-	tbe3(taman / 100);
-	tbe3("briyal 3ndna:");
-	tbe3(taman / 5);
-}
+# dalla franc(achari taman = 5){
+# 	tbe3("bdrhm 3ndna:");
+# 	tbe3(taman / 100);
+# 	tbe3("briyal 3ndna:");
+# 	tbe3(taman / 5);
+# }
 
-# Dkholat
-tbe3("Sh7al dl flous bghiti t7wwel  ?");
-#achari flous = dkhl(achari);
-tbe3("la kant bdrhm khtar 0 la kant briyal khtar 1 la kant b franc khtar 2");
-#sahih khtiyar = dkhl(sahih);
+# # Dkholat
+# tbe3("Sh7al dl flous bghiti t7wwel  ?");
+# achari flous = dkhl(achari);
+# tbe3("la kant bdrhm khtar 0 la kant briyal khtar 1 la kant b franc khtar 2");
+# sahih khtiyar = dkhl(sahih);
 
-achari flous = 32.0;
-sahih khtiyar = 1;
+# sahih a = 2;
 
-sahih a == 2;
+# ma7ed(a == 2){
+
+#     tbe3(a);
+#     hbes;
+# }
 
 
-ila(khtiyar == 0){ dir drhm(flous);}
-ila(khtiyar == 1){ dir riyal(flous);}
-ila(khtiyar == 2){ dir drhm(flous);}
-'''
-run_the_code(sourcy)
+
+# ila(khtiyar == 0){ dir drhm(flous);}
+# ila(khtiyar == 1){ dir riyal(flous);}
+# ila(khtiyar == 2){ dir franc(flous);}
+# '''
+# run_the_code(sourcy)
