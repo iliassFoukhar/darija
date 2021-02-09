@@ -29,7 +29,6 @@ tbe3("la kant bdrhm khtar 0 la kant briyal khtar 1 la kant b franc khtar 2");
 achari flous = 32.0;
 sahih khtiyar = 1;
 
-# Lkhrja
 ila(khtiyar == 0){ dir drhm(flous);}
 ila(khtiyar == 1){ dir riyal(flous);}
 ila(khtiyar == 2){ dir drhm(flous);}

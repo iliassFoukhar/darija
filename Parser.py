@@ -1104,7 +1104,7 @@ def build_parser(source):
 import re
 def blockify(source):
     blocks = []
-    b = ["ila", "ma7ed", "fkoula", "dalla"]
+    b = [ "dalla ","ila ", "ma7ed ", "fkoula "]
     s = ["tbe3", "dkhl", "dir", "sahih", "achari", "manti9i", "marka", "harf", "jme3lia", "qyas"]
     
     i = 0
@@ -1115,9 +1115,9 @@ def blockify(source):
         j = i + 1
         #for j in range(i+1, len(source)):
         while j < len(source):
+            key = source[i: j+1]        
             # Blocks Of Nested Statements
-            if source[i:j+1] in b:
-                print(source[i:j+1])
+            if "fkoula" in key or "ila" in key or "ma7ed" in key or "dalla" in key:
                 o = 0
                 e = 0
                 for k in range(j+1, len(source)):
@@ -1129,19 +1129,16 @@ def blockify(source):
                         block = source[i: k+1]
                         blocks.append(block)
                         i = k + 1
-                        j = k + 1
                         break
-
             #Ordinary statements
-            elif source[i:j+1] in s:
-                print(source[i: j+1])
+            elif "tbe3"  in key or "dkhl" in key or "dir" in key or  "sahih" in key or "achari" in key or  "manti9i" in key or  "marka" in key or "harf" in key or "jme3lia" in key or "qyas" in key:
+            #else:
                 for k in range(j+1, len(source)):
                     if source[k] == ";":
                         block = source[i:k+1]
                         blocks.append(block)
-                        i = k+1
-                        j = k+1
-            
+                        i = k + 1
+                        break
             j += 1
         i += 1
     return blocks
@@ -1153,7 +1150,7 @@ def run_the_code(source):
     # print(listy)
     for l in listy:
         print(l)
-        print("------------------------------------------")
+        print("----------------")
     # for l in listy:
     #     if l != '' and l != " " and l != "  " and l != "\n" and l != "\n\n" and l != "\n\n\n":
     #         build_parser(l)
@@ -1192,7 +1189,8 @@ tbe3("la kant bdrhm khtar 0 la kant briyal khtar 1 la kant b franc khtar 2");
 achari flous = 32.0;
 sahih khtiyar = 1;
 
-# Lkhrja
+sahih a == 2;
+
 
 ila(khtiyar == 0){ dir drhm(flous);}
 ila(khtiyar == 1){ dir riyal(flous);}
