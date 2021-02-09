@@ -413,8 +413,6 @@ def p_statement_assign_var(p):
     p[0] = None
 
 # Increment and decrement variables
-
-
 def p_increment_var(p):
     '''
     var_inc : ID PLUS PLUS SEMICOL
@@ -426,11 +424,9 @@ def p_increment_var(p):
     else:
         if found.get_type() == "sahih":
             found.set_value(found.get_value() + 1)
-            #p[0] = found.get_value()
             p[0] = None
         elif found.get_type() == "achari":
             found.set_value(found.get_value() + 1.0)
-            #p[0] = found.get_value()
             p[0] = None
         else:
             print(f'{p[1]} {errors[4][1]}')
@@ -469,7 +465,6 @@ def p_statement_var(p):
     my_var = variable(p[2], p[1], p[4])
     variables[my_var.get_name()] = my_var
     # ERROR Gestion
-    #p[0] = my_var.get_value()
 
 
 # INPUT From user
@@ -510,7 +505,6 @@ def p_input_statement(p):
     if done == True:
         a = variable(p[2], p[1], value)
         variables[a.get_name()] = a
-        #p[0] = a.get_value()
         pass
 
 
@@ -657,8 +651,6 @@ def p_compare_id_value(p):
             p[0] = False
 
 # Comparing booleans
-
-
 def p_bool_comparison(p):
     '''
         bool_comparison : ID EQUALEQUAL ID
@@ -712,11 +704,10 @@ def p_bool_comparison(p):
             p[0] = True
 
     else:
-        p[0] = 'kayn shi moshkil'
+        print('kayn shi moshkil')
+        p[0] = None
 
 # IF STATEMENTS
-
-
 def p_IF(p):
     '''
         if_statement : IF LPAREN comparison RPAREN LBRACE statements RBRACE
@@ -787,18 +778,14 @@ def p_WHILE(p):
     pass
 
 # FOR STATEMENT
-
-
 def p_FOR(p):
     '''
         for_statement : FOR LPAREN var_statement comparison SEMICOL var_inc RPAREN LBRACE statements RBRACE
     '''
-    # fkoula(sahih a = 1; a < 5; a++;){ task; task; }
     pass
 
+
 # Break
-
-
 def p_break_statement(p):
     '''
         break_statement : BREAK SEMICOL
@@ -859,8 +846,6 @@ def p_empty(p):
     pass
 
 # Error rule for syntax errors
-
-
 def p_error(p):
     print("Kayn shi mushkil f l input !")
 
@@ -884,7 +869,6 @@ def build_parser(source):
         return
     # WHILE STATEMENT
     if "ma7ed" in s:
-        #statements = s.split("{")[1].split("}")[0]
         prestatements = s.split("{")
         statements = ""
         for i in range(1, len(prestatements)):
@@ -934,6 +918,7 @@ def build_parser(source):
                         is_looping = False
                         break
             parser.parse(inc)
+    
     # FUNCTION DECLARATIONS
     elif "dalla" in s:
         parameters = s[s.index("(") + 1: s.index(")")]
@@ -942,6 +927,7 @@ def build_parser(source):
         functionn = function(func_name, parameters, tasks)
         functions[func_name] = functionn
     
+    # FUNCTION CALL
     elif "dir" in s and "ila" in s:
         condition = s[s.index("(") + 1: s.index(")")]
         statement = s[s.index("{") + 1: s.index("}")]
@@ -1009,14 +995,11 @@ def blockify(source):
     blocks = []
     b = [ "dalla ","ila ", "ma7ed ", "fkoula "]
     s = ["tbe3", "dkhl", "dir", "sahih", "achari", "manti9i", "marka", "harf", "jme3lia", "qyas"]
-    
     i = 0
     j = 0
-    #for i in range(len(source)):
     while i < len(source):
         block = ""
         j = i + 1
-        #for j in range(i+1, len(source)):
         while j < len(source):
             key = source[i: j+1]        
             # Blocks Of Nested Statements
@@ -1035,7 +1018,6 @@ def blockify(source):
                         break
             #Ordinary statements
             elif "tbe3"  in key or "dkhl" in key or "dir" in key or  "sahih" in key or "achari" in key or  "manti9i" in key or  "marka" in key or "harf" in key or "jme3lia" in key or "qyas" in key:
-            #else:
                 for k in range(j+1, len(source)):
                     if source[k] == ";":
                         block = source[i:k+1]
@@ -1053,51 +1035,4 @@ def run_the_code(source):
     for l in listy:
         if l != '' and l != " " and l != "  " and l != "\n" and l != "\n\n" and l != "\n\n\n":
             build_parser(l)
-
     print("--------------------------------------------------------------------------------")
-
-
-# sourcy = '''
-#     # Dallat
-# dalla drhm(achari taman = 5){
-# 	tbe3("briyal 3ndna:");
-# 	tbe3(taman * 20);
-# 	tbe3("bl franc 3ndna:");
-# 	tbe3(taman * 100);
-# }
-
-# dalla riyal(achari taman = 5){
-# 	tbe3("bdrhm 3ndna:");
-# 	tbe3(taman / 20);
-# 	tbe3("bl franc 3ndna:");
-# 	tbe3(taman * 5);
-# }
-
-# dalla franc(achari taman = 5){
-# 	tbe3("bdrhm 3ndna:");
-# 	tbe3(taman / 100);
-# 	tbe3("briyal 3ndna:");
-# 	tbe3(taman / 5);
-# }
-
-# # Dkholat
-# tbe3("Sh7al dl flous bghiti t7wwel  ?");
-# achari flous = dkhl(achari);
-# tbe3("la kant bdrhm khtar 0 la kant briyal khtar 1 la kant b franc khtar 2");
-# sahih khtiyar = dkhl(sahih);
-
-# sahih a = 2;
-
-# ma7ed(a == 2){
-
-#     tbe3(a);
-#     hbes;
-# }
-
-
-
-# ila(khtiyar == 0){ dir drhm(flous);}
-# ila(khtiyar == 1){ dir riyal(flous);}
-# ila(khtiyar == 2){ dir franc(flous);}
-# '''
-# run_the_code(sourcy)

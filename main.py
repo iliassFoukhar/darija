@@ -98,9 +98,22 @@ def change_colors():
     lines.configure(bg=bg_lines[color])
     lines.configure(fg=textcolor[color])
 
+def run_interpreter():
+    is_running = True
+    while is_running:
+        try:
+            s = input(">>> ")
+        except EOFError:
+            break
+        if s != "khrej()":
+            Parser.build_parser(s)
+        elif s == "khrej()":
+            print("Nihayat al barnamaj ila li9a2")
+            is_running = False
+
 #IDE Implementation
 root = Tk("Text Editor")
-#root.state('zoomed')
+
 root.title("IDE b darija: Untitled")
 root.configure(bg=root_bg[color])
 
@@ -138,6 +151,7 @@ menubar.add_command(label=" Khwi Motaghayirat ", command=empty_variables)
 menubar.add_command(label=" Bddel Lwanat ", command=change_colors)
 menubar.add_command(label=" Lexer  ", command=run_code)  
 menubar.add_command(label=" Khddm  ", command=run_parser)
+menubar.add_command(label=" Moshaghil  ", command=run_interpreter)
 root.config(menu=menubar)  
 
 
